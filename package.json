@@ -1,0 +1,19 @@
+{
+  "name": "healthapp",
+  "version": "1.0.0",
+  "description": "greenfield project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Russell-17/Russell-17.git"
+  },
+  "author": "Russell-17",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Russell-17/Russell-17/issues"
+  },
+  "homepage": "https://github.com/Russell-17/Russell-17#readme"
+}
