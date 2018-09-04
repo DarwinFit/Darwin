@@ -1,12 +1,12 @@
 # Project Name
 
-> Pithy project description
+> Health App that logs users' daily food intake and exercises
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Stas Savciuc
+  - __Scrum Master__: Julie Jung
+  - __Development Team Members__: Sarah Gujadhur, Arjun Logeswaran
 
 ## Table of Contents
 
@@ -20,15 +20,20 @@
 
 ## Usage
 
-> Some usage instructions
+> The user can keep track of their daily calorie intake and how much calories they have burnt. The user can retrieve nutritional information from the nutrition API as well as the calories burnt with the given weight, height, gender, and age with a specific type of exercise with given amount of excercise time.
 
 ## Requirements
 
 - Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- axios ^0.18.0
+- body-parser ^1.18.3
+- bootstrap ^4.1.3
+- bootstrap-react ^0.3.1
+- express ^4.16.3
+- mysql ^2.16.0
+- react ^16.4.2
+- react-dom ^16.4.2
+- babel ^6.23.1
 
 ## Development
 
@@ -39,7 +44,6 @@ From within the root directory:
 ```sh
 sudo npm install -g bower
 npm install
-bower install
 ```
 
 ### Roadmap
