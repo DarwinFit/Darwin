@@ -4,16 +4,21 @@ const models = require('../models/models.js');
 //return requests to client
 module.exports = {
   createNewUser: (req, res) => {
-    models.saveNewUser.post()
-          .then()
+    models.saveNewUser.post(req) //check what req is and what to send to models
+          .then((result) => {
+            res.sendStatus(201);
+          })
           .catch((err) => {
             console.log('Error caught on models.saveNewUser in controllers', err);
           });
   },
 
   getUserInfo: (req, res) => {
-    models.getUserInfo.get()
-          .then()
+    var username = req.params;  //check where username lives on req
+    models.getUserInfo.get(username)
+          .then((result) => {
+            res.send(result);
+          })
           .catch((err) => {
             console.log('Error caught on models.getUserInfo in controllers', err);
           });
@@ -24,8 +29,8 @@ module.exports = {
   },
 
   createFoodEntry: (req, res) => {
-    models.saveFoodEntry()
-          .then(() => {
+    models.saveFoodEntry.post(req) //check what req is and what to send to models
+          .then((result) => {
             this.getFoodEntry()
           })
           .catch((err) => {
@@ -64,6 +69,7 @@ module.exports = {
   },
 
   updateDailyFood: (req, res) => {
+    //call getDaily to get current nutrient values before updating
     models.updateDailyFood()
           .then()
           .catch((err) => {
