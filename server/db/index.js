@@ -9,4 +9,4 @@ const config = {
 
 const db = mysql.createConnection(config);
 
-module.exports;
+module.exports.db = db;
