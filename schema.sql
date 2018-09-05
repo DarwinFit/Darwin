@@ -1,6 +1,5 @@
-DROP DATABASE russell;
 
-CREATE DATABASE russell;
+CREATE DATABASE IF NOT EXISTS russell;
 
 USE russell;
 
