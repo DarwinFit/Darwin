@@ -3,3 +3,4 @@ build/
 package-lock.json
 bundle.js
 .DS_Store
+config.js

@@ -1,4 +1,4 @@
-const helpers = require('../helpers/apihelpers.js');
+const { getExercises, getNutrients } = require('../helpers/apihelpers.js');
 const models = require('../models/models.js');
 
 //return requests to client
@@ -25,7 +25,14 @@ module.exports = {
   },
 
   searchFoodEntry: (req, res) => {
-    helpers //arjun to update
+    let query = req.body //make sure this is where the searched entry is
+    getNutrients(query, (err, data) => {
+      if(err) {
+        console.log('Error inside searchFoodEntry', err); 
+      } else {
+        res.send(data); 
+      }
+    })
   },
 
   createFoodEntry: (req, res) => {
@@ -49,7 +56,15 @@ module.exports = {
   },
 
   searchExerciseEntry: (req, res) => {
-    helpers //arjun to update
+    let query = req.body; //Check the request for where all the ie(height/weight) is...
+    
+    getExercises(query, (err, data) => {
+      if(err) {
+        console.log('Error inside searchExerciseEntry', err); 
+      } else {
+        res.send(data); 
+      }
+    })
   },
 
   createExerciseEntry: (req, res) => {
