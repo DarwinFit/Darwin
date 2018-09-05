@@ -11,6 +11,7 @@ CREATE TABLE if not exists users (
   weight int NOT NULL,
   height int NOT NULL,
   gender VARCHAR(20) NOT NULL,
+  avg_calories int NOT NULL,
   PRIMARY KEY (id)
 );
 
