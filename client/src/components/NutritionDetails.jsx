@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 const NutritionDetails = ({ foodData }) => {
+	//creating a div to hold the Nutrition facts table, we are assuming that username is passed to this component, as well as foodData
+	//Creating a button which on click would handle adding the food data to the array of daily total;
+	//we are assuming that the the handleaddfood is passed to the component and takes in the data object;
 	return (
 		<div className="NutritionFacts">
 			<h2>
