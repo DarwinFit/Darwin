@@ -35,7 +35,12 @@ class Search extends Component {
 		return (
 			<div className="SearchBar">
 				<label className="SearchText">Write what type of {searchText} you would like to look for: </label>
-				<input type="text" value={value} onChange={this.handleOnChange} placeholder={placeholder} />
+				<input
+					type="text"
+					value={this.state.searchValue}
+					onChange={this.handleOnChange}
+					placeholder={placeholder}
+				/>
 				<button className="" type="submit" onSubmit={this.handleSubmit}>
 					Look it Up!
 				</button>
