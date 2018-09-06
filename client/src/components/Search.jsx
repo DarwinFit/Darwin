@@ -6,6 +6,8 @@ class Search extends Component {
 		this.state = {
 			searchValue: ''
 		};
+		this.handleOnChange = this.handleOnChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	//setting the searchValue to the whatever was the input, also we need this as a separate function to prevent searching without actually clicking search
 	handleOnChange = (event) => {
