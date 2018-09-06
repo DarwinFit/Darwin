@@ -23,12 +23,31 @@ class App extends Component {
 				fat: 0
 			},
 			foodLog: [],
-			exerciseLog: []
+			exerciseLog: [],
+			value: ''
 		};
+
+		this.getValidationState = this.getValidationState.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
+
+  getValidationState() {
+    const length = this.state.value.length;
+    if (length > 10) return 'success';
+    else if (length > 5) return 'warning';
+    else if (length > 0) return 'error';
+    return null;
+  }
+
+  handleChange(e) {
+    this.setState({ value: e.target.value });
+  }
+
 	render() {
 		return (
-			<Signup/>
+			<Signup getValidationState={this.getValidationState}
+							value={this.state.value}
+							handleChange={this.handleChange}/>
 		);
 	}
 }
