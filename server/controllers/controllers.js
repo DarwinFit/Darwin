@@ -38,6 +38,8 @@ module.exports = {
   createFoodEntry: (req, res) => {
     models.saveFoodEntry.post(req) //check what req is and what to send to models
           .then((result) => {
+            if (this.getDialy() )  
+            this.updateDailyFood()
             this.getFoodEntry()
           })
           .catch((err) => {
@@ -85,11 +87,13 @@ module.exports = {
 
   updateDailyFood: (req, res) => {
     //call getDaily to get current nutrient values before updating
-    models.updateDailyFood()
-          .then()
-          .catch((err) => {
-            console.log('Error caught on models.updateDailyFood in controllers', err);
-          });
+    models.getDaily(req) //user_id and date
+          .then(models.updateDailyFood(req)
+            .then()
+            .catch((err) => {
+              console.log('Error caught on models.updateDailyFood in controllers', err);
+            }));
+
   },
   
   updateDailyExercise: (req, res) => {
@@ -101,8 +105,10 @@ module.exports = {
   },
 
   getDaily: (req, res) => {
-    models.getDaily()
-          .then()
+    models.getDaily(req)
+          .then((result) => {
+            res.send(result);
+          })
           .catch((err) => {
             console.log('Error caught on models.getDaily in controllers', err);
           });
