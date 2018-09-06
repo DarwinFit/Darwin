@@ -14,20 +14,17 @@ app.use(bodyParser.json());
 //use routes
 app.use('/health', routes);
 
-// app.get('/*', (req, res) => {
-//   axios.get('/')
-//        .then((response) => {
-//          console.log("SUCCESS!!");
-//        })
-//        .catch((err) => {
-//          console.error(err);
-//        });
-// })
+app.get('/*', (req, res) => {
+  axios.get('/')
+       .then((response) => {
+         console.log("[server] Pretending like routing to the endpoint");
+       })
+       .catch((err) => {
+         console.error(err);
+       });
+})
 
-
-
-// let port = process.env.PORT || 3000;
-let port = 3000;
+let port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`listening on port ${port}!`);
 });
