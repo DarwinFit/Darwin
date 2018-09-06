@@ -27,7 +27,6 @@
 - Node 0.10.x
 - axios ^0.18.0
 - body-parser ^1.18.3
-- bootstrap ^4.1.3
 - bootstrap-react ^0.3.1
 - express ^4.16.3
 - mysql ^2.16.0
