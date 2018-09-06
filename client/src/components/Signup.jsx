@@ -18,3 +18,5 @@ const Signup = (props) => (
     </FormGroup>
   </form>
 )
+
+export default Signup;
