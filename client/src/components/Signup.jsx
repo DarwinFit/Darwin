@@ -1,4 +1,4 @@
-import {FormGroup, ControlLabel, FormControl} from 'bootstrap-react';
+import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 
 const Signup = (props) => (
   <form>
