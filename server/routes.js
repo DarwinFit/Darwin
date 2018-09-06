@@ -5,16 +5,17 @@ const controllers = require('./controllers/controllers.js');
 router.get('/users', controllers.getUserInfo);
 router.post('/users', controllers.createNewUser);
 
-router.post('/food_history', controllers.searchFoodEntry);
+router.get('/food_history/search', controllers.searchFoodEntry);
+router.get('/exercise_history/search', controllers.searchExerciseEntry);
+
 router.post('/food_history', controllers.createFoodEntry);
 router.get('/food_history', controllers.getFoodEntry);
 
-router.post('/exercise_history', controllers.searchExerciseEntry);
 router.post('/exercise_history', controllers.createExerciseEntry);
-router.get('/exercise_history', controllers.getExerciseEntry);
+router.get('/exercise_history/', controllers.getExerciseEntry);
 
-router.post('/daily', controllers.updateDailyFood);
-router.post('/daily', controllers.updateDailyExercise);
+router.post('/daily/food', controllers.updateDailyFood);
+router.post('/daily/exercise', controllers.updateDailyExercise);
 router.get('/daily', controllers.getDaily);
 
 module.exports = router;
