@@ -32,11 +32,11 @@ let getExercises = (query, callback) => {
       'x-remote-user-id': '0'
     },
     data: {
-      'query': ${},
-      "gender": ${},
-      "weight_kg": ${},
-      "height_cm": ${},
-      "age": ${}
+      'query': ``,
+      "gender": ``,
+      "weight_kg": ``,
+      "height_cm": ``,
+      "age": ``
      }
   };
   axios.post(url, options).then((response) => callback(null, response)).catch((err)=> console.log('Error inside APIHELPER/exercise:', err)); 
