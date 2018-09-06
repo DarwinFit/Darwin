@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const controllers = require('./controllers/controllers.js');
 
-//route different request to different endpoints
+// route different request to different endpoints
 router.get('/users', controllers.getUserInfo);
 router.post('/users', controllers.createNewUser);
 
