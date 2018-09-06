@@ -14,6 +14,7 @@ module.exports = {
   },
 
   getUserInfo: (req, res) => {
+    console.log('Inside getUserInfo', req.body);
     var username = req.params;  //check where username lives on req
     models.getUserInfo.get(username)
           .then((result) => {

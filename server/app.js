@@ -11,11 +11,13 @@ app.use(bodyParser.json());
 //use routes
 app.use('/health', routes);
 
-app.get('/*', (req, res) => {
-  res.sendFile('index.html');
-})
+// app.get('/*', (req, res) => {
+//   res.sendFile('index.html');
+// })
 
-let port = process.env.PORT || 3000;
+// let port = process.env.PORT || 3000;
+let port = 3000; 
+
 app.listen(port, () => {
   console.log(`listening on port ${port}!`);
 });
