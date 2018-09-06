@@ -24,6 +24,7 @@ module.exports = {
           });
   },
 
+
   searchFoodEntry: (req, res) => {
     let query = req.body //make sure this is where the searched entry is
     getNutrients(query, (err, data) => {
@@ -55,6 +56,7 @@ module.exports = {
           });
   },
 
+
   searchExerciseEntry: (req, res) => {
     let query = req.body; //Check the request for where all the ie(height/weight) is...
     
@@ -85,6 +87,7 @@ module.exports = {
           });
   },
 
+
   updateDailyFood: (req, res) => {
     //call getDaily to get current nutrient values before updating
     models.getDaily(req) //user_id and date
@@ -93,7 +96,6 @@ module.exports = {
             .catch((err) => {
               console.log('Error caught on models.updateDailyFood in controllers', err);
             }));
-
   },
   
   updateDailyExercise: (req, res) => {
