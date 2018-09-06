@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
+import Signup from './components/Signup.jsx';
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -20,11 +22,14 @@ class App extends Component {
 				protein: 0,
 				fat: 0
 			},
-			foodLog: []
+			foodLog: [],
+			exerciseLog: []
 		};
 	}
 	render() {
-		return;
+		return (
+			<Signup/>
+		);
 	}
 }
 ReactDOM.render(<App />, document.getElementById('app'));
