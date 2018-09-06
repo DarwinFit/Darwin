@@ -14,8 +14,6 @@ router.get('/food_history', controllers.getFoodEntry);
 router.post('/exercise_history', controllers.createExerciseEntry);
 router.get('/exercise_history/', controllers.getExerciseEntry);
 
-router.post('/daily/food', controllers.updateDailyFood);
-router.post('/daily/exercise', controllers.updateDailyExercise);
 router.get('/daily', controllers.getDaily);
 
 module.exports = router;
