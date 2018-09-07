@@ -8,7 +8,7 @@ const Food = (props) => {
 	//import and insert the needed components from smaller ones, pass the expected props and functions to it.
 	return (
 		<div className="Container">
-			<Search onSearch={props.onSearch} showFood={props.showFood} />
+			<Search onSearch={props.onSearch} type={true} />
 			<NutritionDetails foodData={props.foodData} username={props.username} handleAddFood={props.handleAddFood} />
 			<LogList items={props.items} onDelete={props.onDelete} />
 		</div>

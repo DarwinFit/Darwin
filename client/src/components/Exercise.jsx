@@ -9,7 +9,7 @@ const Exercise = (props) => {
 	//pass the expected by each sub-component values and functions
 	return (
 		<div className="Container">
-			<Search onSearch={props.onSearch} showFood={props.showFood} />
+			<Search onSearch={props.onSearch} type={false} />
 			<ExerciseDetails
 				username={props.username}
 				exerciseData={props.exerciseData}
