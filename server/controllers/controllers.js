@@ -4,17 +4,19 @@ const models = require('../models/models.js');
 //return requests to client
 module.exports = {
   createNewUser: (req, res) => {
-    models.saveNewUser.post(req.body, (err, results) => { //check what req is and what to send to models
+    // console.log('request received:', req.body);
+    models.saveNewUser.post(req.body, (err, results) => { 
       if (err) console.log('Error caught on createNewUser in controller.js', err);
       else res.sendStatus(201);
     });
   },
 
   getUserInfo: (req, res) => {
-    var username = req.params;  //check where username lives on req
+    // console.log('This is request in get:', req.query.username);
+    var { username } = req.query;
     models.getUserInfo.get(username, (err, results) => {
       if (err) console.log('Error caught on getUserInfo in controller.js', err);
-      else res.send(result);
+      else res.send(results);
     });
   },
 

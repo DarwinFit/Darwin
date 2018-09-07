@@ -4,21 +4,28 @@ module.exports = {
   //users models
   saveNewUser: {
     post: (params, callback) => {
-      let {} = params //fill out params
+      // console.log('Inside models/save New User', params);
+      let query = []; 
+      for (let key in params) {
+        query.push(params[key])
+      }
       let queryStr = `INSERT INTO users (username, age, weight, height, gender, avg_calories) 
-                      value (?, ?, ?, ?, ?, ?)`;
-      db.query(queryStr, params, (err, result) => {
+                      values (?, ?, ?, ?, ?, ?)`;
+      db.query(queryStr, query, (err, result) => {
         if (err) throw err;
-        callback(err, result);
+        else callback(null, result);
       })
     }
   },
 
   getUserInfo: {
     get: (username, callback) => {
-      let queryStr = `SELECT * FROM users WHERE username = ${username}`;
+      console.log('what is username', username);
+      let queryStr = `SELECT * FROM users WHERE username = "${username}"`;
+      console.log('queryStr', queryStr);
       db.query(queryStr, (err, result) => {
         if (err) throw err;
+        console.log('Response! from database:', result);
         callback(err, result);
       })
     }

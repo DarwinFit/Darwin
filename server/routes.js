@@ -5,6 +5,8 @@ const controllers = require('./controllers/controllers.js');
 router.get('/users', controllers.getUserInfo);
 router.post('/users', controllers.createNewUser);
 
+/////START WORKING WITH THIS TOMORROW START TESTING!!
+
 router.get('/food_history/search', controllers.searchFoodEntry);
 router.get('/exercise_history/search', controllers.searchExerciseEntry);
 
