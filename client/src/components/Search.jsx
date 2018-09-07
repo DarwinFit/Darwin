@@ -13,7 +13,6 @@ class Search extends Component {
 	handleOnChange(event) {
 		//preventing the default behavior of the component, without this the page would refresh after every change
 		event.preventDefault();
-		console.log('DATA RECEIVED', event.target.value);
 		//setting the searchValue to the value of the what text we have in the input field
 		this.setState({ searchValue: event.target.value });
 	}
@@ -22,7 +21,6 @@ class Search extends Component {
 	handleSubmit(event) {
 		//preventing the refreshing of the page, just showing the results
 		event.preventDefault();
-		console.log('SEARCHE VALUE FROM THE STATE', this.state.searchValue);
 		this.props.onSearch(this.state.searchValue);
 	}
 
