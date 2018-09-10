@@ -1,54 +1,83 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import {BrowserRouter} from 'react-router-dom';
 
-import Signup from './components/Signup.jsx';
+// import Navigation from './components/Navigation.jsx';
+import Main from './components/Main.jsx';
+import Home from './components/Home.jsx';
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			food_nutrition: {
-				sugar: 0,
-				calorie: 0,
-				carbs: 0,
-				protein: 0,
-				fat: 0
-			},
-			daily_nutrition: {
-				sugar: 0,
-				calorie: 0,
-				carbs: 0,
-				protein: 0,
-				fat: 0
-			},
-			foodLog: [],
-			exerciseLog: [],
-			value: ''
-		};
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: 'J',
+      foodNutrition: {
+        name: 'Pizza',
+        serving_qty: 0,
+        serving_wt_g: 0,
+        sugar: 0,
+        calories: 0,
+        carbs: 0,
+        protein: 0,
+        fat: 0
+      },
+      dailyNutrition: {
+        sugar: 0,
+        calories: 0,
+        carbs: 0,
+        protein: 0,
+        fat: 0
+      },
+      exerciseData: {
+        name: 'running',
+        duration_min: 30,
+        nf_calories: 150
+      },
+      foodItems: ['1 Slice of Pizza'],
+      exerciseItems: ['30 minutes of running']
+    };
 
-		this.getValidationState = this.getValidationState.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-	}
-
-  getValidationState() {
-    const length = this.state.value.length;
-    if (length > 10) return 'success';
-    else if (length > 5) return 'warning';
-    else if (length > 0) return 'error';
-    return null;
+    this.handleAddFood = this.handleAddFood.bind(this);
+    this.handleAddExercise = this.handleAddExercise.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
-  handleChange(e) {
-    this.setState({ value: e.target.value });
+  handleAddFood() {
+    return;
   }
 
-	render() {
-		return (
-			<Signup getValidationState={this.getValidationState}
-							value={this.state.value}
-							handleChange={this.handleChange}/>
-		);
-	}
+  handleAddExercise() {
+    return;
+  }
+
+  onDelete(item) {
+    return;
+  }
+
+  render() {
+  if (this.state.username===''){
+    return (<Home />)
+  } else {
+    return (
+      <Main 
+        username={this.state.username}
+        dailyNutrition={this.state.dailyNutrition}
+        foodNutrition={this.state.foodNutrition}
+        handleAddFood={this.handleAddFood}
+        showFood={this.state.showFood}
+        foodItems={this.state.foodItems}
+        exerciseItems={this.state.exerciseItems}
+        exerciseData={this.state.exerciseData}
+        handleAddExercise={this.handleAddExercise}
+        onDelete={this.onDelete}
+      />)
+    }
+  }
 }
-ReactDOM.render(<App />, document.getElementById('app'));
+
+ReactDOM.render((
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+), document.getElementById('app'));
