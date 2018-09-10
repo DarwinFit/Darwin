@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const controllers = require('./controllers/controllers.js');
 
-//route different request to different endpoints
+// route different request to different endpoints
 router.get('/users', controllers.getUserInfo);
 router.post('/users', controllers.createNewUser);
 
@@ -14,8 +14,6 @@ router.get('/food_history', controllers.getFoodEntry);
 router.post('/exercise_history', controllers.createExerciseEntry);
 router.get('/exercise_history/', controllers.getExerciseEntry);
 
-router.post('/daily/food', controllers.updateDailyFood);
-router.post('/daily/exercise', controllers.updateDailyExercise);
 router.get('/daily', controllers.getDaily);
 
 module.exports = router;
