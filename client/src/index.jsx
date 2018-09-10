@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import {BrowserRouter} from 'react-router-dom';
 
-// import Navigation from './components/Navigation.jsx';
 import Main from './components/Main.jsx';
 import Home from './components/Home.jsx';
 

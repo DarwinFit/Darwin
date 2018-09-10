@@ -1,5 +1,4 @@
 import React from 'react';
-// import { NavLink, Switch, Route } from 'react-router-dom';
 
 import Search from './Search.jsx';
 import ExerciseDetails from './ExerciseDetails.jsx';
