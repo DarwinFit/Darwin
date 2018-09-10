@@ -8,7 +8,7 @@ const DailyNutrition = ({ username, dailyNutrition }) => {
 			<h2>Daily Nutritional Summary</h2>
 
       <Row>
-        <Col md="2"> 
+        <Col md={2}> 
           <Card>
             <CardBody>
               <CardTitle>{dailyNutrition.calories}</CardTitle>
@@ -23,7 +23,7 @@ const DailyNutrition = ({ username, dailyNutrition }) => {
           </Card>
         </Col>
 
-        <Col md="2">
+        <Col md={2}>
           <Card>
             <CardBody>
               <CardTitle>{dailyNutrition.fat}</CardTitle>
@@ -35,7 +35,7 @@ const DailyNutrition = ({ username, dailyNutrition }) => {
           </Card>
         </Col>
 
-        <Col md="2">
+        <Col md={2}>
           <Card>
             <CardBody>
               <CardTitle>{dailyNutrition.carbs}</CardTitle>
@@ -47,7 +47,7 @@ const DailyNutrition = ({ username, dailyNutrition }) => {
           </Card>
         </Col>
         
-        <Col md="2"> 
+        <Col md={2}> 
           <Card>
             <CardBody>
               <CardTitle>{dailyNutrition.protein}</CardTitle>
@@ -59,7 +59,7 @@ const DailyNutrition = ({ username, dailyNutrition }) => {
           </Card>
         </Col>
         
-        <Col md="2">
+        <Col md={2}>
           <Card>
             <CardBody>
               <CardTitle>{dailyNutrition.sugar}</CardTitle>

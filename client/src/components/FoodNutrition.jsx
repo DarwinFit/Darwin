@@ -12,7 +12,7 @@ const FoodNutrition = ({ username, foodNutrition }) => {
               <CardTitle>{foodNutrition.calories}</CardTitle>
               <CardSubtitle>kcal</CardSubtitle>
             </CardBody>
-            {/* <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" /> */}
+            <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
             <CardBody>
               <CardText>Calories</CardText>
               {/* <CardLink href="#">Card Link</CardLink>
@@ -69,33 +69,10 @@ const FoodNutrition = ({ username, foodNutrition }) => {
           </Card>
         </Col>
       </Row>
-
-			{/* <table>
-        <tbody>
-          <tr>
-            <td>Calories</td>
-            <td>{foodNutrition.calories} kcal</td>
-          </tr>
-          <tr>
-            <td>Total Fat</td>
-            <td>
-              {foodNutrition.fat} g
-            </td>
-          </tr>
-          <tr>
-            <td>Total Carbohydrates</td>
-            <td>{foodNutrition.carbs} g</td>
-          </tr>
-          <tr>
-            <td>Sugars</td>
-            <td>{foodNutrition.sugar} g</td>
-          </tr>
-        </tbody>
-			</table> */}
-      
       <h3>
         Nutritional Summary for {foodNutrition.serving_qty} (about {foodNutrition.serving_wt_g} g) of {foodNutrition.name}
       </h3>
+      <button>Add</button>
 		</div>
 	);
 };
