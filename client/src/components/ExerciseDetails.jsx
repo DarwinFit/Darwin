@@ -8,7 +8,7 @@ const ExerciseDetail = ({ username, exerciseData, handleAddExercise }) => {
 		<div className="exerciseDetail">
 			<h2>Hey ,{username}, bellow are the details of your searched exercise results!</h2>
 				Add
-			</button>
+			{/* <button/> */}
 		</div>
 	);
 };
