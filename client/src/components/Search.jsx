@@ -4,13 +4,14 @@ class Search extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			searchValue: ''
+			searchValue: '',
+			showFood: props.showFood
 		};
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	//setting the searchValue to the whatever was the input, also we need this as a separate function to prevent searching without actually clicking search
-	handleOnChange = (event) => {
+	handleOnChange(event) {
 		//preventing the default behavior of the component, without this the page would refresh after every change
 		event.preventDefault();
 		//setting the searchValue to the value of the what text we have in the input field
@@ -18,7 +19,7 @@ class Search extends Component {
 	};
 	//on click on the Search Button, we are passing the Search value of this state to the parent component Search function which would handle
 	// the api request
-	handleSubmit = (event) => {
+	handleSubmit(event) {
 		//preventing the refreshing of the page, just showing the results
 		event.preventDefault();
 		this.props.onSearch(this.state.searchValue);
@@ -35,9 +36,9 @@ class Search extends Component {
 		return (
 			<div className="SearchBar">
 				<label className="SearchText">Write what type of {searchText} you would like to look for: </label>
-				<input type="text" value={value} onChange={this.handleOnChange} placeholder={placeholder} />
+				<input type="text" value={this.state.searchValue} onChange={this.handleOnChange} placeholder={placeholder} />
 				<button className="" type="submit" onSubmit={this.handleSubmit}>
-					Look it Up!
+					Search
 				</button>
 			</div>
 		);
