@@ -11,7 +11,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: '',
+			username: 'J',
 			foodNutrition: {
 				name: 'Pizza',
 				serving_qty: 0,
@@ -56,22 +56,22 @@ class App extends Component {
 	}
 
 	render() {
-	if (this.state.username===''){
-		return (<Home />)
-	} else {
-		return (
-			<Main 
-				username={this.state.username}
-				dailyNutrition={this.state.dailyNutrition}
-				foodNutrition={this.state.foodNutrition}
-				handleAddFood={this.handleAddFood}
-				showFood={this.state.showFood}
-				foodItems={this.state.foodItems}
-				exerciseItems={this.state.exerciseItems}
-				exerciseData={this.state.exerciseData}
-				handleAddExercise={this.handleAddExercise}
-				onDelete={this.onDelete}
-			/>)
+		if (this.state.username===''){
+			return (<Home />)
+		} else {
+			return (
+				<Main 
+					username={this.state.username}
+					dailyNutrition={this.state.dailyNutrition}
+					foodNutrition={this.state.foodNutrition}
+					handleAddFood={this.handleAddFood}
+					showFood={this.state.showFood}
+					foodItems={this.state.foodItems}
+					exerciseItems={this.state.exerciseItems}
+					exerciseData={this.state.exerciseData}
+					handleAddExercise={this.handleAddExercise}
+					onDelete={this.onDelete}
+				/>)
 		}
 	}
 }
