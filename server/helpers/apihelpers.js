@@ -16,8 +16,9 @@ let getNutrients = (query, callback) => {
       'use_branded_foods': false
     }
   };
-  axios.post(url, options).then((response) => callback(null, response)).catch((err)=> console.log('Error inside APIHELPER/nutrition:', err)); 
-
+  axios.post(url, options)
+      .then((response) => callback(null, response))
+      .catch((err) => console.log('Error inside APIHELPER/nutrition:', err)); 
 }
 
 let getExercises = (query, callback) => {
@@ -39,7 +40,9 @@ let getExercises = (query, callback) => {
       "age": ``
      }
   };
-  axios.post(url, options).then((response) => callback(null, response)).catch((err)=> console.log('Error inside APIHELPER/exercise:', err)); 
+  axios.post(url, options)
+      .then((response) => callback(null, response))
+      .catch((err)=> console.log('Error inside APIHELPER/exercise:', err)); 
 };
 
 module.exports = { getExercises, getNutrients }

@@ -36,12 +36,12 @@ CREATE TABLE if not exists daily (
   id int NOT NULL AUTO_INCREMENT,
   user_id int NOT NULL,
   date date NOT NULL,
-  burnt int NOT NULL,
-  calories int NOT NULL,
-  total_fat int NOT NULL,
-  carbs int NOT NULL,
-  protein int NOT NULL,
-  sugars int NOT NULL,
+  burnt float NOT NULL,
+  calories float NOT NULL,
+  total_fat float NOT NULL,
+  carbs float NOT NULL,
+  protein float NOT NULL,
+  sugars float NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
