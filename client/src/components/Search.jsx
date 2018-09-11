@@ -4,7 +4,8 @@ class Search extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			searchValue: ''
+			searchValue: '',
+			showFood: props.showFood
 		};
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,7 +28,7 @@ class Search extends Component {
 	render() {
 		//search text means the text we want to have in our phrase before the input field, which would give a hint to user for what to search
 		// depends on the either we are in the food component or exercise
-		var searchText = this.props.showFood === true ? 'food' : 'exercise';
+		var searchText = this.props.type ? 'food' : 'exercise';
 		var placeholder = `describe your ${searchText}`;
 		//creating below a div element with a classname for further styling
 		//inside creating a label which would describe to the user what he can search for in this component
@@ -35,14 +36,9 @@ class Search extends Component {
 		return (
 			<div className="SearchBar">
 				<label className="SearchText">Write what type of {searchText} you would like to look for: </label>
-				<input
-					type="text"
-					value={this.state.searchValue}
-					onChange={this.handleOnChange}
-					placeholder={placeholder}
-				/>
+				<input type="text" value={this.state.searchValue} onChange={this.handleOnChange} placeholder={placeholder} />
 				<button className="" type="submit" onSubmit={this.handleSubmit}>
-					Look it Up!
+					Search
 				</button>
 			</div>
 		);

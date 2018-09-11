@@ -15,13 +15,7 @@ app.use(bodyParser.json());
 app.use('/health', routes);
 
 app.get('/*', (req, res) => {
-  axios.get('/')
-       .then((response) => {
-         console.log("[server] Pretending like routing to the endpoint");
-       })
-       .catch((err) => {
-         console.error(err);
-       });
+  res.redirect('/');
 })
 
 let port = process.env.PORT || 3000;
