@@ -34,7 +34,7 @@ module.exports = {
 
   insertIntoFoodHistory: {
     post: (params, callback) => {
-      console.log('params ', params);
+      // console.log('params in insertIntoFoodHistory', params); //[ 'big mac', 1, '20180907' 
       let queryStr = `INSERT INTO food_history (food_name, user_id, date) values (?, ?, ?)`;
       db.query(queryStr, params, (err, result) => {
         if (err) throw err;
@@ -45,7 +45,8 @@ module.exports = {
 
   getDailyForFood: {
     get: (params, callback) => {
-      let dailyQueryStr = `SELECT calories, total_fat, carbs, protein, sugars FROM daily
+      // console.log('params in getDailyForFood', params); //[ 1, '20180907' ]
+      let dailyQueryStr = `SELECT calories, total_fat, total_carbohydrate, protein, sugars FROM daily
                           where user_id = ? AND date = ?`;
       db.query(dailyQueryStr, params, (err, results) => {
         if (err) throw err;
@@ -56,11 +57,13 @@ module.exports = {
 
   updateDaily: {
     post: (params, body, callback) => {
-      let {calories, total_fat, carbs, protein, sugars} = params;
-      let queryStr = `UPDATE daily SET calories=${calories}, total_fat=${total_fat}, carbs=${carbs}, 
+      // console.log('params in updateDaily', params);
+      // console.log('body in updateDaily', body); //[ 1, '20180907' ]
+      let {calories, total_fat, total_carbohydrate, protein, sugars} = params;
+      let queryStr = `UPDATE daily SET calories=${calories}, total_fat=${total_fat}, total_carbohydrate=${total_carbohydrate}, 
                       protein=${protein}, sugars=${sugars} WHERE user_id = ? AND date = ?`;
       db.query(queryStr, body, (err, result) => {
-        if (err) console.log('Error at update in insertFoodHistory saveAndUpdate', err);
+        if (err) console.log('Error at updateDaily in models.js', err);
         callback(null, result);
       })
     }
@@ -123,8 +126,8 @@ module.exports = {
   //first food or exercise input for the day - WORKS
   firstDailyFoodOrExerciseUpdate: {
     post: (params, callback) => {
-      console.log('reaching firstDailyFoodOrExerciseUpdate', params);
-      let queryStr = `INSERT INTO daily (burnt, calories, total_fat, carbs, protein,
+      // console.log('reaching firstDailyFoodOrExerciseUpdate', params);
+      let queryStr = `INSERT INTO daily (burnt, calories, total_fat, total_carbohydrate, protein,
                       sugars, user_id, date) values (?, ?, ?, ?, ?, ?, ?, ?)`;
       db.query(queryStr, params, (err, result) => {
         if (err) throw err;
@@ -136,7 +139,7 @@ module.exports = {
   getDaily: {
     get: (query, callback) => {
       // console.log('reaching getDaily in models.js', query);
-      let queryStr = `SELECT burnt, calories, total_fat, carbs, protein, sugars FROM daily
+      let queryStr = `SELECT burnt, calories, total_fat, total_carbohydrate, protein, sugars FROM daily
                       where user_id = ? AND date = ?`;
       db.query(queryStr, query, (err, result) => {
         // console.log("results in getDaily in models", result);
@@ -144,8 +147,17 @@ module.exports = {
         callback(null, result);
       })
     }
+  },
+  //function retrieve daily entries by just user_id
+  getDailyByOnlyUser: {
+    get: (query, callback) => {
+      
+    }
   }
 };
+
+
+
 
 
   //assuming that user has already updatedDaily with first food of the day
