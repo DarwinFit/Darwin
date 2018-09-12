@@ -17,5 +17,6 @@ router.post('/exercise_history', controllers.createExerciseEntry);
 router.get('/exercise_history/', controllers.getExerciseEntry);
 
 router.get('/daily', controllers.getDaily);
+router.get('/daily/user', controllers.getDailyByOnlyUser);
 
 module.exports = router;

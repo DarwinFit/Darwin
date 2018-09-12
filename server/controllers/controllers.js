@@ -162,7 +162,10 @@ module.exports = {
   },
 
   getDailyByOnlyUser: (req, res) => {
-    //arjun to fix
-    models.getDailyByOnlyUser.get()
+    let userID = [req.query]; //check on this with the incoming data
+    models.getDailyByOnlyUser.get(userID, (err, result) => {
+      if(err) console.log('Error caught in models.getDailyByOnlyUser', err); 
+      else res.send(result); 
+    })
   }
 };
