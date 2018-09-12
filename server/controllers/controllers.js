@@ -28,7 +28,7 @@ module.exports = {
       else res.send(data); 
     });
   },
-
+  
   createFoodEntry: (req, res) => { //when "add" is clicked to add food
     models.getDaily.get(req, (err, result) => {
       if (err) console.log('Error inside createFoodEntry in controllers.js at 1st callback', err);
@@ -61,7 +61,7 @@ module.exports = {
       else res.send(result);
     });
   },
-
+ 
   //API request
   searchExerciseEntry: (req, res) => {
     let query = req.body; //Check the request for where all the ie(height/weight) is...
