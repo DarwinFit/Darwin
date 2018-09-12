@@ -6,13 +6,20 @@ const Navigation = () => {
 	return (
 		//creating a NavBar which will redirect to any component user would click on
 		//adding className to the div for future styling, could also ad activeClassName for each navlink separate, matter of choice
-
-		<div className="Navbar">
-			<NavLink to='/' activeClassName="NavBarLogo">HealthApp</NavLink>
-			<NavLink to='/'>Daily</NavLink>
-			<NavLink to='/food'>Food</NavLink>
-			<NavLink to='/exercise'>Exercise</NavLink>
-		</div>
+		<nav className="navbar is-transparent">
+			<div className="navbar-brand">
+				<NavLink to='/' className="navbar-item">
+					<h1 className="title is-4">HealthApp</h1>
+				</NavLink>
+			</div>
+			<div className="navbar-menu is-active">
+				<div className="navbar-end">
+					<NavLink to='/' className="navbar-item">Daily</NavLink>
+					<NavLink to='/food' className="navbar-item">Food</NavLink>
+					<NavLink to='/exercise' className="navbar-item">Exercise</NavLink>
+				</div>
+			</div>
+		</nav>
 	);
 };
 

@@ -4,9 +4,8 @@ import { Row, Col } from 'react-bootstrap';
 
 const DailyNutrition = ({ username, dailyNutrition }) => {
   return (
-		<div className="NutritionFacts">
+    <div className="NutritionFacts">
 			<h2>Daily Nutritional Summary</h2>
-
       <Row>
         <Col md={2}> 
           <Card>
@@ -71,29 +70,6 @@ const DailyNutrition = ({ username, dailyNutrition }) => {
           </Card>
         </Col>
       </Row>
-
-			{/* <table>
-        <tbody>
-          <tr>
-            <td>Calories</td>
-            <td>{dailyNutrition.calories} kcal</td>
-          </tr>
-          <tr>
-            <td>Total Fat</td>
-            <td>
-              {dailyNutrition.fat} g
-            </td>
-          </tr>
-          <tr>
-            <td>Total Carbohydrates</td>
-            <td>{dailyNutrition.carbs} g</td>
-          </tr>
-          <tr>
-            <td>Sugars</td>
-            <td>{dailyNutrition.sugar} g</td>
-          </tr>
-        </tbody>
-			</table> */}
 		</div>
 	);
 };

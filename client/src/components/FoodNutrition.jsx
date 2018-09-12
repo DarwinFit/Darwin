@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 
 const FoodNutrition = ({ username, foodNutrition }) => {
   return (
-		<div className="NutritionFacts">
+    <div className="NutritionFacts">
       <Row>
         <Col md={2}> 
           <Card>
@@ -67,9 +67,9 @@ const FoodNutrition = ({ username, foodNutrition }) => {
           </Card>
         </Col>
       </Row>
-      <h3>
+      <h5>
         Nutritional Summary for {foodNutrition.serving_qty} (about {foodNutrition.serving_wt_g} g) of {foodNutrition.name}
-      </h3>
+      </h5>
       <button>Add</button>
 		</div>
 	);
