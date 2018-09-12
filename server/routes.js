@@ -11,10 +11,10 @@ router.post('/food_history/search', controllers.searchFoodEntry);
 router.post('/exercise_history/search', controllers.searchExerciseEntry);
 
 router.post('/food_history', controllers.createFoodEntry);
-router.get('/food_history/', controllers.getFoodEntry); 
+router.get('/food_history', controllers.getFoodEntry); 
 
 router.post('/exercise_history', controllers.createExerciseEntry);
-router.get('/exercise_history/', controllers.getExerciseEntry);
+router.get('/exercise_history', controllers.getExerciseEntry);
 
 router.get('/daily', controllers.getDaily);
 
