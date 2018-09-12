@@ -39,7 +39,7 @@ CREATE TABLE if not exists daily (
   burnt int NOT NULL,
   calories int NOT NULL,
   total_fat int NOT NULL,
-  carbs int NOT NULL,
+  total_carbohydrate int NOT NULL,
   protein int NOT NULL,
   sugars int NOT NULL,
   PRIMARY KEY (id),
