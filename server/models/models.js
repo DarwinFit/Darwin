@@ -34,11 +34,11 @@ module.exports = {
 
   insertIntoFoodHistory: {
     post: (params, callback) => {
-      console.log('reached insertIntoFoodHistory', params);
+      console.log('params ', params);
       let queryStr = `INSERT INTO food_history (food_name, user_id, date) values (?, ?, ?)`;
       db.query(queryStr, params, (err, result) => {
         if (err) throw err;
-        callback(result);
+        callback(null, result);
       })
     }
   },
@@ -49,7 +49,7 @@ module.exports = {
                           where user_id = ? AND date = ?`;
       db.query(dailyQueryStr, params, (err, results) => {
         if (err) throw err;
-        callback(results);
+        callback(null, results);
       })
     }
   },

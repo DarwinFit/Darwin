@@ -7,8 +7,8 @@ router.post('/users', controllers.createNewUser); //front-end should send all in
 
 /////START WORKING WITH THIS TOMORROW START TESTING!!
 
-router.get('/food_history/search', controllers.searchFoodEntry);
-router.get('/exercise_history/search', controllers.searchExerciseEntry);
+router.post('/food_history/search', controllers.searchFoodEntry);
+router.post('/exercise_history/search', controllers.searchExerciseEntry);
 
 router.post('/food_history', controllers.createFoodEntry);
 router.get('/food_history/', controllers.getFoodEntry); 

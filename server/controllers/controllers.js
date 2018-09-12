@@ -22,14 +22,15 @@ module.exports = {
     });
   },
 
-  //API request for user's food search 
+  //API request for user's food search - WORKS
   searchFoodEntry: (req, res) => {
-    let query = req.body; //make sure this is where the searched entry is
-    console.log('req.body in search', req.body);
-    console.log('req in search', req);
-    getNutrients(query, (err, data) => {
+    // console.log('req.body in search', req.body);
+    let {food_name} = req.body;
+    getNutrients(food_name, (err, data) => {
       if (err) console.log('Error inside searchFoodEntry in controllers.js', err); 
-      else res.send(data); 
+      else {
+        res.send(data.foods[0])
+      }; 
     });
   },
   //when 'add food' is clicked
@@ -38,6 +39,7 @@ module.exports = {
     let {user_id, date, food_name} = req.body;
     let query = [user_id, date];
     let body = [food_name, user_id, date];
+    let nutrientsToBeUpdated = {};
     //check daily nutrients of user for first entry of the day or just update entry
     models.getDaily.get(query, (err, result) => {
       // console.log('result from getDaily is', result);
@@ -71,23 +73,20 @@ module.exports = {
         // })
 
         models.insertIntoFoodHistory.post(body, (err, result) => {
-          if (err) console.log('Error caught at insertIntoFoodHistory in controllers', err);
+          if (err) console.log('Error caught at insertIntoFoodHistory in controllers', err); //works until here
           models.getDailyForFood.get(query, (err, results) => {
             if (err) console.log('Error caught at getDailyForFood in controllers', err);
-
-            axios.post('/food_history/search', {body})
-                .then((data) => {
-                  for (let key in data) {
-                    results[key] = results[key] + data[key];
-                  }
-                  models.updateDaily.post(results, query, (err, entry) => {
-                    if (err) console.log('Error caught at updateDaily in controllers', err);
-                    console.log('Database has been updated with new food entry');
-                  })
-                })
-                .catch((err) => {
-                  console.log('Error caught on .catch from axios post in getDailyForFood in controllers', err);
-                })
+            nutrientsToBeUpdated = results;
+            getNutrients(food_name, (err, data) => {
+              if (err) console.log('Error inside getNutrients in createFoodEntry in controllers.js', err);
+              for (let key in nutrientsToBeUpdated) {
+                nutrientsToBeUpdated[key] = nutrientsToBeUpdated[key] + data[`nf_${key}`];
+              }
+              models.updateDaily.post(nutrientsToBeUpdated, query,(err, entry) => {
+                if (err) console.log('Error caught at updateDaily in controllers', err);
+                console.log('Database has been updated with new food entry');
+              })
+            })
           })
         })
       }
@@ -102,14 +101,20 @@ module.exports = {
     });
   },
 
-  //API request
+  //API request - WORKS
   searchExerciseEntry: (req, res) => {
-    let query = req.body; //Check the request for where all the ie(height/weight) is...
+    let query = {exercise_name: req.body.exercise_name,
+                  gender: req.body.gender, 
+                  weight_kg: req.body.weight_kg, 
+                  height_cm: req.body.height_cm,
+                  age: req.body.age
+                };
     getExercises(query, (err, data) => {
-      if (err) console.log('Error inside searchExerciseEntry', err); 
-      else res.send(data);
+      if (err) console.log('Error inside searchExerciseEntry in controllers.js', err); 
+      else res.send(data.exercises);
     });
   },
+
   //when 'add exercise' is clicked
   createExerciseEntry: (req, res) => {
     // console.log('hitting createExerciseEntry in controllers', req.body);
@@ -151,14 +156,14 @@ module.exports = {
     })
   },
 
-  getExerciseEntry: (req, res) => {
+  getExerciseEntry: (req, res) => { //WORKS
     models.getExerciseEntry.get(req.query, (err, result) => {
       if (err) console.log('Error caught on models.getExerciseEntry in controllers', err);
       else res.send(result);
     });
   },
 
-  getDaily: (req, res) => {
+  getDaily: (req, res) => { //WORKS
     models.getDaily.get(req)
           .then((result) => {
             res.send(result);
