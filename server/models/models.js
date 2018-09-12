@@ -154,8 +154,12 @@ module.exports = {
   },
   //function retrieve daily entries by just user_id
   getDailyByOnlyUser: {
-    get: (query, callback) => {
-      
+    get: (userID, callback) => {
+      let queryStr = `SELECT * FROM daily where user_id = ?`;
+      db.query(queryStr, userID, (err, result) => {
+        if(err) throw err; 
+        callback(null, result); 
+      })
     }
   }
 };
