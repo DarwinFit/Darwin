@@ -121,7 +121,6 @@ module.exports = {
     }
     getExercise();
   },
-
   //when 'add exercise' is clicked
   createExerciseEntry: (req, res) => {
     // console.log('hitting createExerciseEntry in controllers', req.body);

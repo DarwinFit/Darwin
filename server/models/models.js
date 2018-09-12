@@ -159,35 +159,3 @@ module.exports = {
     }
   }
 };
-
-
-// saveAndUpdateExerciseEntry: {
-//   post: (body, callback) => {
-//     let bodySplit = body.slice(1);
-//     let needToBeUpdated = {};
-  
-//     async function insertExerciseHistory() {
-//       // console.log('reached saveAndUpdateExerciseEntry in models', body);
-//       let queryStr = `INSERT INTO exercise_history (exercise_name, user_id, date) value (?, ?, ?)`;
-//       db.query(queryStr, body, (err, result) => {
-//         if (err) console.log('Error at insert into exercise_history in async saveAndUpdate', err);
-
-//         let dailyQueryStr = `SELECT burnt FROM daily where user_id = ? AND date = ?`;
-//         db.query(dailyQueryStr, bodySplit, (err, result) => {
-//           if (err) console.log('Error at select in ExerciseEntry in async saveAndUpdate', err) 
-//           needToBeUpdated = result;
-//         })
-//       })
-//     }
-//     insertExerciseHistory().then(() => { 
-//        //add values from params to get updated daily values
-//       needToBeUpdated[key] = needToBeUpdated[key] + params[key];
-//       let {burnt} = needToBeUpdated;
-//       let queryStr = `UPDATE daily SET burnt=${burnt} WHERE user_id = ? AND date = ?`; 
-//       db.query(queryStr, bodySplit, (err, result) => {
-//         if (err) console.log('Error at update in insertExerciseHistory saveAndUpdate', err);
-//         callback(null, result);
-//       })
-//     })
-//   }
-// },
