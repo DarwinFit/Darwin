@@ -20,7 +20,7 @@ module.exports = {
 				console.log('Error caught on getUserInfo in controller.js', err);
 				res.sendStatus(404);
 			} else {
-				res.send(results);
+				res.send(results[0]);
 			}
 		});
 	},
@@ -61,7 +61,9 @@ module.exports = {
 								models.getFoodEntry.get(query, (err, result) => {
 									if (err)
 										console.log('Error inside createFoodEntry in controllers at 4th callback', err);
-									else res.send(result);
+									else {
+										res.send(result.data[0]);
+									}
 								});
 							}
 						});

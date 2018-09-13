@@ -80,7 +80,13 @@ const FoodNutrition = ({ username, foodNutrition, handleAddFood }) => {
 							<h2>Are you sure you want to add this food to the list? </h2>
 						</div>
 						<div className="styles.actions">
-							<button className="styles.button" onClick={handleAddFood}>
+							<button
+								className="styles.button"
+								onClick={() => {
+									handleAddFood();
+									close();
+								}}
+							>
 								{' '}
 								Add{' '}
 							</button>

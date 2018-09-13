@@ -83,9 +83,16 @@ class App extends Component {
 
 	//gets the today mm/dd/yyyy and sets it into the state
 	getDate() {
-		let time = new Date();
-		let date = `${time.getFullYear()}${time.getMonth()}${time.getDay()}`;
-		this.setState({ date: date });
+		let date = new Date();
+		let month = '' + (date.getMonth() + 1);
+		let day = '' + date.getDate();
+		let year = date.getFullYear();
+
+		if (month.length < 2) month = '0' + month;
+		if (day.length < 2) day = '0' + day;
+
+		let fullDate = [ year, month, day ].join('');
+		this.setState({ date: fullDate });
 	}
 
 	//authenticate the user and check if the user is in the DB
@@ -148,7 +155,7 @@ class App extends Component {
 		let updatedExercise = this.state.exerciseData;
 
 		axios
-			.post('/health/exercise_history/search', { exercise })
+			.post('/health/exercise_history/search', { exercise_name: exercise })
 			// getting back the updatedExercise obj;
 			.then((exrsData) => {
 				console.log('THIS IS DATA WE GETTING BACK FROM searchExercise: ', exrsData);
@@ -186,14 +193,23 @@ class App extends Component {
 		let options = {
 			food_name: this.state.foodNutrition.name,
 			user_id: this.state.userData.id,
-			date: this.state.date
+			date: this.state.date,
+			total_fat: this.state.foodNutrition.fat,
+			calories: this.state.foodNutrition.calories,
+			total_carbohydrate: this.state.foodNutrition.carbs,
+			sugars: this.state.foodNutrition.sugars,
+			protein: this.state.foodNutrition.protein
 		};
+		console.log(this.state.userData.id);
 		axios
 			.post('/health/food_history', options)
-			.then((data) => {
+			.then(({ data }) => {
 				console.log('THIS IS THE DATA FROM HANDLING ADDFOOD', data);
-				let updatedFood = this.state.foodItems;
-				updatedFood = data;
+				let updatedFood = [];
+
+				data.forEach(function(entry) {
+					updatedFood.push(entry.food_name);
+				});
 				this.setState({ foodItems: updatedFood });
 			})
 			.catch((err) => console.error(err));
@@ -256,9 +272,9 @@ class App extends Component {
 			.get('/health/users', { params: { username: username } })
 			.then(({ data }) => {
 				console.log('THIS IS THE DATA IN AUTH: ', data);
-				if (data.length > 0) {
+				if (data.id > 0) {
 					var userData = this.state.userData;
-					userData.id = data.user_id;
+					userData.id = data.id;
 					userData.age = data.age;
 					userData.gender = data.gender;
 					userData.height = data.height;

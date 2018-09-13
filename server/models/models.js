@@ -148,6 +148,7 @@ module.exports = {
 	getDaily: {
 		get: (query, callback) => {
 			// console.log('reaching getDaily in models.js', query);
+
 			let queryStr = `SELECT burnt, calories, total_fat, total_carbohydrate, protein, sugars FROM daily
                       where user_id = ? AND date = ?`;
 			db.query(queryStr, query, (err, result) => {
