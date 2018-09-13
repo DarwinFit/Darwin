@@ -63,7 +63,6 @@ class App extends Component {
 
 		this.handleAddFood = this.handleAddFood.bind(this);
 		this.handleAddExercise = this.handleAddExercise.bind(this);
-		this.onDelete = this.onDelete.bind(this);
 		this.authListener = this.authListener.bind(this);
 		this.handleAddInfo = this.handleAddInfo.bind(this);
 		this.handleLogOut = this.handleLogOut.bind(this);
