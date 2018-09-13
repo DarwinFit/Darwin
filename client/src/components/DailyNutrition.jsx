@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import { Card, CardText, CardBody, h1, CardSubtitle } from 'reactstrap';
 import { Row, Col } from 'react-bootstrap';
 
 const DailyNutrition = ({ username, dailyNutrition }) => {
   return (
-    <div className="NutritionFacts">
+    <div className="NutritionFacts container">
 			<h2>Daily Nutritional Summary</h2>
       <Row>
         <Col md={2}> 
-          <Card>
+          <Card className="border-0 border-dark">
             <CardBody>
-              <CardTitle>{dailyNutrition.calories}</CardTitle>
-              <CardSubtitle>kcal</CardSubtitle>
+              <h1 className="text-left">{dailyNutrition.calories}</h1>
+              <CardSubtitle className="text-right">kcal</CardSubtitle>
             </CardBody>
-            {/* <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" /> */}
             <CardBody>
-              <CardText>Calories</CardText>
-              {/* <CardLink href="#">Card Link</CardLink>
-              <CardLink href="#">Another Link</CardLink> */}
+              <h4 className="text-right">Calories</h4>
             </CardBody>
           </Card>
         </Col>
@@ -25,11 +22,11 @@ const DailyNutrition = ({ username, dailyNutrition }) => {
         <Col md={2}>
           <Card>
             <CardBody>
-              <CardTitle>{dailyNutrition.fat}</CardTitle>
-              <CardSubtitle>g</CardSubtitle>
+              <h1 className="text-left">{dailyNutrition.fat}</h1>
+              <CardSubtitle className="text-right">g</CardSubtitle>
             </CardBody>
             <CardBody>
-              <CardText>Fat</CardText>
+            <h4 className="text-right">Fat</h4>
             </CardBody>
           </Card>
         </Col>
@@ -37,11 +34,11 @@ const DailyNutrition = ({ username, dailyNutrition }) => {
         <Col md={2}>
           <Card>
             <CardBody>
-              <CardTitle>{dailyNutrition.carbs}</CardTitle>
-              <CardSubtitle>g</CardSubtitle>
+              <h1 className="text-left">{dailyNutrition.carbs}</h1>
+              <CardSubtitle className="text-right">g</CardSubtitle>
             </CardBody>
             <CardBody>
-              <CardText>Carbohydrates</CardText>
+              <h4 className="text-right">Carbohydrates</h4>
             </CardBody>
           </Card>
         </Col>
@@ -49,11 +46,11 @@ const DailyNutrition = ({ username, dailyNutrition }) => {
         <Col md={2}> 
           <Card>
             <CardBody>
-              <CardTitle>{dailyNutrition.protein}</CardTitle>
-              <CardSubtitle>g</CardSubtitle>
+              <h1 className="text-left">{dailyNutrition.protein}</h1>
+              <CardSubtitle className="text-right">g</CardSubtitle>
             </CardBody>
             <CardBody>
-              <CardText>Proteins</CardText>
+              <h4 className="text-right">Proteins</h4>
             </CardBody>
           </Card>
         </Col>
@@ -61,11 +58,11 @@ const DailyNutrition = ({ username, dailyNutrition }) => {
         <Col md={2}>
           <Card>
             <CardBody>
-              <CardTitle>{dailyNutrition.sugar}</CardTitle>
-              <CardSubtitle>g</CardSubtitle>
+              <h1 className="text-left">{dailyNutrition.sugar}</h1>
+              <CardSubtitle className="text-right">g</CardSubtitle>
             </CardBody>
             <CardBody>
-              <CardText>Sugar</CardText>
+              <h4 className="text-right">Sugar</h4>
             </CardBody>
           </Card>
         </Col>

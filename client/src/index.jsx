@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'J',
+      username: '',
       foodNutrition: {
         name: 'Pizza',
         serving_qty: 0,
