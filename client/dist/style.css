@@ -34,7 +34,7 @@ body {
   background-color: #333; */
 }
 
-.homenav-brand {
+.nav-brand {
   float: left;
   display: block;
   padding: 0px;
@@ -64,7 +64,7 @@ li .nav-unselected {
   font-size: 1.1em;
 }
 
-li button .nav-login {
+.nav-login {
   float: right;
   padding: 15px 10px 15px 10px;
   background-color: #2F2E2B;
@@ -79,7 +79,7 @@ li button .nav-login:hover {
   text-decoration: none;
 }
 
-li button .nav-signup {
+.nav-signup {
   float: right;
   padding: 15px;
   background-color: #8A9D22;
