@@ -14,18 +14,33 @@ const Main = ({
 	foodItems,
 	exerciseItems,
 	handleAddExercise,
-	onDelete,
-	logOut
+	logOut,
+	searchFood,
+	searchExercise,
+	getDailyTotalFood,
+	handleAddFood
 }) => (
 	<div>
 		<Navigation handleLogOut={logOut} />
 		<Switch>
-			<Route exact path="/" render={() => <Daily username={username} dailyNutrition={dailyNutrition} />} />
+			<Route
+				exact
+				path="/"
+				render={() => (
+					<Daily username={username} dailyNutrition={dailyNutrition} getDailyTotalFood={getDailyTotalFood} />
+				)}
+			/>
 
 			<Route
 				path="/food"
 				render={() => (
-					<Food username={username} foodNutrition={foodNutrition} items={foodItems} onDelete={onDelete} />
+					<Food
+						username={username}
+						foodNutrition={foodNutrition}
+						items={foodItems}
+						searchFood={searchFood}
+						handleAddFood={handleAddFood}
+					/>
 				)}
 			/>
 
@@ -33,11 +48,11 @@ const Main = ({
 				path="/exercise"
 				render={() => (
 					<Exercise
+						searchExercise={searchExercise}
 						username={username}
 						exerciseData={exerciseData}
 						items={exerciseItems}
 						handleAddExercise={handleAddExercise}
-						onDelete={onDelete}
 					/>
 				)}
 			/>

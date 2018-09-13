@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import { Row, Col } from 'react-bootstrap';
+import Popup from 'reactjs-popup';
+import '../css/PopUpStyle.css';
 
 const FoodNutrition = ({ username, foodNutrition }) => {
   return (
@@ -19,18 +21,18 @@ const FoodNutrition = ({ username, foodNutrition }) => {
           </Card>
         </Col>
 
-        <Col md={2}>
-          <Card>
-            <CardBody>
-              <CardTitle>{foodNutrition.fat}</CardTitle>
-              <CardSubtitle>g</CardSubtitle>
-            </CardBody>
-            <CardBody>
-              <CardText>Fat</CardText>
-            </CardBody>
-          </Card>
-        </Col>
-
+				<Col md={2}>
+					<Card>
+						<CardBody>
+							<CardTitle>{foodNutrition.fat}</CardTitle>
+							<CardSubtitle>g</CardSubtitle>
+						</CardBody>
+						<CardBody>
+							<CardText>Fat</CardText>
+						</CardBody>
+					</Card>
+				</Col>
+        
         <Col md={2}>
           <Card>
             <CardBody>
@@ -70,7 +72,32 @@ const FoodNutrition = ({ username, foodNutrition }) => {
       <h5>
         Nutritional Summary for {foodNutrition.serving_qty} (about {foodNutrition.serving_wt_g} g) of {foodNutrition.name}
       </h5>
-      <button>Add</button>
+      			<Popup trigger={<button className="styles.button">Add</button>} modal>
+				{(close) => (
+					<div className="styles.modal">
+						<div className="styles.content">
+							<h2>Are you sure you want to add this food to the list? </h2>
+						</div>
+						<div className="styles.actions">
+							<button className="styles.button" onClick={handleAddFood}>
+								{' '}
+								Add{' '}
+							</button>
+						</div>
+						<div className="styles.actions">
+							<button
+								className="styles.button"
+								onClick={() => {
+									console.log('modal closed ');
+									close();
+								}}
+							>
+								Close
+							</button>
+						</div>
+					</div>
+				)}
+			</Popup>
 		</div>
 	);
 };
