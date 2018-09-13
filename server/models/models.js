@@ -20,13 +20,11 @@ module.exports = {
 
   getUserInfo: {   //WORKS
     get: (username, callback) => {
-      console.log('what is username', username);
+      // console.log('what is username in getUserInfo in models', username);
       let queryStr = `SELECT * FROM users WHERE username = "${username}"`;
-      console.log('queryStr', queryStr);
       db.query(queryStr, (err, result) => {
         if (err) throw err;
-        // console.log('inside getUserInfo in models:', result);
-        callback(err, result);
+        else callback(null, result);
       })
     }
   },
@@ -34,23 +32,23 @@ module.exports = {
 
   insertIntoFoodHistory: {  //WORKS
     post: (params, callback) => {
-      // console.log('params in insertIntoFoodHistory', params); //[ 'big mac', 1, '20180907' 
+      // console.log('params in insertIntoFoodHistory', params);
       let queryStr = `INSERT INTO food_history (food_name, user_id, date) values (?, ?, ?)`;
       db.query(queryStr, params, (err, result) => {
         if (err) throw err;
-        callback(null, result);
+        else callback(null, result);
       })
     }
   },
 
   getDailyForFood: {  //WORKS
     get: (params, callback) => {
-      // console.log('params in getDailyForFood', params); //[ 1, '20180907' ]
+      // console.log('params in getDailyForFood', params);
       let dailyQueryStr = `SELECT calories, total_fat, total_carbohydrate, protein, sugars FROM daily
                           WHERE user_id = ? AND date = ?`;
       db.query(dailyQueryStr, params, (err, results) => {
         if (err) throw err;
-        callback(null, results);
+        else callback(null, results);
       })
     }
   },
@@ -58,24 +56,23 @@ module.exports = {
   updateDailyForFood: {  //WORKS
     post: (params, body, callback) => {
       // console.log('params in updateDailyForFood', params);
-      // console.log('body in updateDailyForFood', body); //[ 1, '20180907' ]
+      // console.log('body in updateDailyForFood', body);
       let {calories, total_fat, total_carbohydrate, protein, sugars} = params;
       let queryStr = `UPDATE daily SET calories=${calories}, total_fat=${total_fat}, total_carbohydrate=${total_carbohydrate}, 
                       protein=${protein}, sugars=${sugars} WHERE user_id = ? AND date = ?`;
       db.query(queryStr, body, (err, result) => {
-        if (err) console.log('Error at updateDailyForFood in models.js', err);
-        callback(null, result);
+        if (err) throw err;
+        else callback(null, result);
       })
     }
   },
 
   getFoodEntry: {   //WORKS
     get: (query, callback) => {
-      let {user_id, date} = query
       let queryStr = `SELECT * FROM food_history WHERE user_id = ? AND date = ?`;
-      db.query(queryStr, [user_id, date], (err, result) => {
+      db.query(queryStr, query, (err, result) => {
         if (err) throw err;
-        callback(null, result);
+        else callback(null, result);
       })
     }
   },
@@ -87,7 +84,7 @@ module.exports = {
       let queryStr = `INSERT INTO exercise_history (exercise_name, user_id, date) values (?, ?, ?)`;
       db.query(queryStr, params, (err, result) => {
         if (err) throw err;
-        callback(null, result);
+        else callback(null, result);
       })
     }
   },
@@ -98,7 +95,7 @@ module.exports = {
       let dailyQueryStr = `SELECT burnt FROM daily WHERE user_id = ? AND date = ?`;
       db.query(dailyQueryStr, params, (err, results) => {
         if (err) throw err;
-        callback(null, results);
+        else callback(null, results);
       })
     }
   },
@@ -111,18 +108,17 @@ module.exports = {
       let queryStr = `UPDATE daily SET burnt=${burnt} WHERE user_id = ? AND date = ?`;
       db.query(queryStr, body, (err, result) => {
         if (err) console.log('Error at updateDailyForExercise in models.js', err);
-        callback(null, result);
+        else callback(null, result);
       })
     }
   },
 
   getExerciseEntry: {   //WORKS
     get: (query, callback) => {
-      let {user_id, date} = query
       let queryStr = `SELECT * FROM exercise_history WHERE user_id = ? AND date = ?`;
-      db.query(queryStr, [user_id, date], (err, result) => {
+      db.query(queryStr, query, (err, result) => {
         if (err) throw err;
-        callback(null, result);
+        else callback(null, result);
       })
     }
   },
@@ -135,7 +131,7 @@ module.exports = {
                       sugars, user_id, date) values (?, ?, ?, ?, ?, ?, ?, ?)`;
       db.query(queryStr, params, (err, result) => {
         if (err) throw err;
-        callback(null, result);
+        else callback(null, result);
       })
     }
   },
@@ -146,19 +142,18 @@ module.exports = {
       let queryStr = `SELECT burnt, calories, total_fat, total_carbohydrate, protein, sugars FROM daily
                       where user_id = ? AND date = ?`;
       db.query(queryStr, query, (err, result) => {
-        // console.log("results in getDaily in models", result);
         if (err) throw err;
-        callback(null, result);
+        else callback(null, result);
       })
     }
   },
-  //function retrieve daily entries by just user_id
+  //retrieve daily entries by user_id only
   getDailyByOnlyUser: {
     get: (userID, callback) => {
-      let queryStr = `SELECT * FROM daily where user_id = ?`;
+      let queryStr = `SELECT * FROM daily WHERE user_id = ?`;
       db.query(queryStr, userID, (err, result) => {
         if(err) throw err; 
-        callback(null, result); 
+        else callback(null, result); 
       })
     }
   }
