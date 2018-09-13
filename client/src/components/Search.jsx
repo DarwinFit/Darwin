@@ -28,7 +28,7 @@ class Search extends Component {
 	render() {
 		//search text means the text we want to have in our phrase before the input field, which would give a hint to user for what to search
 		// depends on the either we are in the food component or exercise
-		var searchText = this.props.type ? 'food' : 'exercise';
+		var searchText = this.props.type === 'food' ? 'food' : 'exercise';
 		var placeholder = `describe your ${searchText}`;
 		//creating below a div element with a classname for further styling
 		//inside creating a label which would describe to the user what he can search for in this component

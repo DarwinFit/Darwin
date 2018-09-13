@@ -15,10 +15,10 @@ app.use(bodyParser.json());
 app.use('/health', routes);
 
 app.get('/*', (req, res) => {
-  res.redirect('/');
-})
+	res.redirect('/');
+});
 
 let port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`listening on port ${port}!`);
+	console.log(`listening on port ${port}!`);
 });

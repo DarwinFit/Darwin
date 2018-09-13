@@ -27,7 +27,13 @@ const ExerciseDetail = ({ username, exerciseData, handleAddExercise }) => {
 							<h3> Are you sure you want to add this exercise to your list?</h3>
 						</div>
 						<div className="styles.actions">
-							<button className="styles.button" onClick={handleAddExercise}>
+							<button
+								className="styles.button"
+								onClick={() => {
+									handleAddExercise();
+									close();
+								}}
+							>
 								{' '}
 								Add{' '}
 							</button>

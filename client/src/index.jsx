@@ -29,6 +29,7 @@ class App extends Component {
 				protein: 0
 			},
 			dailyNutrition: {
+				burnt: 0,
 				calories: 0,
 				fat: 0,
 				carbs: 0,
@@ -43,7 +44,7 @@ class App extends Component {
 			foodItems: [],
 			exerciseItems: [],
 			userData: {
-				id: '',
+				id: null,
 				username: null,
 				age: null,
 				gender: null,
@@ -109,6 +110,31 @@ class App extends Component {
 			}
 		});
 	}
+	userAuthenticatedAndExists() {
+		let username = this.state.userData.username;
+		let updatedData = this.state.userData;
+
+		//here has to be a function which calls the server for checking if there is user or not
+		axios
+			.get('/health/users', { params: { username: username } })
+			.then(({ data }) => {
+				if (data.id > 0) {
+					updatedData.id = data.id;
+					updatedData.age = data.age;
+					updatedData.gender = data.gender;
+					updatedData.height = data.height;
+					updatedData.weight = data.weight;
+					updatedData.avg_calories = data.avg_calories;
+					this.setState({ userData: updatedData, userExists: true }, () => {
+						//calling to get the total for today, if the user logged out and then logged in
+						this.getDailyTotalFood();
+					});
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}
 	//logs out the user and sets the state of the user data to null
 	handleLogOut() {
 		firebase.auth().signOut();
@@ -151,20 +177,20 @@ class App extends Component {
 
 	//search = post to exercise_history/search - exercise string + username
 	searchExercise(exercise) {
-		console.log('Searching for this exercise: ', exercise);
 		let updatedExercise = this.state.exerciseData;
 
 		axios
-			.post('/health/exercise_history/search', { exercise_name: exercise })
+			.post('/health/exercise_history/search', {
+				exercise_name: exercise,
+				username: this.state.userData.username
+			})
 			// getting back the updatedExercise obj;
-			.then((exrsData) => {
-				console.log('THIS IS DATA WE GETTING BACK FROM searchExercise: ', exrsData);
-				updatedExercise.name = exrsData.name;
-				updatedExercise.duration_min = exrsData.duration_min;
-				updatedExercise.nf_calories = exrsData.nf_calories;
+			.then(({ data }) => {
+				updatedExercise.name = data.name;
+				updatedExercise.duration_min = data.duration_min;
+				updatedExercise.nf_calories = data.nf_calories;
 				//set the state of exercisedata
-				this.setState({ exerciseData: updatedExercise });
-				this.setState({ searchedExercise: exercise });
+				this.setState({ exerciseData: updatedExercise, searchedExercise: exercise });
 			})
 			.catch((err) => console.error(err));
 	}
@@ -173,15 +199,15 @@ class App extends Component {
 	getDailyTotalFood() {
 		let dailyFoodNutrients = this.state.dailyNutrition;
 		axios
-			.get('/health/daily', { query: { user_id: this.state.userData.id, date: this.state.date } })
+			.get('/health/daily', { params: { user_id: this.state.userData.id, date: this.state.date } })
 			//GetDaily  data for username date
-			.then((data) => {
-				console.log('Getting back data for total daily: ', data);
-				dailyFoodNutrients.calories = data.calories;
-				dailyFoodNutrients.fat = data.total_fat;
-				dailyFoodNutrients.carbs = data.total_carbohydrate;
-				dailyFoodNutrients.sugars = data.sugars;
-				dailyFoodNutrients.protein = data.protein;
+			.then(({ data }) => {
+				dailyFoodNutrients.burnt = data[0].burnt;
+				dailyFoodNutrients.calories = data[0].calories;
+				dailyFoodNutrients.fat = data[0].total_fat;
+				dailyFoodNutrients.carbs = data[0].total_carbohydrate;
+				dailyFoodNutrients.sugars = data[0].sugars;
+				dailyFoodNutrients.protein = data[0].protein;
 				this.setState({ dailyNutrition: dailyFoodNutrients });
 			})
 			.catch((err) => console.error(err));
@@ -204,13 +230,15 @@ class App extends Component {
 		axios
 			.post('/health/food_history', options)
 			.then(({ data }) => {
-				console.log('THIS IS THE DATA FROM HANDLING ADDFOOD', data);
 				let updatedFood = [];
 
 				data.forEach(function(entry) {
 					updatedFood.push(entry.food_name);
 				});
-				this.setState({ foodItems: updatedFood });
+				this.setState({ foodItems: updatedFood }, () => {
+					//calling get dailytotal, so it will retrieve the updated total of what we ate today
+					this.getDailyTotalFood();
+				});
 			})
 			.catch((err) => console.error(err));
 	}
@@ -222,12 +250,14 @@ class App extends Component {
 		let options = {
 			user_id: this.state.userData.id,
 			date: this.state.date,
-			exercise_name: this.state.searchedExercise
+			exercise_name: this.state.searchedExercise,
+			burnt: this.state.exerciseData.nf_calories
 		};
-		axios.post('/health/exercise_history', options).then((data) => {
-			console.log('THIS IS DATA WE GETTING BACK FROM ADDEXERCISE: ', data);
-			let updatedData = this.state.exerciseItems;
-			updatedData = data;
+		axios.post('/health/exercise_history', options).then(({ data }) => {
+			let updatedData = [];
+			data.forEach(function(entry) {
+				updatedData.push(entry.exercise_name);
+			});
 			this.setState({ exerciseItems: updatedData });
 		});
 	}
@@ -259,42 +289,11 @@ class App extends Component {
 		axios
 			.post('/health/users', newUserData)
 			.then((data) => {
-				console.log('Data add success!', data);
-				// this.setState({ userExists: true });
+				console.log('Data add success!');
 			})
 			.catch((err) => console.error(err));
 	}
 
-	userAuthenticatedAndExists() {
-		let username = this.state.userData.username;
-		//here has to be a function which calls the server for checking if there is user or not
-		axios
-			.get('/health/users', { params: { username: username } })
-			.then(({ data }) => {
-				console.log('THIS IS THE DATA IN AUTH: ', data);
-				if (data.id > 0) {
-					var userData = this.state.userData;
-					userData.id = data.id;
-					userData.age = data.age;
-					userData.gender = data.gender;
-					userData.height = data.height;
-					userData.weight = data.weight;
-					userData.avg_calories = data.avg_calories;
-					this.setState({ userData: userData, userExists: true });
-				}
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-
-		// if (Object.values(this.state.userData).indexOf(null) === -1) {
-		// 	console.log(Object.values(this.state.userData));
-		// 	return true;
-		// } else {
-		// 	console.log(Object.values(this.state.userData));
-		// 	return false;
-		// }
-	}
 	render() {
 		if (this.state.isSignedIn) {
 			if (this.state.userExists) {
@@ -311,7 +310,6 @@ class App extends Component {
 						logOut={this.handleLogOut}
 						searchFood={this.searchFood}
 						searchExercise={this.searchExercise}
-						getDailyTotalFood={this.getDailyTotalFood}
 						handleAddFood={this.handleAddFood}
 					/>
 				);
