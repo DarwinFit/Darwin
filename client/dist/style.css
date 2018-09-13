@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab|Work+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans');
 
 body {
 	font-family: 'PT Serif', sans-serif;
@@ -8,8 +8,20 @@ body {
 	background: url('appleHome.png');
 	background-repeat: no-repeat;
 	background-size: 100% auto;
-	/* background-position: top -150px right 0px; */
-	font-size: 1.1em;
+}
+
+.home-bg {
+	background-color: #707070;
+	background: url('appleHome.png');
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+}
+
+.main-bg {
+	background-color: #707070;
+	background: url('appleHome.png');
+	background-repeat: no-repeat;
+	background-size: 100% auto;
 }
 
 .nav {
@@ -23,10 +35,9 @@ body {
 	color: white;
 	border: 0px;
 	background-color: rgba(0, 0, 0, 0.0);
-	justify-content: flex-end;
 	overflow: hidden;
 	align-items: center;
-	font-family: 'Work Sans', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	/* list-style-type: none;
   margin: 0;
   padding: 0;
@@ -34,7 +45,18 @@ body {
   background-color: #333; */
 }
 
-.homenav-brand {
+.navhome {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.0);
+	font-family: 'Open Sans', sans-serif;
+	align-items: center;
+}
+
+.navhome-brand {
+	justify-content: flex-start;
 	float: left;
 	display: block;
 	padding: 0px;
@@ -42,14 +64,79 @@ body {
 	font-weight: lighter;
 	margin-left: 5px;
 	font-size: 30pt;
+	text-decoration: none;
 }
 
-li .nav-brand:hover {
-	color: #e3e3e3;
+.navhome-brand:hover {
+	color: #a2a2a2;
 	background-color: rgba(0, 0, 0, 0.0);
 }
 
-li .nav-selected {
+.navhome-button {
+	float: right;
+	text-align: center;
+	/* display: inline-block; */
+}
+
+.navhome-login {
+	margin: 10px 5px 10px 15px;
+	padding: 0px 10px 0px 10px;
+	background-color: #2f2e2b;
+	font-size: 20pt;
+	font-weight: 100;
+	color: white;
+	border: 0px;
+	box-shadow: 0px 3px 6px #000000;
+	border-radius: 2px;
+	width: 180px;
+}
+
+.navhome-login:hover {
+	background-color: #22221f;
+}
+
+.navhome-signup {
+	margin: 10px 15px 10px 5px;
+	padding: 0px 10px 0px 10px;
+	background-color: #8a9d22;
+	font-size: 20pt;
+	font-weight: 100;
+	color: white;
+	border: 0px;
+	box-shadow: 0px 3px 6px #000000;
+	border-radius: 2px;
+	width: 180px;
+}
+
+.navhome-signup:hover {
+	background-color: #70801b;
+}
+
+.home-text {
+	width: 50%;
+	position: absolute;
+	right: 80px;
+	top: 180px;
+}
+
+.home-title {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: ligher;
+	font-size: 40pt;
+	text-align: right;
+	margin: 10px;
+}
+
+.home-p {
+	font-family: 'Roboto Slab';
+	text-align: right;
+	font-size: 10pt;
+	width: 90%;
+	float: right;
+	text-shadow: 0px 3px 6px #000000;
+}
+
+.nav-selected {
 	padding: 5px;
 	color: white;
 	font-weight: bold;
@@ -57,58 +144,25 @@ li .nav-selected {
 	font-size: 60pt;
 }
 
-li .nav-unselected {
+.nav-unselected {
 	padding: 5px;
 	margin-right: 5px;
 	font-size: 1.1em;
 }
 
-li button .nav-login {
-	float: right;
-	padding: 15px 10px 15px 10px;
-	background-color: #2f2e2b;
-	font-size: 2.0em;
-	color: white;
-	border: 0px;
-	box-shadow: 0px 3px 6px #000000;
+li {
+	float: left;
 }
 
-li button .nav-login:hover {
+li a {
+	display: block;
 	color: white;
+	text-align: center;
+	padding: 14px 16px;
 	text-decoration: none;
 }
 
-li button .nav-signup {
-	float: right;
-	padding: 15px;
-	background-color: #8a9d22;
-	font-size: 2.0em;
-	color: white;
-	border: 0px;
-	box-shadow: 0px 3px 6px #000000;
-}
-
-.home-text {
-	width: 40%;
-	position: absolute;
-	right: 80px;
-	top: 180px;
-}
-
-.home-title {
-	font-family: 'Work Sans', sans-serif;
-	font-weight: ligher;
-	font-size: 40pt;
-	text-align: right;
-}
-
-.home-p {
-	font-family: 'Roboto Slab';
-	text-align: right;
-	font-size: 10pt;
-}
-/* check the searchbar styles, since letters are not being seen */
-.SearchInput {
-	font-family: 'Arial';
-	color: black;
-}
+/* Change the link color to #111 (black) on hover */
+/* li a:hover {
+  background-color: #111;
+} */

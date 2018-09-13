@@ -17,6 +17,7 @@ const Home = (props) => (
             </p>
             <p>
             Quisque ultrices quis odio ut ullamcorper. Vestibulum lorem metus, viverra ut elit vel, blandit interdum sapien. Morbi sed quam sem. Suspendisse lobortis tristique justo, nec vulputate mauris congue elementum. Sed sodales imperdiet accumsan. Donec quam magna, placerat at porta scelerisque, ornare sit amet justo. Vestibulum suscipit diam velit, et fermentum lorem fermentum id. Ut dignissim purus id nisl convallis maximus.
+            Quisque ultrices quis odio ut ullamcorper. Vestibulum lorem metus, viverra ut elit vel, blandit interdum sapien. Morbi sed quam sem. Suspendisse lobortis tristique justo, nec vulputate mauris congue elementum. Sed sodales imperdiet accumsan. Donec quam magna, placerat at porta scelerisque, ornare sit amet justo. Vestibulum suscipit diam velit, et fermentum lorem fermentum id. Ut dignissim purus id nisl convallis maximus.
             </p>
           </div>
         </article>

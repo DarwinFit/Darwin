@@ -1,7 +1,7 @@
 /* we can use this styling for our pop-up, if needed remove the code and insert into the main css file*/
 
 .modal {
-	font-size: 12px;
+	font-size: 40px;
 }
 .modal > .header {
 	width: 100%;
