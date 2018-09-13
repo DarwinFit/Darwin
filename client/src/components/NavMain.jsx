@@ -24,7 +24,7 @@ const NavMain = ({ handleLogOut }) => {
 				</Nav>
 				<Nav pullRight>
 					<NavItem>
-						<NavLink to="/" />
+						<NavLink to="/">Daily</NavLink>
 					</NavItem>
 					<NavItem>
 						<NavLink to="/food">Food</NavLink>
