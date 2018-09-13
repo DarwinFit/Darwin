@@ -4,7 +4,7 @@ import { NavLink, Switch, Route } from 'react-router-dom';
 import Daily from './Daily.jsx';
 import Food from './Food.jsx';
 import Exercise from './Exercise.jsx';
-import Navigation from './Navigation.jsx';
+import NavMain from './NavMain.jsx';
 
 const Main = ({
 	username,
@@ -18,7 +18,7 @@ const Main = ({
 	logOut
 }) => (
 	<div>
-		<Navigation handleLogOut={logOut} />
+		<NavMain handleLogOut={logOut} />
 		<Switch>
 			<Route exact path="/" render={() => <Daily username={username} dailyNutrition={dailyNutrition} />} />
 
