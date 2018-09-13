@@ -8,10 +8,10 @@ const NavMain = ({ handleLogOut }) => {
 	return (
 		//creating a NavBar which will redirect to any component user would click on
 		//adding className to the div for future styling, could also ad activeClassName for each navlink separate, matter of choice
-		<Navbar className='nav'>
+		<Navbar className="nav">
 			<Navbar.Header>
 				<Navbar.Brand>
-					<NavLink to='/'>HealthApp</NavLink>
+					<NavLink to="/">HealthApp</NavLink>
 				</Navbar.Brand>
 				<Navbar.Toggle />
 			</Navbar.Header>
@@ -24,13 +24,13 @@ const NavMain = ({ handleLogOut }) => {
 				</Nav>
 				<Nav pullRight>
 					<NavItem>
-						<NavLink to='/'>Daily</NavLink>
+						<NavLink to="/" />
 					</NavItem>
 					<NavItem>
-						<NavLink to='/food'>Food</NavLink>
+						<NavLink to="/food">Food</NavLink>
 					</NavItem>
 					<NavItem>
-						<NavLink to='/exercise'>Exercise</NavLink>
+						<NavLink to="/exercise">Exercise</NavLink>
 					</NavItem>
 				</Nav>
 			</Navbar.Collapse>

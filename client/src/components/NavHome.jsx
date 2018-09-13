@@ -21,16 +21,18 @@ const NavHome = (props) => {
 		// 		</button>
 		// 	</li>
 		// </ul>
-		<ul className='navhome'>
-			<li className='navhome-brand'><NavLink to='/'>HealthApp</NavLink></li>
-			<li className='navhome-button'>
-				<button className='navhome-signup'>
-					<Popup uiConfig={props.uiConfig} page={'SIGN UP'}/>
+		<ul className="navhome">
+			<li className="navhome-brand">
+				<NavLink to="/">HealthApp</NavLink>
+			</li>
+			<li className="navhome-button">
+				<button className="navhome-signup">
+					<Popup uiConfig={props.uiConfig} page={'SIGN UP'} />
 				</button>
 			</li>
-			<li className='navhome-button'>
-				<button className='navhome-login'>
-					<Popup uiConfig={props.uiConfig} page={'LOGIN'}/>
+			<li className="navhome-button">
+				<button className="navhome-login">
+					<Popup uiConfig={props.uiConfig} page={'LOGIN'} />
 				</button>
 			</li>
 		</ul>

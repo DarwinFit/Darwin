@@ -1,44 +1,44 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans');
 
 body {
-  font-family: 'PT Serif', sans-serif;
-  margin: 0px;
-  color: white;
-  background-color: #707070;
-  background: url('appleHome.png');
-  background-repeat: no-repeat;
-  background-size: 100% auto;
+	font-family: 'PT Serif', sans-serif;
+	margin: 0px;
+	color: yellowgreen;
+	background-color: #707070;
+	background: url('appleHome.png');
+	background-repeat: no-repeat;
+	background-size: 100% auto;
 }
 
 .home-bg {
-  background-color: #707070;
-  background: url('appleHome.png');
-  background-repeat: no-repeat;
-  background-size: 100% auto;
+	background-color: #707070;
+	background: url('appleHome.png');
+	background-repeat: no-repeat;
+	background-size: 100% auto;
 }
 
 .main-bg {
-  background-color: #707070;
-  background: url('appleHome.png');
-  background-repeat: no-repeat;
-  background-size: 100% auto;
+	background-color: #707070;
+	background: url('appleHome.png');
+	background-repeat: no-repeat;
+	background-size: 100% auto;
 }
 
 .nav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: inline;
-  margin: 0px;
-  padding: 10px;
-  display: flex;
-  color: white;
-  border: 0px;
-  background-color: rgba(0,0,0,0.0);
-  overflow: hidden;
-  align-items: center;
-  font-family: 'Open Sans', sans-serif;
-  /* list-style-type: none;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: inline;
+	margin: 0px;
+	padding: 10px;
+	display: flex;
+	color: white;
+	border: 0px;
+	background-color: rgba(0, 0, 0, 0.0);
+	overflow: hidden;
+	align-items: center;
+	font-family: 'Open Sans', sans-serif;
+	/* list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -46,120 +46,120 @@ body {
 }
 
 .navhome {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color:rgba(0,0,0,0.0);
-  font-family: 'Open Sans', sans-serif;
-  align-items: center;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.0);
+	font-family: 'Open Sans', sans-serif;
+	align-items: center;
 }
 
 .navhome-brand {
-  justify-content: flex-start;
-  float: left;
-  display: block;
-  padding: 0px;
-  color: white;
-  font-weight: lighter;
-  margin-left: 5px;
-  font-size: 30pt;
-  text-decoration: none;
+	justify-content: flex-start;
+	float: left;
+	display: block;
+	padding: 0px;
+	color: white;
+	font-weight: lighter;
+	margin-left: 5px;
+	font-size: 30pt;
+	text-decoration: none;
 }
 
 .navhome-brand:hover {
-  color: #A2A2A2;
-  background-color: rgba(0,0,0,0.0);
+	color: #a2a2a2;
+	background-color: rgba(0, 0, 0, 0.0);
 }
 
 .navhome-button {
-  float: right;
-  text-align: center;
-  /* display: inline-block; */
+	float: right;
+	text-align: center;
+	/* display: inline-block; */
 }
 
 .navhome-login {
-  margin: 10px 5px 10px 15px;
-  padding: 0px 10px 0px 10px;
-  background-color: #2F2E2B;
-  font-size: 20pt;
-  font-weight: 100;
-  color: white;
-  border: 0px;
-  box-shadow: 0px 3px 6px #000000;
-  border-radius: 2px;
-  width: 180px;
+	margin: 10px 5px 10px 15px;
+	padding: 0px 10px 0px 10px;
+	background-color: #2f2e2b;
+	font-size: 20pt;
+	font-weight: 100;
+	color: white;
+	border: 0px;
+	box-shadow: 0px 3px 6px #000000;
+	border-radius: 2px;
+	width: 180px;
 }
 
 .navhome-login:hover {
-  background-color: #22221F;
+	background-color: #22221f;
 }
 
 .navhome-signup {
-  margin: 10px 15px 10px 5px;
-  padding: 0px 10px 0px 10px;
-  background-color: #8A9D22;
-  font-size: 20pt;
-  font-weight: 100;
-  color: white;
-  border: 0px;
-  box-shadow: 0px 3px 6px #000000;
-  border-radius: 2px;
-  width: 180px;
+	margin: 10px 15px 10px 5px;
+	padding: 0px 10px 0px 10px;
+	background-color: #8a9d22;
+	font-size: 20pt;
+	font-weight: 100;
+	color: white;
+	border: 0px;
+	box-shadow: 0px 3px 6px #000000;
+	border-radius: 2px;
+	width: 180px;
 }
 
 .navhome-signup:hover {
-  background-color: #70801B;
+	background-color: #70801b;
 }
 
-.home-text{
-  width: 50%;
-  position: absolute;
-  right: 80px;
-  top: 180px;
+.home-text {
+	width: 50%;
+	position: absolute;
+	right: 80px;
+	top: 180px;
 }
 
 .home-title {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: ligher;
-  font-size: 40pt;
-  text-align: right;
-  margin: 10px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: ligher;
+	font-size: 40pt;
+	text-align: right;
+	margin: 10px;
 }
 
 .home-p {
-  font-family: 'Roboto Slab';
-  text-align: right;
-  font-size: 10pt;
-  width: 90%;
-  float: right;
-  text-shadow: 0px 3px 6px #000000;
+	font-family: 'Roboto Slab';
+	text-align: right;
+	font-size: 10pt;
+	width: 90%;
+	float: right;
+	text-shadow: 0px 3px 6px #000000;
 }
 
 .nav-selected {
-  padding: 5px;
-  color: white;
-  font-weight: bold;
-  margin-right: 5px;
-  font-size: 60pt;
+	padding: 5px;
+	color: white;
+	font-weight: bold;
+	margin-right: 5px;
+	font-size: 60pt;
 }
 
 .nav-unselected {
-  padding: 5px;
-  margin-right: 5px;
-  font-size: 1.1em;
+	padding: 5px;
+	margin-right: 5px;
+	font-size: 1.1em;
 }
 
 li {
-  float: left;
+	float: left;
 }
 
 li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 
 /* Change the link color to #111 (black) on hover */

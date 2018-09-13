@@ -19,7 +19,6 @@ class App extends Component {
 
 		this.state = {
 			foodNutrition: {
-				//burnt = 0;
 				name: '',
 				serving_qty: 0,
 				serving_wt_g: 0,
@@ -30,6 +29,7 @@ class App extends Component {
 				protein: 0
 			},
 			dailyNutrition: {
+				burnt: 0,
 				calories: 0,
 				fat: 0,
 				carbs: 0,
@@ -44,7 +44,7 @@ class App extends Component {
 			foodItems: [],
 			exerciseItems: [],
 			userData: {
-				id: '',
+				id: null,
 				username: null,
 				age: null,
 				gender: null,
@@ -54,7 +54,8 @@ class App extends Component {
 			},
 			searchedExercise: '',
 			date: '',
-			isSignedIn: false
+			isSignedIn: false,
+			userExists: false
 		};
 
 		this.uiConfig = {
@@ -83,9 +84,16 @@ class App extends Component {
 
 	//gets the today mm/dd/yyyy and sets it into the state
 	getDate() {
-		let time = new Date();
-		let date = time.getMonth() + '/' + time.getDay() + '/' + time.getFullYear();
-		this.setState({ date: date });
+		let date = new Date();
+		let month = '' + (date.getMonth() + 1);
+		let day = '' + date.getDate();
+		let year = date.getFullYear();
+
+		if (month.length < 2) month = '0' + month;
+		if (day.length < 2) day = '0' + day;
+
+		let fullDate = [ year, month, day ].join('');
+		this.setState({ date: fullDate });
 	}
 
 	//authenticate the user and check if the user is in the DB
@@ -96,10 +104,36 @@ class App extends Component {
 			if (user) {
 				this.setState({ userData: newUserAuth });
 				this.setState({ isSignedIn: true });
+				this.userAuthenticatedAndExists();
 			} else {
 				console.log('Problems with authentication');
 			}
 		});
+	}
+	userAuthenticatedAndExists() {
+		let username = this.state.userData.username;
+		let updatedData = this.state.userData;
+
+		//here has to be a function which calls the server for checking if there is user or not
+		axios
+			.get('/health/users', { params: { username: username } })
+			.then(({ data }) => {
+				if (data.id > 0) {
+					updatedData.id = data.id;
+					updatedData.age = data.age;
+					updatedData.gender = data.gender;
+					updatedData.height = data.height;
+					updatedData.weight = data.weight;
+					updatedData.avg_calories = data.avg_calories;
+					this.setState({ userData: updatedData, userExists: true }, () => {
+						//calling to get the total for today, if the user logged out and then logged in
+						this.getDailyTotalFood();
+					});
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 	//logs out the user and sets the state of the user data to null
 	handleLogOut() {
@@ -114,27 +148,26 @@ class App extends Component {
 
 		this.setState({ userData: userSignOut });
 		this.setState({ isSignedIn: false });
+		this.setState({ userExists: false });
 		console.log('LogOut Data! > ', this.state.userData);
 	}
 
 	//search = post to food_history/search - foodname or string which contains foodname
 	searchFood(food) {
-		console.log('Searching for this food: ', food);
 		let updatedFood = this.state.foodNutrition;
 
 		axios
-			.post('food_history/search', { food })
+			.post('/health/food_history/search', { food_name: food })
 			// getting back the food object with nutrients
-			.then((foodData) => {
-				console.log('THIS IS THE DATA WE GETTING BACK FROM searchingFood:', foodData);
-				updatedFood.name = foodData.food_name;
-				updatedFood.serving_qty = foodData.serving_qty;
-				updatedFood.serving_wt_g = foodData.serving_wt_g;
-				updatedFood.calories = foodData.nf_calories;
-				updatedFood.fat = foodData.nf_total_fat;
-				updatedFood.carbs = foodData.nf_total_carbohydrate;
-				updatedFood.sugars = foodData.nf_sugars;
-				updatedFood.protein = foodData.nf_protein;
+			.then(({ data }) => {
+				updatedFood.name = data.food_name;
+				updatedFood.serving_qty = data.serving_qty;
+				updatedFood.serving_wt_g = data.serving_wt_g;
+				updatedFood.calories = data.nf_calories;
+				updatedFood.fat = data.nf_total_fat;
+				updatedFood.carbs = data.nf_total_carbohydrate;
+				updatedFood.sugars = data.nf_sugars;
+				updatedFood.protein = data.nf_protein;
 
 				//set the state of the foodnutrient
 				this.setState({ foodNutrition: updatedFood });
@@ -144,20 +177,20 @@ class App extends Component {
 
 	//search = post to exercise_history/search - exercise string + username
 	searchExercise(exercise) {
-		console.log('Searching for this exercise: ', exercise);
 		let updatedExercise = this.state.exerciseData;
 
 		axios
-			.post('exercise_history/search', { exercise })
+			.post('/health/exercise_history/search', {
+				exercise_name: exercise,
+				username: this.state.userData.username
+			})
 			// getting back the updatedExercise obj;
-			.then((exrsData) => {
-				console.log('THIS IS DATA WE GETTING BACK FROM searchExercise: ', exrsData);
-				updatedExercise.name = exrsData.name;
-				updatedExercise.duration_min = exrsData.duration_min;
-				updatedExercise.nf_calories = exrsData.nf_calories;
+			.then(({ data }) => {
+				updatedExercise.name = data.name;
+				updatedExercise.duration_min = data.duration_min;
+				updatedExercise.nf_calories = data.nf_calories;
 				//set the state of exercisedata
-				this.setState({ exerciseData: updatedExercise });
-				this.setState({ searchedExercise: exercise });
+				this.setState({ exerciseData: updatedExercise, searchedExercise: exercise });
 			})
 			.catch((err) => console.error(err));
 	}
@@ -165,17 +198,16 @@ class App extends Component {
 	//fooddaily-- whenever daily component is mounting we making db call  --returnning all nutrients for today
 	getDailyTotalFood() {
 		let dailyFoodNutrients = this.state.dailyNutrition;
-		let options = [ this.state.userData.username, this.state.date ];
 		axios
-			.get('fooddaily', { options })
+			.get('/health/daily', { params: { user_id: this.state.userData.id, date: this.state.date } })
 			//GetDaily  data for username date
-			.then((data) => {
-				console.log('Getting back data for total daily: ', data);
-				dailyFoodNutrients.calories = data.calories;
-				dailyFoodNutrients.fat = data.totalfat;
-				dailyFoodNutrients.carbs = data.carbs;
-				dailyFoodNutrients.sugars = data.sugar;
-				dailyFoodNutrients.protein = data.protein;
+			.then(({ data }) => {
+				dailyFoodNutrients.burnt = data[0].burnt;
+				dailyFoodNutrients.calories = data[0].calories;
+				dailyFoodNutrients.fat = data[0].total_fat;
+				dailyFoodNutrients.carbs = data[0].total_carbohydrate;
+				dailyFoodNutrients.sugars = data[0].sugars;
+				dailyFoodNutrients.protein = data[0].protein;
 				this.setState({ dailyNutrition: dailyFoodNutrients });
 			})
 			.catch((err) => console.error(err));
@@ -184,15 +216,29 @@ class App extends Component {
 	//exerciseDaily - get post to exercise history -- list of exercises
 
 	handleAddFood() {
-		let options = this.state.foodNutrition;
-		//SHOULD WE ADD BURNT?
+		let options = {
+			food_name: this.state.foodNutrition.name,
+			user_id: this.state.userData.id,
+			date: this.state.date,
+			total_fat: this.state.foodNutrition.fat,
+			calories: this.state.foodNutrition.calories,
+			total_carbohydrate: this.state.foodNutrition.carbs,
+			sugars: this.state.foodNutrition.sugars,
+			protein: this.state.foodNutrition.protein
+		};
+		console.log(this.state.userData.id);
 		axios
-			.post('food_history', options)
-			.then((data) => {
-				console.log('THIS IS THE DATA FROM HANDLING ADDFOOD', data);
-				let updatedFood = this.state.foodItems;
-				updatedFood = data;
-				this.setState({ foodItems: updatedFood });
+			.post('/health/food_history', options)
+			.then(({ data }) => {
+				let updatedFood = [];
+
+				data.forEach(function(entry) {
+					updatedFood.push(entry.food_name);
+				});
+				this.setState({ foodItems: updatedFood }, () => {
+					//calling get dailytotal, so it will retrieve the updated total of what we ate today
+					this.getDailyTotalFood();
+				});
 			})
 			.catch((err) => console.error(err));
 	}
@@ -201,12 +247,17 @@ class App extends Component {
 		//axios.post('/exercise_history', userid date string username
 		// WE NEED TO TALK ABOUT ADDING TIME TO THE EXERCISE IN DB
 
-		let options = [ this.state.userData.username, this.state.date, this.state.searchedExercise ];
-		//do we want to add Burnt here ?
-		axios.post('/exercise_history', options).then((data) => {
-			console.log('THIS IS DATA WE GETTING BACK FROM ADDEXERCISE: ', data);
-			let updatedData = this.state.exerciseItems;
-			updatedData = data;
+		let options = {
+			user_id: this.state.userData.id,
+			date: this.state.date,
+			exercise_name: this.state.searchedExercise,
+			burnt: this.state.exerciseData.nf_calories
+		};
+		axios.post('/health/exercise_history', options).then(({ data }) => {
+			let updatedData = [];
+			data.forEach(function(entry) {
+				updatedData.push(entry.exercise_name);
+			});
 			this.setState({ exerciseItems: updatedData });
 		});
 	}
@@ -224,8 +275,8 @@ class App extends Component {
 			}
 		};
 
-		let newUserData = this.state.userData;
-
+		let newUserData = {};
+		newUserData.username = this.state.userData.username;
 		newUserData.age = age;
 		newUserData.gender = gender;
 		newUserData.height = height;
@@ -236,46 +287,16 @@ class App extends Component {
 		});
 		console.log('Adding this data to DB! ', newUserData);
 		axios
-			.post('/users', { newUserData })
-			.then(() => {
+			.post('/health/users', newUserData)
+			.then((data) => {
 				console.log('Data add success!');
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => console.error(err));
 	}
 
-	userAuthenticatedAndExists() {
-		let user = this.state.userData.username;
-		//here has to be a function which calls the server for checking if there is user or not
-		axios
-			.get('/users', { user })
-			.then(({ data }) => {
-				console.log('THIS IS THE DATA IN AUTH: ', data);
-				var userData = this.state.userData;
-				userData.id = data.user_id;
-				userData.age = data.age;
-				userData.gender = data.gender;
-				userData.height = data.height;
-				userData.weight = data.weight;
-				userData.avg_calories = calorieCalc(data.age, data.gender, data.height, data.weight);
-				this.setState({ userData: userData });
-				return true;
-			})
-			.catch((err) => {
-				console.log(err);
-				return false;
-			});
-
-		// if (Object.values(this.state.userData).indexOf(null) === -1) {
-		// 	console.log(Object.values(this.state.userData));
-		// 	return true;
-		// } else {
-		// 	console.log(Object.values(this.state.userData));
-		// 	return false;
-		// }
-	}
 	render() {
 		if (this.state.isSignedIn) {
-			if (this.userAuthenticatedAndExists()) {
+			if (this.state.userExists) {
 				return (
 					<Main
 						username={this.state.userData.username}
@@ -289,7 +310,6 @@ class App extends Component {
 						logOut={this.handleLogOut}
 						searchFood={this.searchFood}
 						searchExercise={this.searchExercise}
-						getDailyTotalFood={this.getDailyTotalFood}
 						handleAddFood={this.handleAddFood}
 					/>
 				);
