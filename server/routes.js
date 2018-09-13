@@ -3,9 +3,7 @@ const controllers = require('./controllers/controllers.js');
 
 // route different request to different endpoints
 router.get('/users', controllers.getUserInfo); 
-router.post('/users', controllers.createNewUser); //front-end should send all info inputted from user
-
-/////START WORKING WITH THIS TOMORROW START TESTING!!
+router.post('/users', controllers.createNewUser);
 
 router.post('/food_history/search', controllers.searchFoodEntry);
 router.post('/exercise_history/search', controllers.searchExerciseEntry);

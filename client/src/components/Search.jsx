@@ -21,7 +21,7 @@ class Search extends Component {
 	handleSubmit(event) {
 		//preventing the refreshing of the page, just showing the results
 		event.preventDefault();
-		this.props.onSearch(this.state.searchValue);
+		this.props.search(this.state.searchValue);
 	}
 
 	render() {
