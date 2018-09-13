@@ -6,7 +6,7 @@ import Background from '../img/appleHome.jpg';
 
 const Home = (props) => (
   <div>
-    <NavHome />
+    <NavHome uiConfig={props.uiConfig}/>
     <Switch>
     <Route exact path="/" render={() => (
       <div style={{width:'50%'}}>
@@ -20,15 +20,9 @@ const Home = (props) => (
       </div>
     )}/>
 
-    <Route path="/login" render={() => (
-      <p>LOGIN</p>
-    )}/>
-
-    <Route path="/signup" render={() => (
-      <p>SIGNUP</p>
-    )}/> 
-    </Switch>
-  </div>
+			{/*Removed the Routes from here, since we are using the PopUp component in the navHome, so there is no Need for them*/}
+		</Switch>
+	</div>
 );
 
 export default Home;

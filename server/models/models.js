@@ -32,7 +32,7 @@ module.exports = {
   },
 
 
-  insertIntoFoodHistory: {
+  insertIntoFoodHistory: {  //WORKS
     post: (params, callback) => {
       // console.log('params in insertIntoFoodHistory', params); //[ 'big mac', 1, '20180907' 
       let queryStr = `INSERT INTO food_history (food_name, user_id, date) values (?, ?, ?)`;
@@ -43,11 +43,11 @@ module.exports = {
     }
   },
 
-  getDailyForFood: {
+  getDailyForFood: {  //WORKS
     get: (params, callback) => {
       // console.log('params in getDailyForFood', params); //[ 1, '20180907' ]
       let dailyQueryStr = `SELECT calories, total_fat, total_carbohydrate, protein, sugars FROM daily
-                          where user_id = ? AND date = ?`;
+                          WHERE user_id = ? AND date = ?`;
       db.query(dailyQueryStr, params, (err, results) => {
         if (err) throw err;
         callback(null, results);
@@ -55,15 +55,15 @@ module.exports = {
     }
   },
 
-  updateDaily: {
+  updateDailyForFood: {  //WORKS
     post: (params, body, callback) => {
-      // console.log('params in updateDaily', params);
-      // console.log('body in updateDaily', body); //[ 1, '20180907' ]
+      // console.log('params in updateDailyForFood', params);
+      // console.log('body in updateDailyForFood', body); //[ 1, '20180907' ]
       let {calories, total_fat, total_carbohydrate, protein, sugars} = params;
       let queryStr = `UPDATE daily SET calories=${calories}, total_fat=${total_fat}, total_carbohydrate=${total_carbohydrate}, 
                       protein=${protein}, sugars=${sugars} WHERE user_id = ? AND date = ?`;
       db.query(queryStr, body, (err, result) => {
-        if (err) console.log('Error at updateDaily in models.js', err);
+        if (err) console.log('Error at updateDailyForFood in models.js', err);
         callback(null, result);
       })
     }
@@ -81,33 +81,37 @@ module.exports = {
   },
 
   //exercise models
-  saveAndUpdateExerciseEntry: {
-    post: (body, callback) => {
-      let bodySplit = body.slice(1);
-      let needToBeUpdated = {};
-    
-      async function insertExerciseHistory() {
-        // console.log('reached saveAndUpdateExerciseEntry in models', body);
-        let queryStr = `INSERT INTO exercise_history (exercise_name, user_id, date) value (?, ?, ?)`;
-        db.query(queryStr, body, (err, result) => {
-          if (err) console.log('Error at insert into exercise_history in async saveAndUpdate', err);
+  insertIntoExerciseHistory: {
+    post: (params, callback) => {
+      // console.log('params in insertIntoExerciseHistory', params);
+      let queryStr = `INSERT INTO exercise_history (exercise_name, user_id, date) values (?, ?, ?)`;
+      db.query(queryStr, params, (err, result) => {
+        if (err) throw err;
+        callback(null, result);
+      })
+    }
+  },
 
-          let dailyQueryStr = `SELECT burnt FROM daily where user_id = ? AND date = ?`;
-          db.query(dailyQueryStr, bodySplit, (err, result) => {
-            if (err) console.log('Error at select in ExerciseEntry in async saveAndUpdate', err) 
-            needToBeUpdated = result;
-          })
-        })
-      }
-      insertExerciseHistory().then(() => { 
-         //add values from params to get updated daily values
-        needToBeUpdated[key] = needToBeUpdated[key] + params[key];
-        let {burnt} = needToBeUpdated;
-        let queryStr = `UPDATE daily SET burnt=${burnt} WHERE user_id = ? AND date = ?`; 
-        db.query(queryStr, bodySplit, (err, result) => {
-          if (err) console.log('Error at update in insertExerciseHistory saveAndUpdate', err);
-          callback(null, result);
-        })
+  getDailyForExercise: {
+    get: (params, callback) => {
+      // console.log('params in getDailyForExercise', params);
+      let dailyQueryStr = `SELECT burnt FROM daily WHERE user_id = ? AND date = ?`;
+      db.query(dailyQueryStr, params, (err, results) => {
+        if (err) throw err;
+        callback(null, results);
+      })
+    }
+  },
+
+  updateDailyForExercise: {
+    post: (params, body, callback) => {
+      // console.log('params in updateDailyForExercise', params);
+      // console.log('body in updateDailyForExercise', body);
+      let {burnt} = params;
+      let queryStr = `UPDATE daily SET burnt=${burnt} WHERE user_id = ? AND date = ?`;
+      db.query(queryStr, body, (err, result) => {
+        if (err) console.log('Error at updateDailyForExercise in models.js', err);
+        callback(null, result);
       })
     }
   },
@@ -150,89 +154,12 @@ module.exports = {
   },
   //function retrieve daily entries by just user_id
   getDailyByOnlyUser: {
-    get: (query, callback) => {
-      
+    get: (userID, callback) => {
+      let queryStr = `SELECT * FROM daily where user_id = ?`;
+      db.query(queryStr, userID, (err, result) => {
+        if(err) throw err; 
+        callback(null, result); 
+      })
     }
   }
 };
-
-
-
-
-
-  //assuming that user has already updatedDaily with first food of the day
-  // saveAndUpdateFoodEntry: {
-  //   post: (body, callback) => {
-  //     let bodySplit = body.slice(1);
-  //     let needToBeUpdated = {};
-
-  //     const insertFoodHistory = async () => {
-  //       console.log('1');
-  //       let insert = await function() {
-  //         console.log('2');
-  //         let queryStr = `INSERT INTO food_history (food_name, user_id, date) values (?, ?, ?)`;
-  //         db.query(queryStr, body, (err, result) => {
-  //           console.log('3');
-  //           if (err) console.log('Error at insert into food_history in async saveAndUpdate', err);
-  //           let dailyQueryStr = `SELECT calories, total_fat, carbs, protein, sugars FROM daily
-  //           where user_id = ? AND date = ?`;
-  //           db.query(dailyQueryStr, bodySplit, (err, results) => {
-  //             console.log('4');
-  //             if (err) console.log('Error at select in foodEntry in async saveAndUpdate', err);
-  //             needToBeUpdated = results[0];
-  //             console.log('needToBeUpdated once its been updated', needToBeUpdated);
-  //           })
-  //         })
-  //       }
- 
-  //       let update = await function() {
-  //         insert();
-  //         console.log('5', needToBeUpdated);
-  //         //assuming that needToBeUpdated is an object
-  //         //iterate through needToBeUpdated and add values from body to get updated daily values
-  //         for (let key in needToBeUpdated) {
-  //           needToBeUpdated[key] = needToBeUpdated[key] + body[1][key];
-  //         }
-  //         let {calories, total_fat, carbs, protein, sugars} = needToBeUpdated;
-  //         let queryStr = `UPDATE daily SET calories=${calories}, total_fat=${total_fat}, carbs=${carbs}, 
-  //                         protein=${protein}, sugars=${sugars} WHERE user_id = ? AND date = ?`; 
-  //         db.query(queryStr, bodySplit, (err, result) => {
-  //           if (err) console.log('Error at update in insertFoodHistory saveAndUpdate', err);
-  //           callback(null, result);
-  //         })
-  //       }
-  //       update();
-  //     }
-  //     insertFoodHistory();
-
-  //     // async function insertFoodHistory() {
-  //     //   // console.log('reached saveAndUpdateFoodEntry in models', body);
-  //     //   let queryStr = `INSERT INTO food_history (food_name, user_id, date) values (?, ?, ?)`;
-  //     //   db.query(queryStr, body, (err, result) => {
-  //     //     if (err) console.log('Error at insert into food_history in async saveAndUpdate', err);
-
-  //     //     let dailyQueryStr = `SELECT calories, total_fat, carbs, protein, sugars FROM daily
-  //     //     where user_id = ? AND date = ?`;
-  //     //     db.query(dailyQueryStr, bodySplit, (err, results) => {
-  //     //       if (err) console.log('Error at select in foodEntry in async saveAndUpdate', err);
-  //     //       needToBeUpdated = results;
-  //     //     })
-  //     //   })
-  //     // }
-  //     // insertFoodHistory().then(() => {  
-  //     //   console.log('wait wait wait until end of async');
-  //     //   //assuming that needToBeUpdated is an object
-  //     //   //iterate through needToBeUpdated and add values from body to get updated daily values
-  //     //   for (let key in needToBeUpdated) {
-  //     //     needToBeUpdated[key] = needToBeUpdated[key] + body[key];
-  //     //   }
-  //     //   let {calories, total_fat, carbs, protein, sugars} = needToBeUpdated;
-  //     //   let queryStr = `UPDATE daily SET calories=${calories}, total_fat=${total_fat}, carbs=${carbs}, 
-  //     //                   protein=${protein}, sugars=${sugars} WHERE user_id = ? AND date = ?`; 
-  //     //   db.query(queryStr, [user_id, date], (err, result) => {
-  //     //     if (err) console.log('Error at update in insertFoodHistory saveAndUpdate', err);
-  //     //     callback(null, result);
-  //     //   })
-  //     // })
-  //   }
-  // },

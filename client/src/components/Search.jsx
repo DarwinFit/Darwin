@@ -4,8 +4,7 @@ class Search extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			searchValue: '',
-			showFood: props.showFood
+			searchValue: ''
 		};
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,7 +35,12 @@ class Search extends Component {
 		return (
 			<div className="SearchBar">
 				<label className="SearchText">Write what type of {searchText} you would like to look for: </label>
-				<input type="text" value={this.state.searchValue} onChange={this.handleOnChange} placeholder={placeholder} />
+				<input
+					type="text"
+					value={this.state.searchValue}
+					onChange={this.handleOnChange}
+					placeholder={placeholder}
+				/>
 				<button className="" type="submit" onSubmit={this.handleSubmit}>
 					Search
 				</button>

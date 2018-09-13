@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 //importing destructured NavLink from react
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import Logout from './Logout.jsx';
 
-const Navigation = () => {
+const Navigation = ({ handleLogOut }) => {
 	return (
 		//creating a NavBar which will redirect to any component user would click on
 		//adding className to the div for future styling, could also ad activeClassName for each navlink separate, matter of choice
@@ -16,6 +17,11 @@ const Navigation = () => {
 			</Navbar.Header>
 
 			<Navbar.Collapse>
+				<Nav>
+					<NavItem>
+						<Logout handleLogOut={handleLogOut} to="/" />
+					</NavItem>
+				</Nav>
 				<Nav pullRight>
 					<NavItem>
 						<NavLink to='/'>Daily</NavLink>
