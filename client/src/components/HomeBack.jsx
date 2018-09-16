@@ -3,15 +3,15 @@ import { Line } from 'react-chartjs-2';
 
 // intakeData and burntData are an array of objects.
 // Each object within the array contains that x and y values of each point
-let intake = [{t: new Date(2018, 8, 1), y: 2019}, 
-              {t: new Date(2018, 8, 2), y: 2039}, 
-              {t: new Date(2018, 8, 3), y: 1870}]
-let burnt = [{t: new Date(2018, 8, 1), y: 2089}, 
-             {t: new Date(2018, 8, 2), y: 1939}, 
-             {t: new Date(2018, 8, 3), y: 2018}]
+let intake = [{x: 0, y: 2019}, 
+              {x: 1, y: 2039}, 
+              {x: 2, y: 1870}]
+let burnt = [{x: 0, y: 2089}, 
+             {x: 1, y: 1939}, 
+             {x: 2, y: 2018}]
 
 
-const CalorieGraph = ({intakeData, burntData}) => (
+const HomeBack = () => (
   <div className="chart">
     <Line 
       data={{
@@ -21,6 +21,9 @@ const CalorieGraph = ({intakeData, burntData}) => (
             label: 'Intake',
             data: intake,
             backgroundColor: 'rgba(196, 224, 40, 0.5)',
+            pointBackgroundColor: 'rgba(0, 0, 0, 0.0)',
+            pointBorderWidth: 0,
+            pointHoverBorderColor: 'rgba(0, 0, 0, 0.0)'
           }, {
             label: 'Burnt',
             data: burnt,
@@ -31,16 +34,13 @@ const CalorieGraph = ({intakeData, burntData}) => (
       options={{
         scales: {
           xAxes: [{
-            time: {
-              unit: 'day',
-              displayFormats: {
-                day: 'MMM D YY'
-              }
-            },
-            type: 'time',
+            type: 'linear',
             distribution: 'series',
-            position: 'bottom',
-            labelString: 'Date'
+            position: 'bottom'
+          }],
+          yAxes: [{
+            type: 'linear',
+            distribution: 'series',
           }]
         },
         legend: {
@@ -51,4 +51,4 @@ const CalorieGraph = ({intakeData, burntData}) => (
   </div>
 )
 
-export default CalorieGraph;
+export default HomeBack;

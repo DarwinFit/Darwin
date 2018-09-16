@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, Switch, Route } from 'react-router-dom';
 
 import NavHome from './NavHome.jsx';
-import CalorieGraph from './CalorieGraph.jsx';
+import HomeBack from './HomeBack.jsx';
 
 const Home = (props) => (
 	<div>
@@ -42,7 +42,7 @@ const Home = (props) => (
 								</p>
 							</div>
 						</div>
-						<CalorieGraph intakeData={props.intakeData} burntData={props.burntData}/>
+						<HomeBack/>
 					</div>
 				)}
 			/>

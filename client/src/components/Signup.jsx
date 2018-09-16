@@ -1,13 +1,5 @@
 import React from 'react';
-import { FormGroup, Button, Radio, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
-
-const FieldGroup = ({ id, label, help, ...props }) => (
-	<FormGroup controlId={id}>
-		<ControlLabel>{label}</ControlLabel>
-		<FormControl {...props} />
-		{help && <HelpBlock>{help}</HelpBlock>}
-	</FormGroup>
-);
+import { NavLink } from 'react-router-dom';
 
 class Signup extends React.Component {
 	constructor(props) {
@@ -36,55 +28,50 @@ class Signup extends React.Component {
 		const { age, gender, height, weight } = this.state;
 		return (
 			<div>
-				<header>
-					<h2>Type in your data: </h2>
-				</header>
-				<form onSubmit={this.handleClick}>
-					<h3>{this.props.username}</h3>
+				<ul className="navhome">
+					<li className="navhome-brand">
+						<NavLink to="/">DarWin</NavLink>
+					</li>
+				</ul>
 
-					<FieldGroup
-						id="formControlsAge"
-						type="age"
-						label="Age"
-						name="age"
-						value={age}
-						onChange={this.handleChange}
-						placeholder="Enter Age"
-					/>
+				<form className="signup-box" onSubmit={this.handleClick}>
+					<table className="signup-form"><tbody>
+					<tr>
+							<td className="signup-form-left">Age</td> 
+							<td className="signup-form-right" colSpan={2}>
+								<input type="text" name="age" value={age} onChange={this.handleChange}/>
+							</td>
+						</tr>
+						<tr>
+							<td className="signup-form-left">Gender</td>
+							<td className="signup-form-right">
+								<label className="gender-radio">
+									<input type="radio" name="gender" value={'male'} onChange={this.handleChange}/>
+									Male
+								</label>
+								<label className="gender-radio">
+									<input type="radio" name="gender" value={'female'} onChange={this.handleChange}/>
+									Female
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td className="signup-form-left">Height [cm]</td>
+							<td className="signup-form-right" colSpan={2}>
+								<input type="text" name="lastname" value={height} onChange={this.handleChange}/>			
+							</td>
+						</tr>
+						<tr>
+							<td className="signup-form-left">Weight [kg]</td>
+							<td className="signup-form-right" colSpan={2}>
+								<input type="text" name="lastname" value={weight} onChange={this.handleChange}/>
+							</td>
+						</tr>
+					</tbody></table>
 
-					<FormGroup>
-						<ControlLabel>Gender</ControlLabel>
-						<Radio name="gender" value={'male'} onChange={this.handleChange} inline>
-							Male
-						</Radio>{' '}
-						<Radio name="gender" value={'female'} onChange={this.handleChange} inline>
-							Female
-						</Radio>{' '}
-					</FormGroup>
-
-					<FieldGroup
-						id="formControlsHeight"
-						name="height"
-						type="height"
-						label="Height"
-						value={height}
-						onChange={this.handleChange}
-						placeholder="Enter height"
-					/>
-
-					<FieldGroup
-						id="formControlsWeight"
-						name="weight"
-						type="weight"
-						label="Weight"
-						value={weight}
-						onChange={this.handleChange}
-						placeholder="Enter weight"
-					/>
-
-					<Button type="submit" onClick={this.handleClick}>
-						Submit
-					</Button>
+					<button className="signup-signup" type="submit" onClick={this.handleClick}>
+						Sign Me Up!
+					</button>
 				</form>
 			</div>
 		);

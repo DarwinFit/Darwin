@@ -4,24 +4,10 @@ body {
 	font-family: 'PT Serif', sans-serif;
 	margin: 0px;
 	color: white;
-	background-color: #222222;
-	background: url('appleHome.png');
+	background-color: black;
+	background: url('woodMain.png');
 	background-repeat: no-repeat;
 	background-size: auto;
-}
-
-.home-bg {
-	background-color: #707070;
-	background: url('appleHome.png');
-	background-repeat: no-repeat;
-	background-size: 100% auto;
-}
-
-.main-bg {
-	background-color: #707070;
-	background: url('appleHome.png');
-	background-repeat: no-repeat;
-	background-size: 100% auto;
 }
 
 .nav {
@@ -64,11 +50,11 @@ body {
 	font-weight: lighter;
 	margin-left: 5px;
 	font-size: 30pt;
-	text-decoration: none;
+	text-shadow: 0px 3px 6px #000000;
 }
 
 .navhome-brand:hover {
-	color: #a2a2a2;
+	color: #535353;
 	background-color: rgba(0, 0, 0, 0.0);
 }
 
@@ -132,15 +118,17 @@ li a {
 	font-size: 40pt;
 	text-align: right;
 	margin: 10px;
+	text-shadow: 0px 3px 6px #000000;
 }
 
 .home-subtitle {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: lighter;
-	font-size: 20pt;
+	font-size: 18pt;
 	text-align: right;
 	margin: 0px;
 	padding: 0px;
+	text-shadow: 0px 3px 6px #000000;
 }
 
 .home-p {
@@ -166,6 +154,80 @@ li a {
 	font-size: 1.1em;
 }
 
-.chart {
-	margin: 1px;
+.signup-signup {
+	margin: 10px 15px 10px 5px;
+	padding: 5px 20px 5px 20px;
+	background-color: #8a9d22;
+	font-size: 15pt;
+	font-weight: 100;
+	color: white;
+	border: 0px;
+	box-shadow: 0px 3px 6px #000000;
+	border-radius: 2px;
+	position: absolute;
+  right: 3%;
+  bottom: 5%;
+}
+
+.signup-signup:hover {
+	background-color: #70801b;
+}
+
+.signup-box {
+	background-color: white;
+	color: #717171;
+	position: absolute;
+  height: 60%;
+  width: 30%;
+	left: 30%;
+	top: 15%;
+	margin-bottom: 10%;
+	box-shadow: 0px 3px 6px #000000;
+	border-radius: 2px;
+	padding: 100px 60px 30px 60px;
+	font-size: 15pt;
+	font-weight: 100;
+	display: flex;
+  justify-content: center;
+}
+
+.signup-form {
+	align-content: center;
+	border-spacing: 0px 2.5rem;
+}
+
+.signup-form table tr {
+	padding: 0px 100px 0px 10px;
+}
+
+.signup-form-left {
+	align-content: left;
+	width: 35%;
+}
+
+.signup-form-right {
+	text-align: right;
+	width: 50%;
+}
+
+.signup-form-right input{
+	border-radius: 8px;
+	border-color: #DDDDDD;
+	border-style:solid;
+	font-size: 15pt;
+	color: #717171;
+	text-align: right;
+}
+
+.signup-form-right input:hover {
+	border-color: rgb(195, 195, 195);
+}
+
+.gender-radio {
+	margin: 0px 20px 0px 0px;
+}
+
+.measure-unit {
+	color: #DDDDDD;
+  padding-left: 5px;
 }

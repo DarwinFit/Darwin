@@ -323,6 +323,7 @@ class App extends Component {
 		} else {
 			return <Home uiConfig={this.uiConfig} handleAddInfo={this.handleAddInfo} />;
 		}
+		// return (<Signup username={'Julie'} handleAddInfo={this.handleAddInfo}/>);
 	}
 }
 
