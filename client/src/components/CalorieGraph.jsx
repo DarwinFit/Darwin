@@ -15,6 +15,8 @@ const CalorieGraph = ({intakeData, burntData}) => (
   <div className="chart">
     <Line 
       data={{
+        xAxisID: 'Date',
+        yAxisID: 'Calories [kcal]',
         datasets: [{
             label: 'Intake',
             data: intake,
@@ -37,8 +39,13 @@ const CalorieGraph = ({intakeData, burntData}) => (
             },
             type: 'time',
             distribution: 'series',
-            position: 'bottom'
+            position: 'bottom',
+            labelString: 'Date'
           }]
+        },
+        legend: {
+          display: true,
+          position: 'right'
         }
       }}/> 
   </div>
