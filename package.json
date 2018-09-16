@@ -33,7 +33,7 @@
     "ajv": "^6.5.3",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
-    "chartist": "^0.11.0",
+    "chart.js": "^2.7.2",
     "enzyme": "^3.6.0",
     "express": "^4.16.3",
     "file-loader": "^2.0.0",
@@ -43,11 +43,13 @@
     "node-chartist": "^1.0.5",
     "react": "^16.4.2",
     "react-bootstrap": "0.32.3",
+    "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.4.2",
     "react-firebaseui": "^3.0.7",
     "react-router-dom": "^4.3.1",
     "reactjs-popup": "^1.2.0",
     "reactstrap": "^6.4.0",
-    "url-loader": "^1.1.1"
+    "url-loader": "^1.1.1",
+    "webpack": "^4.19.0"
   }
 }

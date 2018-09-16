@@ -3,11 +3,11 @@
 body {
 	font-family: 'PT Serif', sans-serif;
 	margin: 0px;
-	color: yellowgreen;
-	background-color: #707070;
+	color: white;
+	background-color: #222222;
 	background: url('appleHome.png');
 	background-repeat: no-repeat;
-	background-size: 100% auto;
+	background-size: auto;
 }
 
 .home-bg {
@@ -72,10 +72,17 @@ body {
 	background-color: rgba(0, 0, 0, 0.0);
 }
 
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
 .navhome-button {
 	float: right;
 	text-align: center;
-	/* display: inline-block; */
 }
 
 .navhome-login {
@@ -121,10 +128,19 @@ body {
 
 .home-title {
 	font-family: 'Open Sans', sans-serif;
-	font-weight: ligher;
+	/* font-weight: ligher; */
 	font-size: 40pt;
 	text-align: right;
 	margin: 10px;
+}
+
+.home-subtitle {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: lighter;
+	font-size: 20pt;
+	text-align: right;
+	margin: 0px;
+	padding: 0px;
 }
 
 .home-p {
@@ -150,19 +166,6 @@ body {
 	font-size: 1.1em;
 }
 
-li {
-	float: left;
+.chart {
+	margin: 1px;
 }
-
-li a {
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-/* li a:hover {
-  background-color: #111;
-} */

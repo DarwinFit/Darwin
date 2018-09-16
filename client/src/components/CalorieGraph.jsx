@@ -1,28 +1,47 @@
 import React from 'react';
-// var LineChart = require('react-chartjs').Line;
-// const Chart = require('react-chartjs');
+import { Line } from 'react-chartjs-2';
 
-// Chart.responsive = true;
-// /* Add a basic data series with six labels and values */
-// let chartData = {
-//   xAxisID: 'Date',
-//   yAxisID: 'Calories [kcal]',
-//   borderColor: 'rgba(0, 0, 0, 0.1)',
-//   borderWidth: 3,
-//   data: [{x: 0, y: 1780}, {x: 1, y: 1800}, {x: 2, y: 1900}, {x: 3,y: 1900}, 
-//          {x: 4, y: 1900}, {x: 5, y: 1900}, {x: 6,y: 1900}, {x: 7, y: 1900}]
-// };
+// intakeData and burntData are an array of objects.
+// Each object within the array contains that x and y values of each point
+let intake = [{t: new Date(2018, 8, 1), y: 2019}, 
+              {t: new Date(2018, 8, 2), y: 2039}, 
+              {t: new Date(2018, 8, 3), y: 1870}]
+let burnt = [{t: new Date(2018, 8, 1), y: 2089}, 
+             {t: new Date(2018, 8, 2), y: 1939}, 
+             {t: new Date(2018, 8, 3), y: 2018}]
 
-// let chartOptions = {
-//   showLines: true,
-//   spanGaps: true
-// };
 
-const CalorieGraph = () => (
-  <div>
-    <p>GRAPH COMPONENT</p>
+const CalorieGraph = ({intakeData, burntData}) => (
+  <div className="chart">
+    <Line 
+      data={{
+        datasets: [{
+            label: 'Intake',
+            data: intake,
+            backgroundColor: 'rgba(196, 224, 40, 0.5)',
+          }, {
+            label: 'Burnt',
+            data: burnt,
+            backgroundColor: 'rgba(112, 157, 11, 0.5)',
+          }],
+        backgroundColor: 'rgba(0, 0, 0, 1)'
+      }} 
+      options={{
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'day',
+              displayFormats: {
+                day: 'MMM D YY'
+              }
+            },
+            type: 'time',
+            distribution: 'series',
+            position: 'bottom'
+          }]
+        }
+      }}/> 
   </div>
-  // <LineChart data={chartData} options={chartOptions} width="600" height="250"/>
 )
 
 export default CalorieGraph;

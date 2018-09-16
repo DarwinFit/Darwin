@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, Switch, Route } from 'react-router-dom';
 
 import NavHome from './NavHome.jsx';
+import CalorieGraph from './CalorieGraph.jsx';
 
 const Home = (props) => (
 	<div>
@@ -12,8 +13,9 @@ const Home = (props) => (
 				path="/"
 				render={() => (
 					<div>
-						<article className="home-text">
-							<h1 className="home-title">Welcome to the HealthApp</h1>
+						<div className="home-text">
+							<h1 className="home-title">Welcome to DarWin,</h1>
+							<h2 className="home-subtitle">Where You Can Be the Winner of the Survival of the Fittest</h2>
 							<div className="home-p">
 								<p>
 									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur venenatis eu est
@@ -39,7 +41,8 @@ const Home = (props) => (
 									purus id nisl convallis maximus.
 								</p>
 							</div>
-						</article>
+						</div>
+						<CalorieGraph intakeData={props.intakeData} burntData={props.burntData}/>
 					</div>
 				)}
 			/>
