@@ -33,13 +33,20 @@ class Signup extends React.Component {
 						<NavLink to="/">DarWin</NavLink>
 					</li>
 				</ul>
-
 				<form className="signup-box" onSubmit={this.handleClick}>
-					<table className="signup-form"><tbody>
-					<tr>
+					<table className="signup-form">
+					<thead>
+						<tr>
+							<td className="signup-title" colSpan={3}>
+								<b>Fitness Profile for {this.props.username}</b>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
 							<td className="signup-form-left">Age</td> 
 							<td className="signup-form-right" colSpan={2}>
-								<input type="text" name="age" value={age} onChange={this.handleChange}/>
+								<input type="number" name="age" value={age} onChange={this.handleChange}/>
 							</td>
 						</tr>
 						<tr>
@@ -58,19 +65,19 @@ class Signup extends React.Component {
 						<tr>
 							<td className="signup-form-left">Height [cm]</td>
 							<td className="signup-form-right" colSpan={2}>
-								<input type="text" name="lastname" value={height} onChange={this.handleChange}/>			
+								<input type="number" name="height" value={height} onChange={this.handleChange}/>			
 							</td>
 						</tr>
 						<tr>
 							<td className="signup-form-left">Weight [kg]</td>
 							<td className="signup-form-right" colSpan={2}>
-								<input type="text" name="lastname" value={weight} onChange={this.handleChange}/>
+								<input type="number" name="weight" value={weight} onChange={this.handleChange}/>
 							</td>
 						</tr>
 					</tbody></table>
 
 					<button className="signup-signup" type="submit" onClick={this.handleClick}>
-						Sign Me Up!
+						<NavLink to="/" style={{ textDecoration: 'none', color:'white'}}>Sign Me Up!</NavLink>
 					</button>
 				</form>
 			</div>
