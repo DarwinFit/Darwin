@@ -29,13 +29,12 @@ class Search extends Component {
 		//search text means the text we want to have in our phrase before the input field, which would give a hint to user for what to search
 		// depends on the either we are in the food component or exercise
 		var searchText = this.props.type === 'food' ? 'food' : 'exercise';
-		var placeholder = `describe your ${searchText}`;
+		var placeholder = `Search for your ${searchText} to log...`;
 		//creating below a div element with a classname for further styling
 		//inside creating a label which would describe to the user what he can search for in this component
 		//creating a button which would handle the sending of the searched value to the parent component
 		return (
 			<div className="SearchBar">
-				<label className="SearchText">Write what type of {searchText} you would like to look for: </label>
 				<input
 					className="SearchInput"
 					type="text"
@@ -43,7 +42,7 @@ class Search extends Component {
 					onChange={this.handleOnChange}
 					placeholder={placeholder}
 				/>
-				<button className="SearchInput" onClick={this.handleSubmit}>
+				<button className="SearchButton" onClick={this.handleSubmit}>
 					Search
 				</button>
 			</div>

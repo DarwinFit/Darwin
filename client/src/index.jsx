@@ -33,7 +33,7 @@ class App extends Component {
 				calories: 0,
 				fat: 0,
 				carbs: 0,
-				sugar: 0,
+				sugars: 0,
 				protein: 0
 			},
 			exerciseData: {
@@ -43,6 +43,8 @@ class App extends Component {
 			},
 			foodItems: [],
 			exerciseItems: [],
+			intakeData: [],
+			burntData: [],
 			userData: {
 				id: null,
 				username: null,
@@ -202,13 +204,17 @@ class App extends Component {
 			.get('/health/daily', { params: { user_id: this.state.userData.id, date: this.state.date } })
 			//GetDaily  data for username date
 			.then(({ data }) => {
-				dailyFoodNutrients.burnt = data[0].burnt;
-				dailyFoodNutrients.calories = data[0].calories;
-				dailyFoodNutrients.fat = data[0].total_fat;
-				dailyFoodNutrients.carbs = data[0].total_carbohydrate;
-				dailyFoodNutrients.sugars = data[0].sugars;
-				dailyFoodNutrients.protein = data[0].protein;
-				this.setState({ dailyNutrition: dailyFoodNutrients });
+				if (data.length > 0) {
+					dailyFoodNutrients.burnt = data[0].burnt;
+					dailyFoodNutrients.calories = data[0].calories;
+					dailyFoodNutrients.fat = data[0].total_fat;
+					dailyFoodNutrients.carbs = data[0].total_carbohydrate;
+					dailyFoodNutrients.sugars = data[0].sugars;
+					dailyFoodNutrients.protein = data[0].protein;
+					this.setState({ dailyNutrition: dailyFoodNutrients });
+				} else {
+					console.log('There is nothing yet in total daily');
+				}
 			})
 			.catch((err) => console.error(err));
 	}
@@ -314,11 +320,14 @@ class App extends Component {
 						searchFood={this.searchFood}
 						searchExercise={this.searchExercise}
 						handleAddFood={this.handleAddFood}
+						intakeData={this.state.intakeData}
+						burntData={this.state.burntData}
 					/>
 				);
 			} else {
 				{
 					/*passing the username to signup so it will have access to the username*/
+					console.log(this.state.userExists);
 				}
 				return <Signup username={this.state.userData.username} handleAddInfo={this.handleAddInfo} />;
 			}
