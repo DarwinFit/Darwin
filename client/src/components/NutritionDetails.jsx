@@ -49,15 +49,6 @@ const NutritionDetails = ({ username, food_nutrition, handleAddFood }) => {
 						<th>{food_nutrition.sugar} g</th>
 					</td>
 				</tr>
-				{/* <tr>
-					<td>
-						<th>Sodium</th>
-					</td>
-					<td />
-					<td>
-						<th>{food_nutrition.nf_sodium} mg</th>
-					</td>
-				</tr> */}
 			</table>
 			<button className="AddButton" onClick={handleAddFood({ food_nutrition })}>
 				Add {food_nutrition.name} to my daily list!

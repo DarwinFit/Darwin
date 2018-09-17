@@ -47,7 +47,7 @@ const FoodNutrition = ({ username, foodNutrition, handleAddFood }) => {
 			<div className="add-bar">
 				<h5 className="add-bar-name">
 					Nutritional Summary for {foodNutrition.serving_qty} (about {foodNutrition.serving_wt_g} g) of{' '}
-					{foodNutrition.name}
+					{foodNutrition.name || '...'}
 				</h5>
 				<Popup trigger={<button className="add-bar-button">Add</button>} modal>
 					{(close) => (
