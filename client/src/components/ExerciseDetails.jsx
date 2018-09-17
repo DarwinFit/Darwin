@@ -8,24 +8,23 @@ const ExerciseDetail = ({ username, exerciseData, handleAddExercise }) => {
 		//Inside of it, we displaying the username which was passed in by props, with the exercise results for searched exercise
 		//Adding a button to handle adding it to the list of the exercises by executing the function from the main component
 		<div className="exerciseDetail">
-			<h2 className="exercise-detail-title">Hey {username}, below are the details of your searched exercise results!</h2>
+			{/* <h2 className="exercise-detail-title">Hey {username}, below are the details of your searched exercise results!</h2> */}
 
 			<div>
-				{exerciseData.name.length > 1 ? (
-					<p>
-						You will spend {exerciseData.duration_min} min {exerciseData.name} and you will burn{' '}
-						{exerciseData.nf_calories} calories.
-					</p>
-				) : (
-					''
-				)}
+				<div className="cards-exercise">
+				<div className="card-exercise">
+					<ul className="card-exercise-calorie">
+						<li className="nutrition-num">{Math.round(exerciseData.nf_calories)}</li>
+						<li className="nutrition-unit">kcal</li>
+					</ul>
+					<p className="nutrition-name">Calories Burnt</p>
+				</div></div>
 			</div>
 			<div className="add-bar">
 				<h5 className="add-bar-name">
-					Exercise Summary for {exerciseData} (about {foodNutrition.serving_wt_g} g) of{' '}
-					{foodNutrition.name}
+					Exercise Summary for {exerciseData.duration_min} minute(s) of {exerciseData.name || '...'}
 				</h5>
-			<Popup trigger={<button>Add</button>} modal>
+			<Popup trigger={<button className="add-bar-button">Add</button>} modal>
 				{(close) => (
 					<div className="styles.modal">
 						<div className="styles.content">
@@ -56,7 +55,7 @@ const ExerciseDetail = ({ username, exerciseData, handleAddExercise }) => {
 						</div>
 					</div>
 				)}
-			</Popup>
+			</Popup></div>
 		</div>
 	);
 };
