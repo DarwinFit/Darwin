@@ -18,13 +18,26 @@ const Main = ({
 	searchFood,
 	searchExercise,
 	handleAddFood,
-	userData
+	userData,
+	intake,
+	burnt
 }) => (
 	<div>
 		<NavMain handleLogOut={logOut} />
 		<Switch>
-			<Route exact path="/" render={() => 
-				<Daily username={username} dailyNutrition={dailyNutrition} userData={userData}/>} />
+			<Route
+				exact
+				path="/"
+				render={() => (
+					<Daily
+						username={username}
+						dailyNutrition={dailyNutrition}
+						userData={userData}
+						intake={intake}
+						burnt={burnt}
+					/>
+				)}
+			/>
 
 			<Route
 				path="/food"

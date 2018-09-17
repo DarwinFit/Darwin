@@ -42,18 +42,18 @@ const FoodNutrition = ({ username, foodNutrition, handleAddFood }) => {
 						</ul>
 						<p className="nutrition-name">Sugar</p>
 					</div>
-				</div>		
+				</div>
 			</div>
 			<div className="add-bar">
 				<h5 className="add-bar-name">
-					Nutritional Summary for {foodNutrition.serving_qty} (about {foodNutrition.serving_wt_g} g) of{' '}
-					{foodNutrition.name || '...'}
+					Nutritional Summary for {foodNutrition.serving_qty} {foodNutrition.name || '...'} (about{' '}
+					{foodNutrition.serving_wt_g} g)
 				</h5>
 				<Popup trigger={<button className="add-bar-button">Add</button>} modal>
 					{(close) => (
 						<div className="modal">
 							<div className="content">
-								<h2>Are you sure you want to add this food to the list? </h2>
+								<h2>Are you sure you want to add {foodNutrition.name} to the list? </h2>
 							</div>
 							<div className="actions">
 								<button
