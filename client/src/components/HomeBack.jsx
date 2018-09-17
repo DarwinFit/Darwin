@@ -32,24 +32,25 @@ const HomeBack = () => (
       options={{
         scales: {
           xAxes: [{
-            type: 'linear',
-            distribution: 'series',
-            position: 'bottom',
+            display: false,
             gridLines: {
               display: false
             }
           }],
           yAxes: [{
-            type: 'linear',
-            distribution: 'series',
+            display: false,
             gridLines: {
               display: false
             }
           }]
         },
+        elements: {
+          point: {
+            radius: 0
+          }
+        },
         legend: {
           display: false,
-          position: 'right'
         }
       }}/> 
   </div>

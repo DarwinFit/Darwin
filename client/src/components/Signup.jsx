@@ -46,7 +46,7 @@ class Signup extends React.Component {
 						<tr>
 							<td className="signup-form-left">Age</td> 
 							<td className="signup-form-right" colSpan={2}>
-								<input type="number" name="age" value={age} onChange={this.handleChange}/>
+								<input type="number" name="age" required="required" value={age} onChange={this.handleChange}/>
 							</td>
 						</tr>
 						<tr>
@@ -65,19 +65,19 @@ class Signup extends React.Component {
 						<tr>
 							<td className="signup-form-left">Height [cm]</td>
 							<td className="signup-form-right" colSpan={2}>
-								<input type="number" name="height" value={height} onChange={this.handleChange}/>			
+								<input type="number" name="height" required="required" value={height} onChange={this.handleChange}/>			
 							</td>
 						</tr>
 						<tr>
 							<td className="signup-form-left">Weight [kg]</td>
 							<td className="signup-form-right" colSpan={2}>
-								<input type="number" name="weight" value={weight} onChange={this.handleChange}/>
+								<input type="number" name="weight" required="required" value={weight} onChange={this.handleChange}/>
 							</td>
 						</tr>
 					</tbody></table>
 
 					<button className="signup-signup" type="submit" onClick={this.handleClick}>
-						<NavLink to="/" style={{ textDecoration: 'none', color:'white'}}>Sign Me Up!</NavLink>
+						Sign Me Up!
 					</button>
 				</form>
 			</div>

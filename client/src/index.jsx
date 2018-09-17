@@ -289,7 +289,10 @@ class App extends Component {
 		axios
 			.post('/health/users', newUserData)
 			.then((data) => {
-				this.setState({isSignedIn: true});
+				this.setState({
+					isSignedIn: true,
+					userExists: true
+				});
 				console.log('Data add success!');
 			})
 			.catch((err) => console.error(err));
