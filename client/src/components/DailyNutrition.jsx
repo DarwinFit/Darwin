@@ -3,7 +3,6 @@ import { Card, CardText, CardBody, h1, h2 } from 'reactstrap';
 import { Row, Col } from 'react-bootstrap';
 
 const DailyNutrition = ({ username, dailyNutrition }) => {
-	console.log(dailyNutrition.sugars);
 	return (
 		<div className="daily-nutrition-container">
 			<h2 className="card-title">Daily Nutritional Summary</h2>
@@ -50,7 +49,7 @@ const DailyNutrition = ({ username, dailyNutrition }) => {
 					</ul>
 					<p className="nutrition-name">Sugar</p>
 				</div>
-			</div>		
+			</div>
 		</div>
 	);
 };

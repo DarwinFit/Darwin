@@ -80,6 +80,7 @@ class App extends Component {
 		this.searchFood = this.searchFood.bind(this);
 		this.searchExercise = this.searchExercise.bind(this);
 		this.getDailyTotalFood = this.getDailyTotalFood.bind(this);
+		this.getHistoryOfBurntAndEat = this.getHistoryOfBurntAndEat.bind(this);
 	}
 	componentDidMount() {
 		this.authListener();
@@ -132,6 +133,7 @@ class App extends Component {
 					this.setState({ userData: updatedData, userExists: true }, () => {
 						//calling to get the total for today, if the user logged out and then logged in
 						this.getDailyTotalFood();
+						this.getHistoryOfBurntAndEat();
 					});
 				}
 			})
@@ -139,6 +141,7 @@ class App extends Component {
 				console.log(err);
 			});
 	}
+
 	//logs out the user and sets the state of the user data to null
 	handleLogOut() {
 		firebase.auth().signOut();
@@ -158,36 +161,62 @@ class App extends Component {
 
 	getFoodLog() {
 		axios
-			.get('/health/food_history', {params: {user_id: this.state.userData.id, date: this.state.date}})
-			.then(({data}) => {
-				console.log('DATA for food entries', data);
+			.get('/health/food_history', { params: { user_id: this.state.userData.id, date: this.state.date } })
+			.then(({ data }) => {
 				let fooditems = [];
 				data.forEach((entry) => {
-					fooditems.push(entry.food_name)
-				})
-				if (data.length > 0) this.setState({foodItems: fooditems})
+					fooditems.push(entry.food_name);
+				});
+				if (data.length > 0) this.setState({ foodItems: fooditems });
 			})
 			.catch((err) => {
-				console.log('Could not retrieve food entries from database')
+				console.log('Could not retrieve food entries from database');
 				console.error(err);
-			})
+			});
 	}
 
 	getExerciseLog() {
 		axios
-			.get('/health/exercise_history', {params: {user_id: this.state.userData.id, date: this.state.date}})
-			.then(({data}) => {
-				console.log('DATA for food entries', data);
+			.get('/health/exercise_history', { params: { user_id: this.state.userData.id, date: this.state.date } })
+			.then(({ data }) => {
 				let exerciseitems = [];
 				data.forEach((entry) => {
-					exerciseitems.push(entry.exercise_name)
-				})
-				if (data.length > 0) this.setState({exerciseItems: exerciseitems})
+					exerciseitems.push(entry.exercise_name);
+				});
+				if (data.length > 0) this.setState({ exerciseItems: exerciseitems });
 			})
 			.catch((err) => {
-				console.log('Could not retrieve food entries from database')
+				console.log('Could not retrieve food entries from database');
 				console.error(err);
+			});
+	}
+
+	//getting the history of burnt and eaten by user for all time
+
+	getHistoryOfBurntAndEat() {
+		axios
+			.get('/health/daily/user', { params: { user_id: this.state.userData.id } })
+			.then(({ data }) => {
+				let intakeData = [];
+				let burntData = [];
+				data.forEach(function(entry) {
+					let year = entry.date.slice(0, 4);
+					let month = entry.date.slice(5, 7);
+					let day = entry.date.slice(8, 10);
+					let food = {
+						t: new Date(year, month, day),
+						y: entry.calories
+					};
+					let exercise = {
+						t: new Date(year, month, day),
+						y: entry.burnt
+					};
+					intakeData.push(food);
+					burntData.push(exercise);
+				});
+				this.setState({ intakeData: intakeData, burntData: burntData });
 			})
+			.catch((err) => console.error(err));
 	}
 
 	//search = post to food_history/search - foodname or string which contains foodname
@@ -200,7 +229,7 @@ class App extends Component {
 			.then(({ data }) => {
 				updatedFood.name = data.food_name;
 				updatedFood.serving_qty = data.serving_qty;
-				updatedFood.serving_wt_g = data.serving_wt_g;
+				updatedFood.serving_wt_g = data.serving_weight_grams;
 				updatedFood.calories = data.nf_calories;
 				updatedFood.fat = data.nf_total_fat;
 				updatedFood.carbs = data.nf_total_carbohydrate;
@@ -208,7 +237,9 @@ class App extends Component {
 				updatedFood.protein = data.nf_protein;
 
 				//set the state of the foodnutrient
-				this.setState({ foodNutrition: updatedFood });
+				this.setState({ foodNutrition: updatedFood }, () => {
+					console.log('Nutrition', this.state.foodNutrition);
+				});
 			})
 			.catch((err) => console.error(err));
 	}
@@ -282,6 +313,7 @@ class App extends Component {
 				this.setState({ foodItems: updatedFood }, () => {
 					//calling get dailytotal, so it will retrieve the updated total of what we ate today
 					this.getDailyTotalFood();
+					this.getFoodLog();
 				});
 			})
 			.catch((err) => console.error(err));
@@ -304,6 +336,7 @@ class App extends Component {
 			});
 			this.setState({ exerciseItems: updatedData }, () => {
 				this.getDailyTotalFood();
+				this.getExerciseLog();
 			});
 		});
 	}
@@ -364,12 +397,13 @@ class App extends Component {
 						intakeData={this.state.intakeData}
 						burntData={this.state.burntData}
 						userData={this.state.userData}
+						burnt={this.state.burntData}
+						intake={this.state.intakeData}
 					/>
 				);
 			} else {
 				{
 					/*passing the username to signup so it will have access to the username*/
-					console.log(this.state.userExists);
 				}
 				return <Signup username={this.state.userData.username} handleAddInfo={this.handleAddInfo} />;
 			}
