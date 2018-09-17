@@ -117,7 +117,8 @@ module.exports = {
 	},
 
 	getFoodEntry: (req, res) => {
-		console.log('req in getFoodEntry in controllers', req);
+		// console.log('req in getFoodEntry in controllers', req);
+		console.log(req.query);
 		let { user_id, date } = req.query;
 		let params = [ user_id, date ];
 		models.getFoodEntry.get(params, (err, result) => {
