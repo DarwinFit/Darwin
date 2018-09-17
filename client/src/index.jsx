@@ -69,6 +69,7 @@ class App extends Component {
 		};
 
 		this.getFoodLog = this.getFoodLog.bind(this);
+		this.getExerciseLog = this.getExerciseLog.bind(this);
 		this.handleAddFood = this.handleAddFood.bind(this);
 		this.handleAddExercise = this.handleAddExercise.bind(this);
 		this.authListener = this.authListener.bind(this);
@@ -172,6 +173,23 @@ class App extends Component {
 			})
 	}
 
+	getExerciseLog() {
+		axios
+			.get('/health/exercise_history', {params: {user_id: this.state.userData.id, date: this.state.date}})
+			.then(({data}) => {
+				console.log('DATA for food entries', data);
+				let exerciseitems = [];
+				data.forEach((entry) => {
+					exerciseitems.push(entry.exercise_name)
+				})
+				this.setState({exerciseItems: exerciseitems})
+			})
+			.catch((err) => {
+				console.log('Could not retrieve food entries from database')
+				console.error(err);
+			})
+	}
+
 	//search = post to food_history/search - foodname or string which contains foodname
 	searchFood(food) {
 		let updatedFood = this.state.foodNutrition;
@@ -230,7 +248,8 @@ class App extends Component {
 					dailyFoodNutrients.sugars = data[0].sugars;
 					dailyFoodNutrients.protein = data[0].protein;
 					this.setState({ dailyNutrition: dailyFoodNutrients }, () => {
-						this.getFoodLog()
+						this.getFoodLog();
+						this.getExerciseLog();
 					});
 				} else {
 					console.log('There is nothing yet in total daily');
