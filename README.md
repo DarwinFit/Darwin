@@ -1,6 +1,6 @@
 # Project Name
 
-> Health App that logs users' daily food intake and exercises
+> DarWin
 
 ## Team
 
@@ -25,14 +25,26 @@
 ## Requirements
 
 - Node 0.10.x
-- axios ^0.18.0
-- body-parser ^1.18.3
-- bootstrap-react ^0.3.1
-- express ^4.16.3
-- mysql ^2.16.0
-- react ^16.4.2
-- react-dom ^16.4.2
-- babel ^6.23.1
+- Ajv ^6.5.3
+- Axios ^0.18.0
+- Body-parser ^1.18.3
+- Chart.js ^2.7.2
+- Enzyme ^3.6.0
+- Express ^4.16.3
+- File-loader ^2.0.0
+- Firebase ^5.4.2
+- jQuery ^3.3.1
+- MySQL ^2.16.0
+- Node-chartist ^1.0.5
+- React ^16.4.2
+- React-bootstrap 0.32.3
+- React-chartjs-2 ^2.7.4
+- React-dom ^16.4.2
+- React-firebaseui ^3.0.7
+- React-router-dom ^4.3.1
+- Reactjs-popup ^1.2.0
+- Reactstrap ^6.4.0
+- URL-loader ^1.1.1
 
 ## Development
 
