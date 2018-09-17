@@ -129,7 +129,9 @@ module.exports = {
 		});
 	},
 
-	//API request - WORKS - FIX SO THAT USER DOESN'T NEED TO INPUT ALL
+	// API request - WORKS - FIX SO THAT USER DOESN'T NEED TO INPUT ALL
+	// this controller function makes a call to the external API to access data from Nutritionix. 
+	// get Exercises is a function that is being imported from the /helpers file. 
 	searchExerciseEntry: (req, res) => {
 		let { username, exercise_name } = req.body;
 		models.getUserInfo.get(username, (err, result) => {
@@ -153,6 +155,13 @@ module.exports = {
 		});
 	},
 	//when 'add exercise' is clicked
+	// this controller function adds the excercise done to the database
+	// if this is the first exercise inserted for the day we will make that check then determine if 
+	// burnt calories must be added to an already accumulating burnt amount or if this will be the 
+	// first burnt entry of the day
+	// we will also need to add to the exercise history table also just so we know what exercies we did
+	// on this day and the days prior
+	
 	createExerciseEntry: (req, res) => {
 		// console.log('hitting createExerciseEntry in controllers', req.body);
 		let { exercise_name, user_id, date, username } = req.body;
@@ -225,8 +234,9 @@ module.exports = {
 		});
 	},
 
+	// this controller function calls the getExerciseEntry function in models based on 
+	// userID and date and retrieves the exercises done on that date. 
 	getExerciseEntry: (req, res) => {
-		//WORKS
 		let { user_id, date } = req.query;
 		let params = [ user_id, date ];
 		models.getExerciseEntry.get(params, (err, result) => {
@@ -235,8 +245,9 @@ module.exports = {
 		});
 	},
 
+	// this controller function  calls the getDaily function 
+	// in models based on user_id && date and returns that day's intake/exertion by the user
 	getDaily: (req, res) => {
-		//WORKS
 		let { user_id, date } = req.query;
 		let query = [ user_id, date ];
 		models.getDaily.get(query, (err, result) => {
@@ -245,8 +256,9 @@ module.exports = {
 		});
 	},
 
+	// this controller function  calls the getDailyByOnlyUser function 
+	// in models based on user_id and returns the daily intake/exertion by the user
 	getDailyByOnlyUser: (req, res) => {
-		//WORKS
 		let { user_id } = req.query;
 		let userID = user_id;
 		models.getDailyByOnlyUser.get(userID, (err, result) => {

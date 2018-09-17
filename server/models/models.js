@@ -85,7 +85,8 @@ module.exports = {
 		}
 	},
 
-	//exercise models
+	//exercise models--------
+	// this model function inserts data into the exerciseHistory table with user_id, and date
 	insertIntoExerciseHistory: {
 		post: (params, callback) => {
 			// console.log('params in insertIntoExerciseHistory', params);
@@ -97,6 +98,7 @@ module.exports = {
 		}
 	},
 
+	// this model function pulls out the burnt calories done on a particular DATE and for a particular USER
 	getDailyForExercise: {
 		get: (params, callback) => {
 			// console.log('params in getDailyForExercise', params);
@@ -108,6 +110,7 @@ module.exports = {
 		}
 	},
 
+	//this model function adds onto the previously burnt count in the daily table
 	updateDailyForExercise: {
 		post: (params, body, callback) => {
 			// console.log('params in updateDailyForExercise', params);
@@ -121,6 +124,7 @@ module.exports = {
 		}
 	},
 
+	// this model function selects all the exercises from the exercise history based on user_id and date
 	getExerciseEntry: {
 		//WORKS
 		get: (query, callback) => {
@@ -132,7 +136,7 @@ module.exports = {
 		}
 	},
 
-	//first food or exercise input for the day - WORKS
+	//first food or exercise input for the day gets added into the daily table with the user_id and date included 
 	firstDailyFoodOrExerciseUpdate: {
 		post: (params, callback) => {
 			// console.log('reaching firstDailyFoodOrExerciseUpdate', params);
@@ -144,7 +148,8 @@ module.exports = {
 			});
 		}
 	},
-	//getting daily nutrients - WORKS
+
+	//getting daily nutrients from daily based on user_id and date. 
 	getDaily: {
 		get: (query, callback) => {
 			// console.log('reaching getDaily in models.js', query);
@@ -157,7 +162,8 @@ module.exports = {
 			});
 		}
 	},
-	//retrieve daily entries by user_id only
+
+	//retrieve daily entries from daily table by user_id only
 	getDailyByOnlyUser: {
 		get: (userID, callback) => {
 			let queryStr = `SELECT * FROM daily WHERE user_id = ?`;
