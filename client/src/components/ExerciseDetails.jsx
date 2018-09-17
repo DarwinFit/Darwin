@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Popup from 'reactjs-popup';
-import '../css/PopUpStyle.css';
+// import '../css/PopUpStyle.css';
 
 const ExerciseDetail = ({ username, exerciseData, handleAddExercise }) => {
 	return (
@@ -26,13 +26,13 @@ const ExerciseDetail = ({ username, exerciseData, handleAddExercise }) => {
 				</h5>
 			<Popup trigger={<button className="add-bar-button">Add</button>} modal>
 				{(close) => (
-					<div className="styles.modal">
-						<div className="styles.content">
+					<div className="modal">
+						<div className="content">
 							<h3> Are you sure you want to add this exercise to your list?</h3>
 						</div>
-						<div className="styles.actions">
+						<div className="actions">
 							<button
-								className="styles.button"
+								className="button"
 								onClick={() => {
 									handleAddExercise();
 									close();
@@ -42,9 +42,9 @@ const ExerciseDetail = ({ username, exerciseData, handleAddExercise }) => {
 								Add{' '}
 							</button>
 						</div>
-						<div className="styles.actions">
+						<div className="actions">
 							<button
-								className="styles.button"
+								className="button"
 								onClick={() => {
 									console.log('modal closed ');
 									close();

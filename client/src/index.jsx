@@ -165,7 +165,7 @@ class App extends Component {
 				data.forEach((entry) => {
 					fooditems.push(entry.food_name)
 				})
-				this.setState({foodItems: fooditems})
+				if (data.length > 0) this.setState({foodItems: fooditems})
 			})
 			.catch((err) => {
 				console.log('Could not retrieve food entries from database')
@@ -182,7 +182,7 @@ class App extends Component {
 				data.forEach((entry) => {
 					exerciseitems.push(entry.exercise_name)
 				})
-				this.setState({exerciseItems: exerciseitems})
+				if (data.length > 0) this.setState({exerciseItems: exerciseitems})
 			})
 			.catch((err) => {
 				console.log('Could not retrieve food entries from database')
@@ -302,7 +302,9 @@ class App extends Component {
 			data.forEach(function(entry) {
 				updatedData.push(entry.exercise_name);
 			});
-			this.setState({ exerciseItems: updatedData });
+			this.setState({ exerciseItems: updatedData }, () => {
+				this.getDailyTotalFood();
+			});
 		});
 	}
 
@@ -361,6 +363,7 @@ class App extends Component {
 						handleAddFood={this.handleAddFood}
 						intakeData={this.state.intakeData}
 						burntData={this.state.burntData}
+						userData={this.state.userData}
 					/>
 				);
 			} else {
