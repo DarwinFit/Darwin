@@ -3,15 +3,18 @@ import { Line } from 'react-chartjs-2';
 
 // intakeData and burntData are an array of objects.
 // Each object within the array contains that x and y values of each point
-let intake = [{t: new Date(2018, 8, 1), y: 2019}, 
-              {t: new Date(2018, 8, 2), y: 2039}, 
-              {t: new Date(2018, 8, 3), y: 1870}]
-let burnt = [{t: new Date(2018, 8, 1), y: 2089}, 
-             {t: new Date(2018, 8, 2), y: 1939}, 
-             {t: new Date(2018, 8, 3), y: 2018}]
 
 
-const CalorieGraph = ({intakeData, burntData}) => (
+const CalorieGraph = ({dailyNutrition, userData}) => {
+  let todayburnt = dailyNutrition.calories + userData.avg_calories;
+  let todayintake = dailyNutrition.burnt;
+  let intake = [{t: new Date(2018, 8, 15), y: 2019}, 
+                {t: new Date(2018, 8, 16), y: 2039}, 
+                {t: new Date(2018, 8, 17), y: todayburnt}]
+  let burnt = [{t: new Date(2018, 8, 15), y: 2089}, 
+              {t: new Date(2018, 8, 16), y: 1939}, 
+              {t: new Date(2018, 8, 17), y: todayintake}]
+  return (
   <div className="chart-container">
     <h2 className="graph-title">Calorie History</h2>
     <div className="chart">
@@ -76,6 +79,6 @@ const CalorieGraph = ({intakeData, burntData}) => (
         }}/> 
     </div>
   </div>
-)
+); }
 
 export default CalorieGraph;
