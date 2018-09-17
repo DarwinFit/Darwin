@@ -1,17 +1,12 @@
 const { db } = require('../db');
 
 module.exports = {
-	//saving new user to database - WORKS
+	//saving new user to database
 	saveNewUser: {
 		post: (params, callback) => {
 			// console.log('inside models saveNewUser', params);
-			let query = [];
-			// for (let key in params) {
-			//   query.push(params[key])
-			// }
 			let { username, age, weight, height, gender, avg_calories } = params;
-			query = [ username, age, weight, height, gender, avg_calories ];
-			console.log('THIS ARE THE PARAMS', params);
+			let query = [ username, age, weight, height, gender, avg_calories ];
 			let queryStr = `INSERT INTO users (username, age, weight, height, gender, avg_calories) 
                       values (?, ?, ?, ?, ?, ?)`;
 			db.query(queryStr, query, (err, result) => {
@@ -20,9 +15,8 @@ module.exports = {
 			});
 		}
 	},
-
+  //retrieving user's information from database
 	getUserInfo: {
-		//WORKS
 		get: (username, callback) => {
 			// console.log('what is username in getUserInfo in models', username);
 			let queryStr = `SELECT * FROM users WHERE username = "${username}"`;
@@ -33,9 +27,8 @@ module.exports = {
 			});
 		}
 	},
-
+  //inserting food name into the database
 	insertIntoFoodHistory: {
-		//WORKS
 		post: (params, callback) => {
 			// console.log('params in insertIntoFoodHistory', params);
 			let queryStr = `INSERT INTO food_history (food_name, user_id, date) values (?, ?, ?)`;
@@ -45,9 +38,8 @@ module.exports = {
 			});
 		}
 	},
-
+  //getting the food (excluding burnt) nutrients for the user at the spefic day
 	getDailyForFood: {
-		//WORKS
 		get: (params, callback) => {
 			// console.log('params in getDailyForFood', params);
 			let dailyQueryStr = `SELECT calories, total_fat, total_carbohydrate, protein, sugars FROM daily
@@ -58,12 +50,9 @@ module.exports = {
 			});
 		}
 	},
-
+  //updating the user's nutrient intake in daily once they have added food
 	updateDailyForFood: {
-		//WORKS
 		post: (params, body, callback) => {
-			// console.log('params in updateDailyForFood', params);
-			// console.log('body in updateDailyForFood', body);
 			let { calories, total_fat, total_carbohydrate, protein, sugars } = params;
 			let queryStr = `UPDATE daily SET calories=${calories}, total_fat=${total_fat}, total_carbohydrate=${total_carbohydrate}, 
                       protein=${protein}, sugars=${sugars} WHERE user_id = ? AND date = ?`;
@@ -73,9 +62,8 @@ module.exports = {
 			});
 		}
 	},
-
+  //retrieving the user's food names for that specific day
 	getFoodEntry: {
-		//WORKS
 		get: (query, callback) => {
 			let queryStr = `SELECT * FROM food_history WHERE user_id = ? AND date = ?`;
 			db.query(queryStr, query, (err, result) => {
