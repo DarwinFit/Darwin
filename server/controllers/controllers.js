@@ -117,10 +117,12 @@ module.exports = {
 	},
 
 	getFoodEntry: (req, res) => {
-		// console.log('req in getFoodEntry in controllers', req.query);
+		console.log('req in getFoodEntry in controllers', req);
 		let { user_id, date } = req.query;
 		let params = [ user_id, date ];
 		models.getFoodEntry.get(params, (err, result) => {
+			console.log('HITTING GET FOOD ENTRY')
+			console.log('RESULT', result)
 			if (err) console.log('Error caught on getFoodEntry in controller.js', err);
 			else res.send(result);
 		});

@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -34,7 +33,7 @@ class App extends Component {
 				calories: 0,
 				fat: 0,
 				carbs: 0,
-				sugar: 0,
+				sugars: 0,
 				protein: 0
 			},
 			exerciseData: {
@@ -44,6 +43,8 @@ class App extends Component {
 			},
 			foodItems: [],
 			exerciseItems: [],
+			intakeData: [],
+			burntData: [],
 			userData: {
 				id: null,
 				username: null,
@@ -67,6 +68,7 @@ class App extends Component {
 			}
 		};
 
+		this.getFoodLog = this.getFoodLog.bind(this);
 		this.handleAddFood = this.handleAddFood.bind(this);
 		this.handleAddExercise = this.handleAddExercise.bind(this);
 		this.authListener = this.authListener.bind(this);
@@ -81,6 +83,24 @@ class App extends Component {
 	componentDidMount() {
 		this.authListener();
 		this.getDate();
+		// this.getFoodLog();
+	}
+
+	getFoodLog() {
+		axios
+			.get('/food_history', {user_id: this.state.userData.id, date: this.state.date})
+			.then((data) => {
+				console.log('DATA for food entries', data);
+				let fooditems = [];
+				data.forEach((entry) => {
+					fooditems.push(entry.food_name)
+				})
+				this.setState({foodItems: fooditems})
+			})
+			.catch((err) => {
+				console.log('Could not retrieve food entries from database')
+				console.error(err);
+			})
 	}
 
 	//gets the today mm/dd/yyyy and sets it into the state
@@ -103,9 +123,9 @@ class App extends Component {
 			let newUserAuth = this.state.userData;
 			newUserAuth.username = user.displayName;
 			if (user) {
-				this.setState({ userData: newUserAuth });
-				this.setState({ isSignedIn: true });
-				this.userAuthenticatedAndExists();
+				this.setState({ userData: newUserAuth, isSignedIn: true }, () => {
+					this.userAuthenticatedAndExists();
+				});
 			} else {
 				console.log('Problems with authentication');
 			}
@@ -203,13 +223,17 @@ class App extends Component {
 			.get('/health/daily', { params: { user_id: this.state.userData.id, date: this.state.date } })
 			//GetDaily  data for username date
 			.then(({ data }) => {
-				dailyFoodNutrients.burnt = data[0].burnt;
-				dailyFoodNutrients.calories = data[0].calories;
-				dailyFoodNutrients.fat = data[0].total_fat;
-				dailyFoodNutrients.carbs = data[0].total_carbohydrate;
-				dailyFoodNutrients.sugars = data[0].sugars;
-				dailyFoodNutrients.protein = data[0].protein;
-				this.setState({ dailyNutrition: dailyFoodNutrients });
+				if (data.length > 0) {
+					dailyFoodNutrients.burnt = data[0].burnt;
+					dailyFoodNutrients.calories = data[0].calories;
+					dailyFoodNutrients.fat = data[0].total_fat;
+					dailyFoodNutrients.carbs = data[0].total_carbohydrate;
+					dailyFoodNutrients.sugars = data[0].sugars;
+					dailyFoodNutrients.protein = data[0].protein;
+					this.setState({ dailyNutrition: dailyFoodNutrients });
+				} else {
+					console.log('There is nothing yet in total daily');
+				}
 			})
 			.catch((err) => console.error(err));
 	}
@@ -315,11 +339,14 @@ class App extends Component {
 						searchFood={this.searchFood}
 						searchExercise={this.searchExercise}
 						handleAddFood={this.handleAddFood}
+						intakeData={this.state.intakeData}
+						burntData={this.state.burntData}
 					/>
 				);
 			} else {
 				{
 					/*passing the username to signup so it will have access to the username*/
+					console.log(this.state.userExists);
 				}
 				return <Signup username={this.state.userData.username} handleAddInfo={this.handleAddInfo} />;
 			}

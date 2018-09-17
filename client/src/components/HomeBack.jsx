@@ -12,7 +12,7 @@ let back = [{x: 0, y: 2089},
 
 
 const HomeBack = () => (
-  <div className="chart">
+  <div className="chart-home">
     <Line 
       data={{
         xAxisID: 'Date',

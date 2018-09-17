@@ -4,7 +4,7 @@ body {
 	font-family: 'PT Serif', sans-serif;
 	margin: 0px;
 	color: white;
-	background-color: black;
+	background-color: #1C1C1C;
 	background: url('woodMain.png');
 	background-repeat: no-repeat;
 	background-size: auto;
@@ -100,6 +100,13 @@ li a {
 	background-color: #70801b;
 }
 
+.nav-options {
+	display: block;
+	font-size: 20pt;
+	text-shadow: 0px 3px 6px #000000;
+	float: right;
+}
+
 .home-text {
 	width: 50%;
 	position: absolute;
@@ -135,7 +142,7 @@ li a {
 	text-shadow: 0px 3px 6px #000000;
 }
 
-.nav-selected {
+.navhome-selected {
 	padding: 5px;
 	color: white;
 	font-weight: bold;
@@ -143,7 +150,7 @@ li a {
 	font-size: 60pt;
 }
 
-.nav-unselected {
+.navhome-unselected {
 	padding: 5px;
 	margin-right: 5px;
 	font-size: 1.1em;
@@ -231,4 +238,246 @@ li a {
 input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
+}
+
+.card-title {
+	margin-top: 5%;
+	margin-left: 5%;
+	text-shadow: 0px 3px 6px #000000;
+}
+
+.cards-daily {
+	margin-top: 0px;
+	margin-bottom: 20%;
+	margin-left: 5%;
+	width: 90%;
+	padding: 10px;
+}
+
+.card-daily-calorie {
+	list-style-type: none;
+	margin-top: 5%;
+	margin-left: 5%;
+	width: 68%;
+	height: 80%;
+	color: white;
+	background: #717171;
+	border-radius: 2px;
+}
+
+.card-daily-calorie li {
+	margin-right: 8px;
+	vertical-align: baseline;
+}
+
+.card-daily {
+	width: 15%;
+	float: left;
+	color: #717171;
+	background: white;
+	margin-left: 10px;
+	margin-right: 10px; 
+	height: 250px;
+	border-radius: 2px;
+	box-shadow: 0px 3px 6px #000000;
+}
+
+.cards-food {
+	margin-top: 30px;
+	margin-bottom: 15px;
+	margin-left: 12%;
+	width: 90%;
+	padding: 10px;
+}
+
+.card-food-calorie {
+	list-style-type: none;
+	margin-top: 5%;
+	margin-left: 5%;
+	width: 68%;
+	height: 80%;
+	color: white;
+	background: #717171;
+	border-radius: 2px;
+}
+
+.card-food-calorie li {
+	margin-right: 8px;
+	vertical-align: baseline;
+	margin-left: 0px;
+}
+
+.card-food {
+	width: 15%;
+	float: left;
+	color: #717171;
+	background: white;
+	margin-left: 10px;
+	margin-right: 10px; 
+	height: 250px;
+	border-radius: 2px;
+	box-shadow: 0px 3px 6px #000000;
+}
+
+.nutrition-num {
+	font-family: 'Open Sans', sans-serif;
+	float: left;
+	font-size: 35pt;
+}
+
+.nutrition-unit {
+	margin-top: 2%;
+	font-family: 'Open Sans', sans-serif;
+	float: right;
+}
+
+.nutrition-name {
+	text-align: right;
+	color: #717171;
+	margin-top: 0px;
+	margin-right: 10px;
+}
+
+.SearchBar {
+	margin-top: 5%;
+	margin-left: 10%;
+	width: 100%;
+	display: inline-block;
+	vertical-align: center;
+	align-content: center;
+}
+
+.SearchInput {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 15pt;
+	width: 70%;
+	margin-right: 5px;
+	padding: 10px 20px 10px 20px;
+	border-radius: 2px;
+	border-style:solid;
+	border-color: white;
+	box-shadow: 0px 3px 6px #000000;
+}
+
+.SearchButton {
+	margin-left: 10px;
+	padding: 10px 20px 10px 20px;
+	background-color: #8a9d22;
+	font-size: 20pt;
+	font-weight: 100;
+	color: white;
+	border: 0px;
+	box-shadow: 0px 3px 6px #000000;
+	border-radius: 2px;
+}
+
+.graph-title {
+	margin-top: 5%;
+	margin-left: 5%;
+	text-shadow: 0px 3px 6px #000000;
+}
+
+.chart-container {
+	margin-top: 5%;
+}
+
+.chart {
+	width: 85%;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	margin-left: 7%;
+	padding: 10px 10px 10px 10px;
+	background-color: white;
+	border-radius: 3px;
+	box-shadow: 0px 3px 6px #000000;
+}
+
+.chart-home {
+	width: 100%;
+}
+
+.add-bar {
+	margin-top: 30px;
+	margin-left: 8%;
+	width: 85%;
+	display: inline-block;
+	vertical-align: center;
+	align-content: center;
+	background-color: #717171;
+	padding: 0px 0px 0px 0px;
+	box-shadow: 0px 3px 6px #000000;
+}
+
+.add-bar-name {
+	color: white;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 15pt;
+	padding: 10px 20px 10px 20px;
+	margin: 0px;
+	border-radius: 2px;
+	float: left;
+	font-weight: 100;
+	vertical-align: center;
+}
+
+.add-bar-button {
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 10px 20px 10px 20px;
+	width: 120px;
+	background-color: #8a9d22;
+	font-size: 20pt;
+	font-weight: 100;
+	color: white;
+	border: 0px;
+	box-shadow: 0px 3px 6px #000000;
+	border-radius: 2px;
+	float: right;
+	vertical-align: center;
+}
+
+.daily-nutrition-container {
+	margin-bottom: 100px;
+}
+
+.ItemList {
+	background-color: white;
+	color: #717171;
+	width: 85%;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	margin-left: 8%;
+	min-height: 200px;
+	padding-left: 30px;
+	padding-top: 5px;
+}
+
+.ListItem {
+	list-style-type: none;
+	background-color: #717171;
+	color: white;
+	width: 90%;
+	margin-left: 3%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px 10px 10px 10px;
+}
+
+.NutritionFacts {
+	margin: 10px 10px 10px 10px;
+}
+
+.logout-img {
+	-webkit-filter: invert(1);
+	filter: invert(1);
+	background-image: url('logout.png');
+	/* text-shadow: 0px 3px 6px #000000; */
+}
+
+.exercise-detail-title {
+	margin-top: 5%;
+	margin-left: 10%;
+	text-shadow: 0px 3px 6px #000000;
 }

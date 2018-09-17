@@ -3,10 +3,10 @@ import React from 'react';
 import DailyNutrition from './DailyNutrition.jsx';
 import CalorieGraph from './CalorieGraph.jsx';
 
-const Daily = ({ username, dailyNutrition }) => (
+const Daily = ({ username, dailyNutrition, intakeData, burntData }) => (
 	<div>
 		<DailyNutrition username={username} dailyNutrition={dailyNutrition} />
-		{/* <CalorieGraph /> */}
+		<CalorieGraph />
 	</div>
 );
 

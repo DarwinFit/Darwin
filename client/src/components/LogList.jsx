@@ -6,11 +6,13 @@ const LogList = ({ items }) => {
 	//inside of the div we are pasing the mapped items, which would be displayed each item as a separate <li> containing a delete button and item
 	return (
 		<div className="ItemList">
-			<h2>Your Daily Log</h2>
-			{items.map((item, i) => (
+			<h2>Daily Log</h2>
+			{items.map((item, i) => {
+				console.log(item);
+				return (
 				//returning a LogListItem component with uniq key and item which we want to be in each list component
 				<LogListItem key={i} item={item} />
-			))}
+			)})}
 		</div>
 	);
 };

@@ -5,7 +5,7 @@ USE russell;
 
 CREATE TABLE if not exists users (
   id int NOT NULL AUTO_INCREMENT,
-  username VARCHAR(255) NOT NULL,
+  username VARCHAR(255) NOT NULL UNIQUE,
   age int NOT NULL,
   weight int NOT NULL,
   height int NOT NULL,
