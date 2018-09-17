@@ -117,7 +117,8 @@ module.exports = {
 	},
 
 	getFoodEntry: (req, res) => {
-		console.log('req in getFoodEntry in controllers', req);
+		// console.log('req in getFoodEntry in controllers', req);
+		console.log(req.query);
 		let { user_id, date } = req.query;
 		let params = [ user_id, date ];
 		models.getFoodEntry.get(params, (err, result) => {
@@ -226,7 +227,9 @@ module.exports = {
 
 	getExerciseEntry: (req, res) => {
 		//WORKS
-		models.getExerciseEntry.get(req.query, (err, result) => {
+		let { user_id, date } = req.query;
+		let params = [ user_id, date ];
+		models.getExerciseEntry.get(params, (err, result) => {
 			if (err) console.log('Error caught on models.getExerciseEntry in controllers', err);
 			else res.send(result);
 		});
