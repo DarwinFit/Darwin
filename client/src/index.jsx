@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -226,7 +227,6 @@ class App extends Component {
 			sugars: this.state.foodNutrition.sugars,
 			protein: this.state.foodNutrition.protein
 		};
-		console.log(this.state.userData.id);
 		axios
 			.post('/health/food_history', options)
 			.then(({ data }) => {
@@ -289,6 +289,10 @@ class App extends Component {
 		axios
 			.post('/health/users', newUserData)
 			.then((data) => {
+				this.setState({
+					isSignedIn: true,
+					userExists: true
+				});
 				console.log('Data add success!');
 			})
 			.catch((err) => console.error(err));
@@ -322,6 +326,7 @@ class App extends Component {
 		} else {
 			return <Home uiConfig={this.uiConfig} handleAddInfo={this.handleAddInfo} />;
 		}
+		// return (<Signup username={'Julie'} handleAddInfo={this.handleAddInfo}/>);
 	}
 }
 

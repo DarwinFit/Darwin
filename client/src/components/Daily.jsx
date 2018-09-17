@@ -6,7 +6,7 @@ import CalorieGraph from './CalorieGraph.jsx';
 const Daily = ({ username, dailyNutrition }) => (
 	<div>
 		<DailyNutrition username={username} dailyNutrition={dailyNutrition} />
-		<CalorieGraph />
+		{/* <CalorieGraph /> */}
 	</div>
 );
 
