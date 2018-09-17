@@ -33,7 +33,7 @@ class Signup extends React.Component {
 						<NavLink to="/">DarWin</NavLink>
 					</li>
 				</ul>
-				<form className="signup-box" onSubmit={this.handleClick}>
+				<form className="signup-box">
 					<table className="signup-form">
 					<thead>
 						<tr>

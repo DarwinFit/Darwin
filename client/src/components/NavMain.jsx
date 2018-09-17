@@ -36,21 +36,21 @@ const NavMain = ({ handleLogOut }) => {
 		// 	</Navbar.Collapse>
 		// </Navbar>
 
-	<ul className="navhome">
+	<ul className="nav">
 		<li className="navhome-brand">
 			<NavLink to="/">DarWin</NavLink>
 		</li>
-		<li>
-			<Logout handleLogOut={handleLogOut} to="/" />
-		</li>
-		<li >
+		<li className="nav-options" style={"float: right"}>
 			<NavLink to="/">Daily</NavLink>
 		</li>
-		<li >
+		<li className="nav-options">
 			<NavLink to="/food">Food</NavLink>
 		</li>
-		<li>
+		<li className="nav-options">
 			<NavLink to="/exercise">Exercise</NavLink>
+		</li>
+		<li className="nav-options">
+			<Logout handleLogOut={handleLogOut} to="/" />
 		</li>
 	</ul>
 	);

@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -103,9 +102,9 @@ class App extends Component {
 			let newUserAuth = this.state.userData;
 			newUserAuth.username = user.displayName;
 			if (user) {
-				this.setState({ userData: newUserAuth });
-				this.setState({ isSignedIn: true });
-				this.userAuthenticatedAndExists();
+				this.setState({ userData: newUserAuth, isSignedIn: true }, () => {
+					this.userAuthenticatedAndExists();
+				});
 			} else {
 				console.log('Problems with authentication');
 			}
