@@ -68,6 +68,7 @@ class App extends Component {
 			}
 		};
 
+		this.getFoodLog = this.getFoodLog.bind(this);
 		this.handleAddFood = this.handleAddFood.bind(this);
 		this.handleAddExercise = this.handleAddExercise.bind(this);
 		this.authListener = this.authListener.bind(this);
@@ -82,6 +83,24 @@ class App extends Component {
 	componentDidMount() {
 		this.authListener();
 		this.getDate();
+		// this.getFoodLog();
+	}
+
+	getFoodLog() {
+		axios
+			.get('/food_history', {user_id: this.state.userData.id, date: this.state.date})
+			.then((data) => {
+				console.log('DATA for food entries', data);
+				let fooditems = [];
+				data.forEach((entry) => {
+					fooditems.push(entry.food_name)
+				})
+				this.setState({foodItems: fooditems})
+			})
+			.catch((err) => {
+				console.log('Could not retrieve food entries from database')
+				console.error(err);
+			})
 	}
 
 	//gets the today mm/dd/yyyy and sets it into the state
