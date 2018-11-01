@@ -1,12 +1,11 @@
-DROP DATABASE russell;
 
-CREATE DATABASE russell;
+CREATE DATABASE IF NOT EXISTS russell;
 
 USE russell;
 
 CREATE TABLE if not exists users (
   id int NOT NULL AUTO_INCREMENT,
-  username VARCHAR(255) NOT NULL,
+  username VARCHAR(255) NOT NULL UNIQUE,
   age int NOT NULL,
   weight int NOT NULL,
   height int NOT NULL,
@@ -40,7 +39,7 @@ CREATE TABLE if not exists daily (
   burnt int NOT NULL,
   calories int NOT NULL,
   total_fat int NOT NULL,
-  carbs int NOT NULL,
+  total_carbohydrate int NOT NULL,
   protein int NOT NULL,
   sugars int NOT NULL,
   PRIMARY KEY (id),
