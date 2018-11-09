@@ -1,6 +1,6 @@
-# Project Name
+# DarWin
 
-> DarWin
+> The website can be reached at https://darwinfit.herokuapp.com/
 
 ## Team
 
