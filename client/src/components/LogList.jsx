@@ -8,11 +8,11 @@ const LogList = ({ items }) => {
 		<div className="ItemList">
 			<h2>Daily Log</h2>
 			{items.map((item, i) => {
-				console.log(item);
 				return (
-				//returning a LogListItem component with uniq key and item which we want to be in each list component
-				<LogListItem key={i} item={item} />
-			)})}
+					//returning a LogListItem component with uniq key and item which we want to be in each list component
+					<LogListItem key={i} item={item} />
+				);
+			})}
 		</div>
 	);
 };

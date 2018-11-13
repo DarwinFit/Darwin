@@ -4,7 +4,8 @@
   "description": "greenfield project",
   "main": "index.js",
   "scripts": {
-    "start": "npm run react-dev-once && npm run server-dev",
+    "start": "node server/app.js",
+    "heroku-postbuild": "webpack -p",
     "react-dev": "webpack -d --watch",
     "react-dev-once": "webpack",
     "server-dev": "nodemon server/app.js"
