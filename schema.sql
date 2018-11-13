@@ -1,7 +1,7 @@
 
-CREATE DATABASE IF NOT EXISTS russell;
+CREATE DATABASE IF NOT EXISTS teamRussell;
 
-USE russell;
+USE teamRussell;
 
 CREATE TABLE if not exists users (
   id int NOT NULL AUTO_INCREMENT,
