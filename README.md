@@ -15,7 +15,7 @@
 1. [Styling](#styling)
 1. [License](#license)
 
-## Development
+## Getting Started
 
 ### Installing Dependencies
 
