@@ -15,6 +15,7 @@
 1. [Screenshots](#screenshots)
 1. [Styling](#styling)
 1. [Contributing](#contributing)
+1. [Licensing](#licensing)
 
 ## Getting Started
 
@@ -77,3 +78,7 @@ DarWin uses the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javasc
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+## Licensing
+
+DarWin uses the [MIT License](LICENSE.MD)
