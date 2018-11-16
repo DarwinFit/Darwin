@@ -81,4 +81,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Licensing
 
-DarWin uses the [MIT License](LICENSE.MD)
+DarWin uses the [MIT License](LICENSE.md)
