@@ -203,6 +203,14 @@ class App extends Component {
       .then(({ data }) => {
         let intakeData = [];
         let burntData = [];
+        if (data.length === 0) {
+          let dateNow = new Date();
+          dateNow = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate());
+          let food = { t: dateNow, y: 0 };
+          let exercise = { t: dateNow, y: this.state.userData.avg_calories };
+          intakeData.push(food);
+          burntData.push(exercise);
+        }
         data.forEach(function(entry) {
           let date = new Date(entry.date);
           let year = date.getFullYear();
@@ -296,7 +304,9 @@ class App extends Component {
           this.setState({ dailyNutrition: newDailyWithBurnt });
         }
       })
-      .then(this.getHistoryOfBurntAndEat)
+      .then(() => {
+        this.getHistoryOfBurntAndEat();
+      })
       .catch((err) => console.error(err));
   }
 
@@ -384,10 +394,13 @@ class App extends Component {
     newUserData.avg_calories = calorieCalc(age, gender, height, weight);
     dailyNutrition = this.dailyNutrition;
     dailyNutrition.burnt = newUserData.avg_calories;
-    this.setState({
-      userData: newUserData,
-      dailyNutrition
-    });
+    this.setState(
+      {
+        userData: newUserData,
+        dailyNutrition
+      },
+      this.getHistoryOfBurntAndEat
+    );
     axios
       .post('/health/users', newUserData)
       .then((data) => {
