@@ -205,8 +205,6 @@ class App extends Component {
         let intakeData = [];
         let burntData = [];
         data.forEach(function(entry) {
-          console.log(entry.date);
-          console.log(typeof entry.date);
           let date = new Date(entry.date);
           let year = date.getFullYear();
           let month = date.getMonth();
@@ -294,7 +292,9 @@ class App extends Component {
             this.getExerciseLog();
           });
         } else {
-          console.log('There is nothing yet in total daily');
+          let newDailyWithBurnt = this.state.dailyNutrition;
+          newDailyWithBurnt.burnt = this.state.userData.avg_calories;
+          this.setState({ dailyNutrition: newDailyWithBurnt });
         }
       })
       .catch((err) => console.error(err));
@@ -375,8 +375,11 @@ class App extends Component {
     newUserData.height = height;
     newUserData.weight = weight;
     newUserData.avg_calories = calorieCalc(age, gender, height, weight);
+    dailyNutrition = this.dailyNutrition;
+    dailyNutrition.burnt = newUserData.avg_calories;
     this.setState({
-      userData: newUserData
+      userData: newUserData,
+      dailyNutrition
     });
     axios
       .post('/health/users', newUserData)
