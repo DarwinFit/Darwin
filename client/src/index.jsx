@@ -305,6 +305,7 @@ class App extends Component {
   handleAddFood() {
     console.log('foodNutrition in handleAddFood()', this.state.foodNutrition);
     let options = {
+      avg_cal: this.state.userData.avg_calories,
       food_name: `${this.state.foodNutrition.serving_qty} ${this.state.foodNutrition.name}`,
       user_id: this.state.userData.id,
       date: this.state.date,

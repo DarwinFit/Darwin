@@ -44,9 +44,27 @@ module.exports = {
       if (err) console.log('Error inside createFoodEntry in controllers.js at 1st callback', err);
       //if it's the first entry of the day, result.length would be zero: user is putting in first food entry of the day
       else if (result.length === 0) {
-        let { calories, total_fat, total_carbohydrate, protein, sugars, user_id, date } = req.body;
+        let {
+          avg_cal,
+          calories,
+          total_fat,
+          total_carbohydrate,
+          protein,
+          sugars,
+          user_id,
+          date
+        } = req.body;
         //user is comsuming nutrients therefore burnt = 0
-        let params = [0, calories, total_fat, total_carbohydrate, protein, sugars, user_id, date];
+        let params = [
+          avg_cal,
+          calories,
+          total_fat,
+          total_carbohydrate,
+          protein,
+          sugars,
+          user_id,
+          date
+        ];
         models.firstDailyFoodOrExerciseUpdate.post(params, (err, result) => {
           if (err)
             console.log('Error inside createFoodEntry in controllers.js at 2nd callback', err);
