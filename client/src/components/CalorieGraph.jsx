@@ -7,7 +7,6 @@ import { Line } from 'react-chartjs-2';
 const CalorieGraph = ({ dailyNutrition, userData, intake, burnt }) => {
   let todayburnt = dailyNutrition.calories + userData.avg_calories;
   let todayintake = dailyNutrition.burnt;
-  // console.log(intake);
   return (
     <div className="chart-container">
       <h2 className="graph-title">Calorie History</h2>

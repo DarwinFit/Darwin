@@ -303,8 +303,9 @@ class App extends Component {
   //exerciseDaily - get post to exercise history -- list of exercises
 
   handleAddFood() {
+    console.log('foodNutrition in handleAddFood()', this.state.foodNutrition);
     let options = {
-      food_name: this.state.foodNutrition.name,
+      food_name: `${this.state.foodNutrition.serving_qty} ${this.state.foodNutrition.name}`,
       user_id: this.state.userData.id,
       date: this.state.date,
       total_fat: this.state.foodNutrition.fat,
@@ -338,7 +339,8 @@ class App extends Component {
       user_id: this.state.userData.id,
       date: this.state.date,
       exercise_name: this.state.searchedExercise,
-      burnt: this.state.exerciseData.nf_calories
+      burnt: this.state.exerciseData.nf_calories,
+      avg_cal: this.state.userData.avg_calories
     };
     axios.post('/health/exercise_history', options).then(({ data }) => {
       let updatedData = [];
