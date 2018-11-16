@@ -1,13 +1,21 @@
 const axios = require('axios');
-const { APPID, APIKEY } = require('../../config.js');
+let APPID;
+let APIKEY;
+try {
+  APPID = require('../../config.js').APPID;
+  APIKEY = require('../../config.js').APIKEY;
+} catch (err) {
+  APPID = process.env.APPID;
+  APIKEY = process.env.APIKEY;
+}
 
 let getNutrients = (query, callback) => {
   var requestConfig = {
     method: 'POST',
     url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
     headers: {
-      'x-app-id': `${process.env.APPID || APPID}`,
-      'x-app-key': `${process.env.APIKEY || APIKEY}`,
+      'x-app-id': `${APPID}`,
+      'x-app-key': `${APIKEY}`,
       'x-app-remote-id': '0'
     },
     data: {
@@ -25,8 +33,8 @@ let getExercises = (query, callback) => {
     method: 'POST',
     url: 'https://trackapi.nutritionix.com/v2/natural/exercise',
     headers: {
-      'x-app-id': `${process.env.APPID || APPID}`,
-      'x-app-key': `${process.env.APIKEY || APIKEY}`,
+      'x-app-id': `${APPID}`,
+      'x-app-key': `${APIKEY}`,
       'x-app-remote-id': '0'
     },
     data: {
