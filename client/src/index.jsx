@@ -303,7 +303,6 @@ class App extends Component {
   //exerciseDaily - get post to exercise history -- list of exercises
 
   handleAddFood() {
-    console.log('foodNutrition in handleAddFood()', this.state.foodNutrition);
     let options = {
       avg_cal: this.state.userData.avg_calories,
       food_name: `${this.state.foodNutrition.serving_qty} ${this.state.foodNutrition.name}`,
