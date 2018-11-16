@@ -1,13 +1,12 @@
-const { getExercises, getNutrients } = require("../helpers/apihelpers.js");
-const models = require("../models/models.js");
-const axios = require("axios");
+const { getExercises, getNutrients } = require('../helpers/apihelpers.js');
+const models = require('../models/models.js');
+const axios = require('axios');
 
 module.exports = {
   //saving new user in database
   createNewUser: (req, res) => {
     models.saveNewUser.post(req.body, (err, results) => {
-      if (err)
-        console.log("Error caught on createNewUser in controller.js", err);
+      if (err) console.log('Error caught on createNewUser in controller.js', err);
       else res.sendStatus(201);
     });
   },
@@ -16,7 +15,7 @@ module.exports = {
     let { username } = req.query;
     models.getUserInfo.get(username, (err, results) => {
       if (err) {
-        console.log("Error caught on getUserInfo in controller.js", err);
+        console.log('Error caught on getUserInfo in controller.js', err);
         res.sendStatus(404);
       } else {
         res.send(results[0]);
@@ -28,8 +27,7 @@ module.exports = {
   searchFoodEntry: (req, res) => {
     let { food_name } = req.body;
     getNutrients(food_name, (err, data) => {
-      if (err)
-        console.log("Error inside searchFoodEntry in controllers.js", err);
+      if (err) console.log('Error inside searchFoodEntry in controllers.js', err);
       else {
         res.send(data.foods[0]);
       }
@@ -43,14 +41,11 @@ module.exports = {
     let nutrientsToBeUpdated = {};
     //check daily nutrients of user to see if it's the first entry of the day or just updating the nutrient entry
     models.getDaily.get(query, (err, result) => {
-      if (err)
-        console.log(
-          "Error inside createFoodEntry in controllers.js at 1st callback",
-          err
-        );
+      if (err) console.log('Error inside createFoodEntry in controllers.js at 1st callback', err);
       //if it's the first entry of the day, result.length would be zero: user is putting in first food entry of the day
       else if (result.length === 0) {
         let {
+          avg_cal,
           calories,
           total_fat,
           total_carbohydrate,
@@ -61,7 +56,7 @@ module.exports = {
         } = req.body;
         //user is comsuming nutrients therefore burnt = 0
         let params = [
-          0,
+          avg_cal,
           calories,
           total_fat,
           total_carbohydrate,
@@ -72,29 +67,20 @@ module.exports = {
         ];
         models.firstDailyFoodOrExerciseUpdate.post(params, (err, result) => {
           if (err)
-            console.log(
-              "Error inside createFoodEntry in controllers.js at 2nd callback",
-              err
-            );
+            console.log('Error inside createFoodEntry in controllers.js at 2nd callback', err);
           else {
             //adding the first food entry to the database
             models.insertIntoFoodHistory.post(body, (err, entry) => {
               if (err)
-                console.log(
-                  "Error inside createFoodEntry in controllers at 3rd callback",
-                  err
-                );
+                console.log('Error inside createFoodEntry in controllers at 3rd callback', err);
               else {
                 //retrieving the food entries for the user on this specific date
                 models.getFoodEntry.get(query, (err, result) => {
                   if (err)
-                    console.log(
-                      "Error inside createFoodEntry in controllers at 4th callback",
-                      err
-                    );
+                    console.log('Error inside createFoodEntry in controllers at 4th callback', err);
                   else {
                     //send back results to front-end
-                    res.send(result.data[0]);
+                    res.send([] || result.data[0]);
                   }
                 });
               }
@@ -105,29 +91,15 @@ module.exports = {
       } else {
         //adding another food entry to the database
         models.insertIntoFoodHistory.post(body, (err, result) => {
-          if (err)
-            console.log(
-              "Error caught at insertIntoFoodHistory in controllers",
-              err
-            );
+          if (err) console.log('Error caught at insertIntoFoodHistory in controllers', err);
           else {
             //getting the user's daily nutrients until this food element has been added
             models.getDailyForFood.get(query, (err, results) => {
-              if (err)
-                console.log(
-                  "Error caught at getDailyForFood in controllers",
-                  err
-                );
+              if (err) console.log('Error caught at getDailyForFood in controllers', err);
               else {
                 //setting nutrientToBeUpdated to the result so as to be able to manipulate and update it
                 nutrientsToBeUpdated = results[0];
-                let {
-                  calories,
-                  total_fat,
-                  total_carbohydrate,
-                  protein,
-                  sugars
-                } = req.body;
+                let { calories, total_fat, total_carbohydrate, protein, sugars } = req.body;
                 let inputtedNutrients = {
                   burnt: 0,
                   calories: calories,
@@ -139,38 +111,27 @@ module.exports = {
                 //iterate over nutrientToBeUpdated and add the new nutrients
                 for (let key in nutrientsToBeUpdated) {
                   let oldNutrient = nutrientsToBeUpdated[key];
-                  nutrientsToBeUpdated[key] =
-                    oldNutrient + inputtedNutrients[key];
+                  nutrientsToBeUpdated[key] = oldNutrient + inputtedNutrients[key];
                 }
                 //update the daily for the food nutrients
-                models.updateDailyForFood.post(
-                  nutrientsToBeUpdated,
-                  query,
-                  (err, entry) => {
-                    if (err)
-                      console.log(
-                        "Error caught at updateDailyForFood in controllers",
-                        err
-                      );
-                    else {
-                      //retrieve the food entries of the day so far after updatting the database
-                      models.getFoodEntry.get(query, (err, result) => {
-                        if (err)
-                          console.log(
-                            "Error inside createFoodEntry in controllers at 4th callback",
-                            err
-                          );
-                        else {
-                          console.log(
-                            "Database has been updated with new food entry"
-                          );
-                          //send back results to front-end
-                          res.send(result);
-                        }
-                      });
-                    }
+                models.updateDailyForFood.post(nutrientsToBeUpdated, query, (err, entry) => {
+                  if (err) console.log('Error caught at updateDailyForFood in controllers', err);
+                  else {
+                    //retrieve the food entries of the day so far after updatting the database
+                    models.getFoodEntry.get(query, (err, result) => {
+                      if (err)
+                        console.log(
+                          'Error inside createFoodEntry in controllers at 4th callback',
+                          err
+                        );
+                      else {
+                        console.log('Database has been updated with new food entry');
+                        //send back results to front-end
+                        res.send(result);
+                      }
+                    });
                   }
-                );
+                });
               }
             });
           }
@@ -183,8 +144,7 @@ module.exports = {
     let { user_id, date } = req.query;
     let params = [user_id, date];
     models.getFoodEntry.get(params, (err, result) => {
-      if (err)
-        console.log("Error caught on getFoodEntry in controller.js", err);
+      if (err) console.log('Error caught on getFoodEntry in controller.js', err);
       else res.send(result);
     });
   },
@@ -195,11 +155,7 @@ module.exports = {
   searchExerciseEntry: (req, res) => {
     let { username, exercise_name } = req.body;
     models.getUserInfo.get(username, (err, result) => {
-      if (err)
-        console.log(
-          "Error caught at userInfo in searchExerciseEntry in controllers",
-          err
-        );
+      if (err) console.log('Error caught at userInfo in searchExerciseEntry in controllers', err);
       else {
         let user = result[0];
         let query = {
@@ -211,10 +167,7 @@ module.exports = {
         };
         getExercises(query, (err, data) => {
           if (err)
-            console.log(
-              "Error inside getExercises in searchExerciseEntry in controllers",
-              err
-            );
+            console.log('Error inside getExercises in searchExerciseEntry in controllers', err);
           else {
             res.send(data.exercises[0]);
           }
@@ -238,32 +191,26 @@ module.exports = {
     //check daily burnt of user for first entry of the day or just update entry
     models.getDaily.get(query, (err, result) => {
       if (err)
-        console.log(
-          "Error inside createExerciseEntry in controllers.js at 1st callback",
-          err
-        );
+        console.log('Error inside createExerciseEntry in controllers.js at 1st callback', err);
       else if (result.length === 0) {
         //user is putting in first exercise entry of the day
-        let { burnt, user_id, date } = req.body;
-        let params = [burnt, 0, 0, 0, 0, 0, user_id, date];
+        let { burnt, avg_cal, user_id, date } = req.body;
+        let params = [burnt + avg_cal, 0, 0, 0, 0, 0, user_id, date];
         models.firstDailyFoodOrExerciseUpdate.post(params, (err, result) => {
           if (err)
-            console.log(
-              "Error inside createExerciseEntry in controllers.js at 2nd callback",
-              err
-            );
+            console.log('Error inside createExerciseEntry in controllers.js at 2nd callback', err);
           else {
             models.insertIntoExerciseHistory.post(body, (err, entry) => {
               if (err)
                 console.log(
-                  "Error inside createExerciseEntry in controllers.js at 3rd callback",
+                  'Error inside createExerciseEntry in controllers.js at 3rd callback',
                   err
                 );
               else {
                 models.getExerciseEntry.get(query, (err, result) => {
                   if (err)
                     console.log(
-                      "Error inside createExerciseEntry in controllers.js at 4th callback",
+                      'Error inside createExerciseEntry in controllers.js at 4th callback',
                       err
                     );
                   else res.send(result);
@@ -275,18 +222,10 @@ module.exports = {
       } else {
         //updating user's burnt intake
         models.insertIntoExerciseHistory.post(body, (err, result) => {
-          if (err)
-            console.log(
-              "Error caught at insertIntoExerciseHistory in controllers",
-              err
-            );
+          if (err) console.log('Error caught at insertIntoExerciseHistory in controllers', err);
           else {
             models.getDailyForExercise.get(query, (err, results) => {
-              if (err)
-                console.log(
-                  "Error caught at getDailyForExercise in controllers",
-                  err
-                );
+              if (err) console.log('Error caught at getDailyForExercise in controllers', err);
               else {
                 burntToBeUpdated = results[0];
                 let { burnt } = req.body;
@@ -294,32 +233,23 @@ module.exports = {
                 let oldBurnt = burntToBeUpdated.burnt;
                 burntToBeUpdated.burnt = oldBurnt + inputtedBurnt;
 
-                models.updateDailyForExercise.post(
-                  burntToBeUpdated,
-                  query,
-                  (err, entry) => {
-                    if (err)
-                      console.log(
-                        "Error caught at updateDailyForExercise in controllers",
-                        err
-                      );
-                    else {
-                      models.getExerciseEntry.get(query, (err, result) => {
-                        if (err)
-                          console.log(
-                            "Error inside createExerciseEntry in controllers.js at 4th callback",
-                            err
-                          );
-                        else {
-                          console.log(
-                            "Database has been updated with new exercise entry"
-                          );
-                          res.send(result);
-                        }
-                      });
-                    }
+                models.updateDailyForExercise.post(burntToBeUpdated, query, (err, entry) => {
+                  if (err)
+                    console.log('Error caught at updateDailyForExercise in controllers', err);
+                  else {
+                    models.getExerciseEntry.get(query, (err, result) => {
+                      if (err)
+                        console.log(
+                          'Error inside createExerciseEntry in controllers.js at 4th callback',
+                          err
+                        );
+                      else {
+                        console.log('Database has been updated with new exercise entry');
+                        res.send(result);
+                      }
+                    });
                   }
-                );
+                });
               }
             });
           }
@@ -334,11 +264,7 @@ module.exports = {
     let { user_id, date } = req.query;
     let params = [user_id, date];
     models.getExerciseEntry.get(params, (err, result) => {
-      if (err)
-        console.log(
-          "Error caught on models.getExerciseEntry in controllers",
-          err
-        );
+      if (err) console.log('Error caught on models.getExerciseEntry in controllers', err);
       else res.send(result);
     });
   },
@@ -349,8 +275,7 @@ module.exports = {
     let { user_id, date } = req.query;
     let query = [user_id, date];
     models.getDaily.get(query, (err, result) => {
-      if (err)
-        console.log("Error caught on models.getDaily in controllers", err);
+      if (err) console.log('Error caught on models.getDaily in controllers', err);
       else res.send(result);
     });
   },
@@ -361,11 +286,7 @@ module.exports = {
     let { user_id } = req.query;
     let userID = user_id;
     models.getDailyByOnlyUser.get(userID, (err, result) => {
-      if (err)
-        console.log(
-          "Error caught in models.getDailyByOnlyUser in controllers",
-          err
-        );
+      if (err) console.log('Error caught in models.getDailyByOnlyUser in controllers', err);
       else res.send(result);
     });
   }

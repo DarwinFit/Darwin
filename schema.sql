@@ -1,7 +1,7 @@
 
-CREATE DATABASE IF NOT EXISTS russell;
+CREATE DATABASE IF NOT EXISTS darwinFit;
 
-USE russell;
+USE darwinFit;
 
 CREATE TABLE if not exists users (
   id int NOT NULL AUTO_INCREMENT,
