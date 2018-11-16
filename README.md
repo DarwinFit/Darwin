@@ -12,6 +12,8 @@
 1. [Authors](#authors)
 1. [Built With](#built-with)
 1. [Screenshots](#screenshots)
+1. [Styling](#styling)
+1. [License](#license)
 
 ## Development
 
@@ -66,6 +68,10 @@ Once logged in, the user is led to the Daily page with the daily summary of calo
 ![Exercise](./readmeImgs/exercise.gif)
 
 User can search and input food items and exercises to keep track of their daily calorie log.
+
+## Styling
+
+DarWin uses the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript/).
 
 ## Contributing
 
