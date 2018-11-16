@@ -1,6 +1,6 @@
 # DarWin
 
-DarWin is a web application, where users can keep track of their daily calorie intake and how much calories they have burnt. The user can retrieve nutritional information from the nutrition API as well as the calories burnt with the given weight, height, gender, and age with a specific type of exercise with given amount of excercise time.
+DarWin is a web application, where users can keep track of their daily calorie intake and how much calories they have burnt. Users can search nutritional information of their food items as well as calories information of specific exercises with given amount of excercise time to record onto their log. The daily calories burnt also keeps track of the baseline calories burnt dependent on the users' weight, height, gender, and age.
 
 ![Main](./readmeImgs/home.png)
 
