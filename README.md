@@ -13,7 +13,7 @@
 1. [Built With](#built-with)
 1. [Screenshots](#screenshots)
 1. [Styling](#styling)
-1. [License](#license)
+1. [Contributing](#contributing)
 
 ## Getting Started
 
