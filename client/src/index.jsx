@@ -133,7 +133,6 @@ class App extends Component {
           this.setState({ userData: updatedData, userExists: true }, () => {
             //calling to get the total for today, if the user logged out and then logged in
             this.getDailyTotalFood();
-            this.getHistoryOfBurntAndEat();
           });
         }
       })
@@ -297,6 +296,7 @@ class App extends Component {
           this.setState({ dailyNutrition: newDailyWithBurnt });
         }
       })
+      .then(this.getHistoryOfBurntAndEat)
       .catch((err) => console.error(err));
   }
 
@@ -329,6 +329,9 @@ class App extends Component {
           this.getFoodLog();
         });
       })
+      .then(() => {
+        this.getHistoryOfBurntAndEat();
+      })
       .catch((err) => console.error(err));
   }
 
@@ -343,16 +346,21 @@ class App extends Component {
       burnt: this.state.exerciseData.nf_calories,
       avg_cal: this.state.userData.avg_calories
     };
-    axios.post('/health/exercise_history', options).then(({ data }) => {
-      let updatedData = [];
-      data.forEach(function(entry) {
-        updatedData.push(entry.exercise_name);
+    axios
+      .post('/health/exercise_history', options)
+      .then(({ data }) => {
+        let updatedData = [];
+        data.forEach(function(entry) {
+          updatedData.push(entry.exercise_name);
+        });
+        this.setState({ exerciseItems: updatedData }, () => {
+          this.getDailyTotalFood();
+          this.getExerciseLog();
+        });
+      })
+      .then(() => {
+        this.getHistoryOfBurntAndEat();
       });
-      this.setState({ exerciseItems: updatedData }, () => {
-        this.getDailyTotalFood();
-        this.getExerciseLog();
-      });
-    });
   }
 
   //handle the new user info if the user doesn't have its data available
@@ -410,8 +418,6 @@ class App extends Component {
             searchFood={this.searchFood}
             searchExercise={this.searchExercise}
             handleAddFood={this.handleAddFood}
-            intakeData={this.state.intakeData}
-            burntData={this.state.burntData}
             userData={this.state.userData}
             burnt={this.state.burntData}
             intake={this.state.intakeData}
