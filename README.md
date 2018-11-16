@@ -2,6 +2,7 @@
 
 [DarWin](https://darwinfit.herokuapp.com/) is a web application, where users can keep track of their daily calorie intake and how much calories they have burnt. Users can search nutritional information of their food items as well as calories information of specific exercises with given amount of excercise time to record onto their log. The daily calories burnt also keeps track of the baseline calories burnt dependent on the users' weight, height, gender, and age.
 
+
 ![Main](./readmeImgs/home.png)
 
 ## Table of Contents
